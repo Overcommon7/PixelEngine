@@ -2,19 +2,20 @@ Init(50, 10, 10)
 
 float x = 2
 ChangeColor(green)
-PlacePixel(x, 3)
-PlacePixel(3, x)
+DrawPixel(x, 3)
+DrawPixel(3, x)
+
 x += 3
 float y = x
 float z = 12
-z -= 2 - 4
+z -= 2 + 4 - 1
+
 ChangeColor(blue)
-PlacePixel(y, 3)
-PlacePixel(3, y)
+DrawPixel(y, 3)
+DrawPixel(3, y)
 ChangeColor(red)
+
 y = y - 1
 Print(x, y, z)
-Print(x, y, z)
-Print(x, y, z)
-PlacePixel(z, 3)
-PlacePixel(3, z)
+DrawPixel(z, 3)
+DrawPixel(3, z)

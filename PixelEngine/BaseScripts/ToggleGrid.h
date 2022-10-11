@@ -12,8 +12,7 @@ public:
     //Invoke Gets Called When A PixelScript Calls The Name Of The Fuction
     void Invoke(const vector<string>& params) override
     {
-        if (params.empty())
-            Draw::ToggleGrid();
-        else Draw::SetGrid(params[0] == "true");
+        if (params.empty()) return;
+        Draw::SetGrid(params[0] == "true");
     }
 };

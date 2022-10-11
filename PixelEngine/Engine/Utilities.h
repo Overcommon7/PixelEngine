@@ -15,6 +15,30 @@ namespace Utils
             c = toupper(c);
     }
 
+    static bool IsDigit(const string& str)
+    {
+        short i = 0;
+        if (str.front() == '+' || str.front() == '-') ++i;
+        for (; i < str.length(); i++)
+            if (!isdigit(str[i])) return false;
+        return true;
+    }
+
+    static bool IsFloat(const string& str)
+    {
+        short numOfDeciamls = 0;
+        short i = 0, j = 0;
+        if (str.front() == '+' || str.front() == '-') ++i;
+        if (str.back() == 'f') ++j;
+        for (; i < str.length() - j; i++)
+        {
+            if (str[i] != '.' && !isdigit(str[i])) return false;
+            if (str[i] == '.') ++numOfDeciamls;
+            if (numOfDeciamls > 1) return false;
+        }
+        return true;
+    }
+
 	static void DrawRectangle(const Rectangle& rec, const Color& c = GRAY)
 	{
 		DrawRectangle(rec.x, rec.y, rec.width, rec.height, c);

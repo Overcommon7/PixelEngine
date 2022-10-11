@@ -152,16 +152,10 @@
     <ClInclude Include="Engine\Vector3.h">
       <Filter>Source Files\Utils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\DrawBox.h">
-      <Filter>UserScripts</Filter>
-    </ClInclude>
-    <ClInclude Include="UserScripts\PlaceTriangle.h">
-      <Filter>UserScripts</Filter>
-    </ClInclude>
     <ClInclude Include="BaseScripts\Init.h">
       <Filter>Source Files\BaseScripts</Filter>
     </ClInclude>
-    <ClInclude Include="BaseScripts\PlacePixel.h">
+    <ClInclude Include="BaseScripts\DrawPixel.h">
       <Filter>Source Files\BaseScripts</Filter>
     </ClInclude>
     <ClInclude Include="BaseScripts\ToggleGrid.h">
@@ -169,6 +163,15 @@
     </ClInclude>
     <ClInclude Include="Engine\PixelFloat.h">
       <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\DrawLine.h">
+      <Filter>UserScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\DrawRectangle.h">
+      <Filter>UserScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\DrawTriangle.h">
+      <Filter>UserScripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +182,18 @@
       <Filter>Scripts</Filter>
     </Text>
     <Text Include="..\Scripts\FloatTest2.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="BaseScripts\BaseScriptsSyntax.txt">
+      <Filter>Source Files\BaseScripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\LineTest.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\Square.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\Triangle.txt">
       <Filter>Scripts</Filter>
     </Text>
   </ItemGroup>

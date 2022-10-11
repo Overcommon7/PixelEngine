@@ -1,29 +1,6 @@
 #include "pch.h"
 #include "ScriptParser.h"
-
-bool ScriptParser::IsDigit(const string& str)
-{
-	short i = 0;
-	if (str.front() == '+' || str.front() == '-') ++i;
-	for (; i < str.length(); i++)
-		if (!isdigit(str[i])) return false;
-	return true;
-}
-
-bool ScriptParser::IsFloat(const string& str)
-{
-	short numOfDeciamls = 0;
-	short i = 0, j = 0;
-	if (str.front() == '+' || str.front() == '-') ++i;
-	if (str.back() == 'f') ++j;
-	for (; i < str.length() - j; i++)
-	{
-		if (str[i] != '.' && !isdigit(str[i])) return false;
-		if (str[i] == '.') ++numOfDeciamls;
-		if (numOfDeciamls > 1) return false;
-	}
-	return true;
-}
+#include "Utilities.h"
 
 void ScriptParser::LoadFloat(const string& line, unordered_map<string, PixelFloat>& variables)
 {
@@ -43,7 +20,7 @@ void ScriptParser::LoadFloat(const string& line, unordered_map<string, PixelFloa
 		variables.insert({ params[1], variables.at(params.back()) });
 		return;
 	}
-	if (!IsFloat(params.back()))
+	if (!Utils::IsFloat(params.back()))
 	{
 		cout << "Syntax Error on line: " << lineNumber << '\n';
 		return;
@@ -97,24 +74,26 @@ void ScriptParser::LoadCommand(string line, unordered_map<string, PixelFloat>& v
 		commands.push_back(command);
 }
 
-void ScriptParser::InternalFloatCommand(string line, unordered_map<string, PixelFloat>& variables)
+void ScriptParser::InternalFloatCommand(const string& line, unordered_map<string, PixelFloat>& variables, const OperationType& type)
 {
 	auto params = GetParams(line);
-	line.erase(line.begin() + line.find('='));
-	line.insert(0, params.front() + " = ");
-	params.insert(params.begin(), { params.front(), " = " });
-	float total = GetTotal(line, variables, params);
-	if (total == NAN) return;
-	variables.at(params.front()).SetCurrentValue(total);
+	float total = GetTotal(line, variables, params, true);
+	if (total == NAN || total == -NAN) return;
+	if (type == OperationType::PlusEquals) variables.at(params.front()).AddTo(total);
+	else if (type == OperationType::MinusEquals) variables.at(params.front()).SubtractTo(total);
+	else if (type == OperationType::MultiplyEquals) variables.at(params.front()).MultiplyTo(total);
+	else if (type == OperationType::PlusEquals) variables.at(params.front()).DivideTo(total);
 }
 
-float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloat>& variables, const vector<string>& params)
+float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloat>& variables, const vector<string>& params, const bool& skipCheck)
 {
-	if (params.size() < 5)
+
+	if (!skipCheck && params.size() < 5)
 	{
 		cout << "Syntax Error on line: " << lineNumber << '\n';
 		return NAN;
 	}
+
 	if (!variables.contains(params.front()))
 	{
 		cout << "Variable does not exists on line: " << lineNumber << '\n';
@@ -122,7 +101,7 @@ float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloa
 	}
 	float total = 0;
 	if (variables.contains(params[2])) total = variables.at(params[2]).GetValue();
-	else if (IsFloat(params[2])) total = stof(params[2]);
+	else if (Utils::IsFloat(params[2])) total = stof(params[2]);
 	else
 	{
 		cout << "Syntax Error on line: " << lineNumber << '\n';
@@ -132,7 +111,7 @@ float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloa
 	{
 		bool isValid = true;
 		if (variables.contains(params[i])) isValid = Arithmetic(params[i - 1].front(), total, variables.at(params[i]).GetValue());
-		else if (IsFloat(params[i])) isValid = Arithmetic(params[i - 1].front(), total, stof(params[i]));
+		else if (Utils::IsFloat(params[i])) isValid = Arithmetic(params[i - 1].front(), total, stof(params[i]));
 		else
 		{
 			cout << "Syntax Error on line: " << lineNumber << '\n';
@@ -190,7 +169,7 @@ void ScriptParser::SetFloatCommand(const string& line, unordered_map<string, Pix
 		variables.at(params.front()) = variables.at(params.back());
 		return;
 	}
-	if (!IsFloat(params.back()))
+	if (!Utils::IsFloat(params.back()))
 	{
 		cout << "Syntax Error on line: " << lineNumber << '\n';
 		return;
@@ -221,25 +200,25 @@ vector<Command> ScriptParser::ParseText(const vector<string>& instructions, unor
 	for (const auto& line : instructions)
 	{
 		++lineNumber;
+
 		bool equals = line.find('=') != string::npos;
 		bool add = line.find('+') != string::npos;
 		bool sub = line.find('-') != string::npos;
 		bool div = line.find('/') != string::npos;
 		bool mul = line.find('*') != string::npos;
-		bool plusEqual = line.find("+=") != string::npos;
-		bool minusEqual = line.find("-=") != string::npos;
-		bool mulEqual = line.find("*=") != string::npos;
-		bool divideEqual = line.find("/=") != string::npos;
+
+		OperationType type = OperationType::Null;
+		if (line.find("+=") != string::npos) type = OperationType::PlusEquals;
+		else if (line.find("-=") != string::npos) type = OperationType::MinusEquals;
+		else if (line.find("*=") != string::npos) type = OperationType::MultiplyEquals;
+		else if (line.find("/=") != string::npos) type = OperationType::DivideEquals;
 
 
-		if (line.find("float ") != string::npos || line.find("int ") != string::npos)	LoadFloat(line, variables);
-		else if (plusEqual || divideEqual || minusEqual || mulEqual) InternalFloatCommand(line, variables);
+		if (line.find("float ") != string::npos || line.find("int ") != string::npos) LoadFloat(line, variables);
+		else if (type != OperationType::Null) InternalFloatCommand(line, variables, type);
 		else if (equals && (add || sub || div || mul)) ArithmeticFloatCommand(line, variables);
 		else if (equals) SetFloatCommand(line, variables);
-		else LoadCommand(line, variables);
-
-
-				
+		else LoadCommand(line, variables);	
 	}
 	return commands;
 }

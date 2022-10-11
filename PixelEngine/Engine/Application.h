@@ -11,6 +11,14 @@ class Application
     Application& operator=(const Application& a) = delete;
 
     inline static string scriptFile = "";
+    
+#ifndef _DEBUG
+    inline static const string screenshotPath = "ScreenShots/";
+#else
+    inline static const string screenshotPath = "../ScreenShots/";
+#endif
+
+    static void SaveNewScreenShot();
 public:
     static void Initalize();
     static void MenuLogic(ApplicationState& state);

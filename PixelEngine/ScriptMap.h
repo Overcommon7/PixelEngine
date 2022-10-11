@@ -1,9 +1,10 @@
 #pragma once
-#include "UserScripts/PlaceDiamond.h"
-#include "UserScripts/PlaceTriangle.h"
-#include "UserScripts/DrawBox.h"
+#include "UserScripts/DrawTriangle.h"
+#include "UserScripts/DrawLine.h"
+#include "UserScripts/DrawRectangle.h"
 #include "UserScripts/ChangeColor.h"
-#include "PlacePixel.h"
+#include "UserScripts/PlaceDiamond.h"
+#include "DrawPixel.h"
 #include "ToggleGrid.h"
 #include "Init.h"
 #include "Commands.h"
@@ -11,22 +12,24 @@
 class ScriptMap
 {
 private:
+    inline static DRAWTRIANGLE drawtriangle = {};
+    inline static DRAWLINE drawline = {};
+    inline static DRAWRECTANGLE drawrectangle = {};
+    inline static CHANGECOLOR changecolor = {};
     inline static PlaceDiamond placediamond = {};
-    inline static PlaceTriangle placetriangle = {};
-    inline static DrawBox drawbox = {};
-    inline static ChangeColor changecolor = {};
-    inline static PlacePixel placepixel = {};
+    inline static DRAWPIXEL drawpixel = {};
     inline static ToggleGrid togglegrid = {};
     inline static Init init = {};
 	inline static unordered_map<string, Commands*> scripts =
 	{
         { Init().GetName(), &init },
         { ToggleGrid().GetName(), &togglegrid },
-        { PlacePixel().GetName(), &placepixel },
-        { ChangeColor().GetName(), &changecolor },
-        { DrawBox().GetName(), &drawbox },
-        { PlaceTriangle().GetName(), &placetriangle },
+        { DRAWPIXEL().GetName(), &drawpixel },
         { PlaceDiamond().GetName(), &placediamond },
+        { CHANGECOLOR().GetName(), &changecolor },
+        { DRAWRECTANGLE().GetName(), &drawrectangle },
+        { DRAWLINE().GetName(), &drawline },
+        { DRAWTRIANGLE().GetName(), &drawtriangle },
 	};
 public:
 	ScriptMap() = delete;
@@ -35,6 +38,15 @@ public:
 
 	static void InvokeScript(const string& s, const vector<string>& params);
 };
+
+
+
+
+
+
+
+
+
 
 
 

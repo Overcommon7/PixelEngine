@@ -377,7 +377,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseScripts\Init.h" />
-    <ClInclude Include="BaseScripts\PlacePixel.h" />
+    <ClInclude Include="BaseScripts\DrawPixel.h" />
     <ClInclude Include="BaseScripts\ToggleGrid.h" />
     <ClInclude Include="Engine\Application.h" />
     <ClInclude Include="Engine\Button.h" />
@@ -400,14 +400,19 @@
     <ClInclude Include="ScriptMap.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UserScripts\ChangeColor.h" />
-    <ClInclude Include="UserScripts\DrawBox.h" />
-    <ClInclude Include="UserScripts\PlaceTriangle.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Scripts\FloatTest.txt" />
     <Text Include="..\Scripts\FloatTest2.txt" />
+    <Text Include="..\Scripts\LineTest.txt" />
     <Text Include="..\Scripts\Rainbow.txt" />
+    <ClInclude Include="UserScripts\ChangeColor.h" />
+    <ClInclude Include="UserScripts\DrawRectangle.h" />
+    <ClInclude Include="UserScripts\DrawLine.h" />
+    <ClInclude Include="UserScripts\DrawTriangle.h" />
+    <Text Include="..\Scripts\Square.txt" />
+    <Text Include="..\Scripts\Triangle.txt" />
+    <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

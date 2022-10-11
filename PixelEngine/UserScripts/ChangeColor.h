@@ -3,10 +3,10 @@
 #include "Pixel.h"
 #include "Utilities.h"
 
-class ChangeColor : public Commands
+class CHANGECOLOR : public Commands
 {
 public:
-    ChangeColor() {}
+    CHANGECOLOR() {}
     //Returns The Name Of The Function
     string GetName() override { return "ChangeColor"; }
 

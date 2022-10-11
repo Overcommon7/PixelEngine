@@ -8,14 +8,21 @@ struct Command
     vector<string> params;
 };
 
+enum class OperationType
+{
+    Null,
+    PlusEquals,
+    MinusEquals,
+    MultiplyEquals,
+    DivideEquals
+};
+
 class ScriptParser
 {
-    static bool IsDigit(const string& str);
-    static bool IsFloat(const string& str);
     static void LoadFloat(const string& line, unordered_map<string, PixelFloat>& variables);
     static void LoadCommand(string line, unordered_map<string, PixelFloat>& variables);
-    static void InternalFloatCommand(string line, unordered_map<string, PixelFloat>& variables);
-    static float GetTotal(const string& line, unordered_map<string, PixelFloat>& variables, const vector<string>& params);
+    static void InternalFloatCommand(const string& line, unordered_map<string, PixelFloat>& variables, const OperationType& type);
+    static float GetTotal(const string& line, unordered_map<string, PixelFloat>& variables, const vector<string>& params, const bool& skipCheck = false);
     static void ArithmeticFloatCommand(const string& line, unordered_map<string, PixelFloat>& variables);
     static void SetFloatCommand(const string& line, unordered_map<string, PixelFloat>& variables);
     static bool Arithmetic(const char& c, float& total, const float& value);

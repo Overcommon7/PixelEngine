@@ -3,7 +3,11 @@ float y = 3
 float z = 4
 float r = 5
 
-r += 2 - 1
-y -= 1 - 1
-z /= 2 - 1
-x *= 3 - 1
+Print(x, y, z, r)
+
+r += 2 - 1 * 4
+y -= 1 - 1 + 5 / 2.5
+z /= 2 - 1 + 1 * 1
+x *= 3 - 1 * 2 - 2
+
+Print(x, y, z, r)
