@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{2c57c744-4eb9-4910-891e-60ac12aa5d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{edc6c7bc-3f7d-4af0-b259-f32a5065bead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\Headers">
+      <UniqueIdentifier>{03fb091b-aefd-4ca1-b132-3bc8bfd71b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\CPPs">
+      <UniqueIdentifier>{3a68b00f-9b13-45dc-aa2d-358caca4cb2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{ad4ba9fd-dbdc-4609-b3ca-1645063ba057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameClasses">
+      <UniqueIdentifier>{dbd5d45d-da92-4d55-bc80-6f60fbf7268d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameClasses\CPPS">
+      <UniqueIdentifier>{642285b5-fb00-4120-8e28-fbec95da4d89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameClasses\Headers">
+      <UniqueIdentifier>{7f7d462f-f073-4ac8-a44e-078bb28e7399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils\CPPs">
+      <UniqueIdentifier>{64409710-a2fc-4c39-83fa-3a7a3db28930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils\Headers">
+      <UniqueIdentifier>{b729989b-c840-4437-a867-4851ceddb4df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserScripts">
+      <UniqueIdentifier>{31dacc6d-0617-4aca-b64d-45cf0a6df4c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{1ee763c1-83ce-42e9-939f-8a47facb9e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseScripts">
+      <UniqueIdentifier>{a41af273-2022-459e-99a5-d0e5818747de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Draw.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\System.cpp">
+      <Filter>Source Files\Managers\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Application.cpp">
+      <Filter>Source Files\Managers\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Mouse.cpp">
+      <Filter>Source Files\Utils\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Button.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ButtonManager.cpp">
+      <Filter>Source Files\Managers\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ScriptManager.cpp">
+      <Filter>Source Files\Managers\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ScriptParser.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\User.cpp">
+      <Filter>Source Files\Utils\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptMap.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Commands.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SymbolDefines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Pixel.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PixelFloat.cpp">
+      <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Draw.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Application.h">
+      <Filter>Source Files\Managers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\System.h">
+      <Filter>Source Files\Managers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Defines.h">
+      <Filter>Source Files\Utils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Mouse.h">
+      <Filter>Source Files\Utils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Button.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities.h">
+      <Filter>Source Files\Utils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ButtonManager.h">
+      <Filter>Source Files\Managers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ScriptManager.h">
+      <Filter>Source Files\Managers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ScriptParser.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\User.h">
+      <Filter>Source Files\Utils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptMap.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Commands.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SymbolDefines.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Pixel.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\ChangeColor.h">
+      <Filter>UserScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Vector2.h">
+      <Filter>Source Files\Utils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Vector3.h">
+      <Filter>Source Files\Utils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\DrawBox.h">
+      <Filter>UserScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\PlaceTriangle.h">
+      <Filter>UserScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScripts\Init.h">
+      <Filter>Source Files\BaseScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScripts\PlacePixel.h">
+      <Filter>Source Files\BaseScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScripts\ToggleGrid.h">
+      <Filter>Source Files\BaseScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PixelFloat.h">
+      <Filter>Source Files\GameClasses\Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Scripts\Rainbow.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\FloatTest.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\FloatTest2.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+float x = 2
+float y = 3
+float z = 4
+float r = 5
+
+r += 2 - 1
+y -= 1 - 1
+z /= 2 - 1
+x *= 3 - 1
