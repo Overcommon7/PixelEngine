@@ -173,6 +173,9 @@
     <ClInclude Include="UserScripts\DrawTriangle.h">
       <Filter>UserScripts</Filter>
     </ClInclude>
+    <ClInclude Include="UserScripts\DrawDiamond.h">
+      <Filter>UserScripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Scripts\Rainbow.txt">

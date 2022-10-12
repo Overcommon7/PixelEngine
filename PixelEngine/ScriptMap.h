@@ -3,7 +3,6 @@
 #include "UserScripts/DrawLine.h"
 #include "UserScripts/DrawRectangle.h"
 #include "UserScripts/ChangeColor.h"
-#include "UserScripts/PlaceDiamond.h"
 #include "DrawPixel.h"
 #include "ToggleGrid.h"
 #include "Init.h"
@@ -16,7 +15,6 @@ private:
     inline static DRAWLINE drawline = {};
     inline static DRAWRECTANGLE drawrectangle = {};
     inline static CHANGECOLOR changecolor = {};
-    inline static PlaceDiamond placediamond = {};
     inline static DRAWPIXEL drawpixel = {};
     inline static ToggleGrid togglegrid = {};
     inline static Init init = {};
@@ -25,7 +23,6 @@ private:
         { Init().GetName(), &init },
         { ToggleGrid().GetName(), &togglegrid },
         { DRAWPIXEL().GetName(), &drawpixel },
-        { PlaceDiamond().GetName(), &placediamond },
         { CHANGECOLOR().GetName(), &changecolor },
         { DRAWRECTANGLE().GetName(), &drawrectangle },
         { DRAWLINE().GetName(), &drawline },
@@ -38,6 +35,11 @@ public:
 
 	static void InvokeScript(const string& s, const vector<string>& params);
 };
+
+
+
+
+
 
 
 

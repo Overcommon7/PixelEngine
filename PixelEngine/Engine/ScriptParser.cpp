@@ -52,7 +52,7 @@ void ScriptParser::LoadCommand(string line, unordered_map<string, PixelFloat>& v
 			else command.params.push_back(substr);
 		}
 	}
-	bool valid = true;
+
 	if (command.funcitonName == "Print")
 	{
 		++printStatemets;
@@ -64,14 +64,12 @@ void ScriptParser::LoadCommand(string line, unordered_map<string, PixelFloat>& v
 		return;
 	}
 	if (command.funcitonName.empty()) return;
-	for (const auto& p : command.params)
-		if (p.empty())
-		{
-			valid = false;
-			break;
-		}
-	if (valid)
-		commands.push_back(command);
+	auto it = command.params.begin();
+	while (it != command.params.end())
+		if (it->empty())it = command.params.erase(it);
+		else ++it;
+
+	commands.push_back(command);
 }
 
 void ScriptParser::InternalFloatCommand(const string& line, unordered_map<string, PixelFloat>& variables, const OperationType& type)

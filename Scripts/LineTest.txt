@@ -1,5 +1,7 @@
 Init(5, 100, 100)
 
 DrawLine(5, 5, 50, 30)
-ChangeColor(red)
+ChangeColor(blue)
 DrawLine(60, 10, 25, 70)
+ChangeColor(red)
+DrawPixel(2, 5)

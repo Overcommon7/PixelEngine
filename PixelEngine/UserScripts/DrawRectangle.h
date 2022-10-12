@@ -17,6 +17,7 @@ public:
         Color temp = Pixel::GetPixelColor();
         int posX = stoi(params[0]);
         int posY = stoi(params[1]);
+        if (!Utils::IsFloat(params[2])) return;
         short size = stoi(params[2]);
 
         bool hollow = false;
