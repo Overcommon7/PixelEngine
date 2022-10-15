@@ -4,6 +4,7 @@
 extern int screenHeight = 500, screenWidth = 500;
 extern int monitorWidth = 0, monitorHeight = 0;
 extern const string workingDirectory = fs::current_path().generic_string() + '/';
+extern bool windowResized = false;
 #ifdef _DEBUG
 extern const string filepath = "../Scripts/";
 #else

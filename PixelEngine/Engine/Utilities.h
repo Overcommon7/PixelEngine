@@ -3,16 +3,22 @@
 
 namespace Utils
 {
-    static void ToLowerString(string& s)
+    static string ToLowerString(const string& s)
     {
+        string temp;
+        temp.reserve(s.length());
         for (auto& c : s)
-            c = tolower(c);
+            temp.push_back(tolower(c));
+        return temp;
     }
 
-    static void ToUpperString(string& s)
+    static string ToUpperString(const string& s)
     {
+        string temp;
+        temp.reserve(s.length());
         for (auto& c : s)
-            c = toupper(c);
+            temp.push_back(toupper(c));
+        return temp;
     }
 
     static bool IsDigit(const string& str)
@@ -64,10 +70,10 @@ namespace Utils
         return v1.r == v2.r && v1.g == v2.g && v1.b == v2.b && v1.a == v2.a;
     }
     
-    static Color StringToColor(string str)
+    static Color StringToColor(const string& s)
     {
-        ToUpperString(str);
-        if (str == "LIGHTGRAY") return LIGHTGRAY;
+        string str = ToUpperString(s);
+        if (str == "LIGHTGRAY" || str == "LIGHTGREY") return LIGHTGRAY;
         if (str == "GRAY" || str == "GREY") return GRAY;
         if (str == "DARKGRAY") return DARKGRAY;
         if (str == "YELLOW") return YELLOW;
@@ -95,4 +101,44 @@ namespace Utils
         if (str == "RAYWHITE") return RAYWHITE;
         return WHITE;
     }
+
+    static bool TryParse(const string& str, float& num)
+    {
+        if (IsFloat(str))
+        {
+            num = stof(str);
+            return true;
+        }
+        return false;
+    }
+
+    static bool TryParse(const string& str, int& num)
+    {
+        if (IsDigit(str))
+        {
+            num = stoi(str);
+            return true;
+        }
+        return false;
+    }
+
+    static Color LerpColor(const Color& c1, const Color& c2, const float& t)
+    {
+        return Color(
+            std::lerp(c1.r, c2.r, t),
+            std::lerp(c1.g, c2.g, t),
+            std::lerp(c1.b, c2.b, t),
+            255
+        );
+    }
+
+   /* static Color LerpColor(const Color& c1, const Color& c2, const float& numOfPoints, const float& currentPoint)
+    {
+        return Color(
+            (c1.r + currentPoint) / (numOfPoints * (c1.r * c2.r)),
+            (c1.b + currentPoint) / (numOfPoints * (c1.b * c2.b)),
+            (c1.g + currentPoint) / (numOfPoints * (c1.g * c2.g)),
+            255
+        );
+    }*/
 }

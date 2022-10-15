@@ -9,11 +9,9 @@ public:
 	const float& GetResetValue() const { return resetValue; }
 	const string& GetStringValue() const { return currentValueAsString; }
 
-
-	void ResetCurrentValue() { currentValue = resetValue; }
+	void ResetCurrentValue() { currentValue = resetValue; currentValueAsString = to_string(resetValue); }
 	void SetCurrentValue(const float& f);
 	
-
 	void AddTo(const float& f);
 	void AddTo(const PixelFloat& p);
 	void SubtractTo(const float& f);

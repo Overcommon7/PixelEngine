@@ -40,7 +40,7 @@ namespace Math
 		Vector3 operator-(const Vector3& vec) const { return Vector3(this->x - vec.x, this->y - vec.y, this->z - vec.z); }
 		Vector3 operator/(const float& f) const { if (f == 0) return *this; return Vector3(this->x / f, this->y / f, this->z / f); }
 		Vector3 operator*(const float& f) const { return Vector3(this->x * f, this->y * f, this->z * f); }
-
+		
 		float Magnitude() const
 		{
 			return sqrtf((x * x) + (y * y) + (z * z));
@@ -65,6 +65,13 @@ namespace Math
 				(this->y * w.z) - (w.y * this->z), 
 				(this->z * w.x) - (w.z * this->x), 
 				(this->x * w.y) - (w.x * this->y));
+		}
+		Vector3 Lerp(const Vector3& vec, const float& t) const
+		{
+			return Vector3(
+				std::lerp(x, vec.x, t),
+				std::lerp(y, vec.y, t),
+				std::lerp(z, vec.z, t));
 		}
 	};
 };

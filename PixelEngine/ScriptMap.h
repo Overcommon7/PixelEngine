@@ -1,7 +1,7 @@
 #pragma once
-#include "UserScripts/DrawTriangle.h"
-#include "UserScripts/DrawLine.h"
-#include "UserScripts/DrawRectangle.h"
+#include "UserScripts/AddVertex.h"
+#include "UserScripts/EndDraw.h"
+#include "UserScripts/BeginDraw.h"
 #include "UserScripts/ChangeColor.h"
 #include "DrawPixel.h"
 #include "ToggleGrid.h"
@@ -11,30 +11,46 @@
 class ScriptMap
 {
 private:
-    inline static DRAWTRIANGLE drawtriangle = {};
-    inline static DRAWLINE drawline = {};
-    inline static DRAWRECTANGLE drawrectangle = {};
-    inline static CHANGECOLOR changecolor = {};
-    inline static DRAWPIXEL drawpixel = {};
-    inline static ToggleGrid togglegrid = {};
-    inline static Init init = {};
-	inline static unordered_map<string, Commands*> scripts =
+    inline static const ADDVERTEX addvertex = {};
+    inline static const ENDDRAW enddraw = {};
+    inline static const BEGINDRAW begindraw = {};
+    inline static const CHANGECOLOR changecolor = {};
+    inline static const DRAWPIXEL drawpixel = {};
+    inline static const ToggleGrid togglegrid = {};
+    inline static const Init init = {};
+	inline const static unordered_map<string, const Commands*> scripts =
 	{
-        { Init().GetName(), &init },
-        { ToggleGrid().GetName(), &togglegrid },
-        { DRAWPIXEL().GetName(), &drawpixel },
-        { CHANGECOLOR().GetName(), &changecolor },
-        { DRAWRECTANGLE().GetName(), &drawrectangle },
-        { DRAWLINE().GetName(), &drawline },
-        { DRAWTRIANGLE().GetName(), &drawtriangle },
+        { init.GetName(), &init},
+        { togglegrid.GetName(), &togglegrid },
+        { drawpixel.GetName(), &drawpixel },
+        { changecolor.GetName(), &changecolor },
+        { begindraw.GetName(), &begindraw },
+        { enddraw.GetName(), &enddraw },
+        { addvertex.GetName(), &addvertex },
 	};
 public:
-	ScriptMap() = delete;
-	ScriptMap(const ScriptMap& s) = delete;
-	ScriptMap& operator=(const ScriptMap& s) = delete;
-
 	static void InvokeScript(const string& s, const vector<string>& params);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

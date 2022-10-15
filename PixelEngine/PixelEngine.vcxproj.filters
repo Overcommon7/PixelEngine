@@ -34,14 +34,23 @@
     <Filter Include="Source Files\Utils\Headers">
       <UniqueIdentifier>{b729989b-c840-4437-a867-4851ceddb4df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UserScripts">
-      <UniqueIdentifier>{31dacc6d-0617-4aca-b64d-45cf0a6df4c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripts">
       <UniqueIdentifier>{1ee763c1-83ce-42e9-939f-8a47facb9e33}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\BaseScripts">
       <UniqueIdentifier>{a41af273-2022-459e-99a5-d0e5818747de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserSourceCode">
+      <UniqueIdentifier>{13fe11a7-2ec0-4aa6-ac4a-8ccba4a190b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserSourceCode\Headers">
+      <UniqueIdentifier>{4c424615-5113-4d51-9ca1-69087b6d09a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserSourceCode\CPPs">
+      <UniqueIdentifier>{65581690-aef4-40fb-bb02-d901fe56a79d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserCommands">
+      <UniqueIdentifier>{31dacc6d-0617-4aca-b64d-45cf0a6df4c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,11 +96,17 @@
     <ClCompile Include="Engine\SymbolDefines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Pixel.cpp">
+    <ClCompile Include="Engine\Rasterizer.cpp">
       <Filter>Source Files\GameClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="Engine\PixelFloat.cpp">
       <Filter>Source Files\GameClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="UserUtils\PrimitiveManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserUtils\Vertex.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,11 +155,11 @@
     <ClInclude Include="Engine\SymbolDefines.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Pixel.h">
+    <ClInclude Include="Engine\Rasterizer.h">
       <Filter>Source Files\GameClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="UserScripts\ChangeColor.h">
-      <Filter>UserScripts</Filter>
+      <Filter>UserCommands</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Vector2.h">
       <Filter>Source Files\Utils\Headers</Filter>
@@ -164,39 +179,27 @@
     <ClInclude Include="Engine\PixelFloat.h">
       <Filter>Source Files\GameClasses\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\DrawLine.h">
-      <Filter>UserScripts</Filter>
+    <ClInclude Include="UserUtils\PrimitiveManager.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\DrawRectangle.h">
-      <Filter>UserScripts</Filter>
+    <ClInclude Include="UserUtils\Vertex.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\DrawTriangle.h">
-      <Filter>UserScripts</Filter>
+    <ClInclude Include="UserScripts\BeginDraw.h">
+      <Filter>Source Files\BaseScripts</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\DrawDiamond.h">
-      <Filter>UserScripts</Filter>
+    <ClInclude Include="UserScripts\EndDraw.h">
+      <Filter>Source Files\BaseScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\AddVertex.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Scripts\Rainbow.txt">
-      <Filter>Scripts</Filter>
-    </Text>
-    <Text Include="..\Scripts\FloatTest.txt">
-      <Filter>Scripts</Filter>
-    </Text>
-    <Text Include="..\Scripts\FloatTest2.txt">
-      <Filter>Scripts</Filter>
-    </Text>
     <Text Include="BaseScripts\BaseScriptsSyntax.txt">
       <Filter>Source Files\BaseScripts</Filter>
     </Text>
-    <Text Include="..\Scripts\LineTest.txt">
-      <Filter>Scripts</Filter>
-    </Text>
-    <Text Include="..\Scripts\Square.txt">
-      <Filter>Scripts</Filter>
-    </Text>
-    <Text Include="..\Scripts\Triangle.txt">
+    <Text Include="..\Scripts\NewPixelScript1.txt">
       <Filter>Scripts</Filter>
     </Text>
   </ItemGroup>

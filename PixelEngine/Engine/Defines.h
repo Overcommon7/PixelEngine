@@ -3,6 +3,7 @@ extern int screenHeight, screenWidth;
 extern int monitorWidth, monitorHeight;
 extern const string workingDirectory;
 extern const string filepath;
+extern bool windowResized;
 
 #define BUTTON_HEIGHT 75.f
 #define SCREEN_HEIGHT 500

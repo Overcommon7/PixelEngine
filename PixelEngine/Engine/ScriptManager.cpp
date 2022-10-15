@@ -31,6 +31,13 @@ void ScriptManager::Update()
 
 void ScriptManager::RunScripts()
 {
-	for (const auto& c : commands)
-		ScriptMap::InvokeScript(c.funcitonName, c.params);
+	auto it = commands.begin();
+	while (it != commands.end())
+	{
+		ScriptMap::InvokeScript(it->funcitonName, it->params);
+		if (it->funcitonName == "Init") 
+			it = commands.erase(it);
+		else ++it;
+	}
+		
 }

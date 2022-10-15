@@ -56,11 +56,12 @@ int System::Shutdown()
 
 void System::SystemLogic()
 {
-    if (IsWindowResized()) OnResize();
+    if (windowResized || IsWindowResized()) OnResize();
     SetWindowTitle((to_string(GetFPS()) + "FPS").c_str());
     Mouse::Update();
     User::Update();
     Draw::ChangePixelColor(WHITE);
+    windowResized = false;
 }
 
 void System::OnResize()

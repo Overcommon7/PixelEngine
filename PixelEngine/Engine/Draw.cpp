@@ -41,6 +41,7 @@ void Draw::SetPixelResolution(int x, int y)
 	if (width > monitorWidth) width = monitorWidth;
 	if (height > monitorHeight) height = monitorHeight;
 	SetWindowSize(width, height);
+	windowResized = true;
 }
 
 void Draw::Drawing()

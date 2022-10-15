@@ -179,7 +179,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)BaseScripts;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)BaseScripts;%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -200,7 +200,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)BaseScripts;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)BaseScripts;%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -221,7 +221,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -241,7 +241,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -261,7 +261,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -285,7 +285,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -309,7 +309,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -333,7 +333,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)UserUtils</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -359,7 +359,7 @@
     <ClCompile Include="Engine\Commands.cpp" />
     <ClCompile Include="Engine\Mouse.cpp" />
     <ClCompile Include="Engine\Draw.cpp" />
-    <ClCompile Include="Engine\Pixel.cpp" />
+    <ClCompile Include="Engine\Rasterizer.cpp" />
     <ClCompile Include="Engine\PixelFloat.cpp" />
     <ClCompile Include="Engine\ScriptManager.cpp" />
     <ClCompile Include="Engine\ScriptParser.cpp" />
@@ -369,6 +369,8 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ScriptMap.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UserUtils\PrimitiveManager.cpp" />
+    <ClCompile Include="UserUtils\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -386,7 +388,7 @@
     <ClInclude Include="Engine\Mouse.h" />
     <ClInclude Include="Engine\Defines.h" />
     <ClInclude Include="Engine\Draw.h" />
-    <ClInclude Include="Engine\Pixel.h" />
+    <ClInclude Include="Engine\Rasterizer.h" />
     <ClInclude Include="Engine\PixelFloat.h" />
     <ClInclude Include="Engine\ScriptManager.h" />
     <ClInclude Include="Engine\ScriptParser.h" />
@@ -398,27 +400,20 @@
     <ClInclude Include="Engine\Vector3.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
+    <ClInclude Include="UserUtils\PrimitiveManager.h" />
+    <ClInclude Include="UserUtils\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Scripts\FloatTest.txt" />
-    <Text Include="..\Scripts\FloatTest2.txt" />
-    <Text Include="..\Scripts\LineTest.txt" />
-    <Text Include="..\Scripts\Rainbow.txt" />
     <ClInclude Include="UserScripts\ChangeColor.h" />
-    <ClInclude Include="UserScripts\DrawRectangle.h" />
-    <ClInclude Include="UserScripts\DrawLine.h" />
-    <ClInclude Include="UserScripts\DrawTriangle.h" />
-    <Text Include="..\Scripts\Square.txt" />
-    <Text Include="..\Scripts\Triangle.txt" />
+    <ClInclude Include="UserScripts\BeginDraw.h" />
+    <ClInclude Include="UserScripts\EndDraw.h" />
+    <ClInclude Include="UserScripts\AddVertex.h" />
+    <Text Include="..\Scripts\NewPixelScript1.txt" />
     <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-
-
-
