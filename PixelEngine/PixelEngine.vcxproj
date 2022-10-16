@@ -410,7 +410,11 @@
     <ClInclude Include="UserScripts\BeginDraw.h" />
     <ClInclude Include="UserScripts\EndDraw.h" />
     <ClInclude Include="UserScripts\AddVertex.h" />
-    <Text Include="..\Scripts\NewPixelScript1.txt" />
+    <Text Include="..\Scripts\Line.txt" />
+    <Text Include="..\Scripts\TestTriangle.txt" />
+    <Text Include="..\Scripts\HighResTriangle.txt" />
+    <Text Include="..\Scripts\Triangle.txt" />
+  <ClInclude Include="UserScripts\SetFillMode.h" />
     <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

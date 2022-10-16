@@ -1,8 +1,0 @@
-Init(25, 21, 20)
-
-ToggleGrid(f)
-BeginDraw(Triangle)
-AddVertex(0,0,red)
-AddVertex(20,0,green)
-AddVertex(10,10,blue)
-EndDraw()

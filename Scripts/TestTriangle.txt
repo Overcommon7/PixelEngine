@@ -1,0 +1,16 @@
+Init(25, 21, 20)
+
+ToggleGrid(true)
+BeginDraw(Triangle)
+AddVertex(0,0,red)
+AddVertex(20,0,green)
+AddVertex(10,10,blue)
+
+AddVertex(20,20,red)
+AddVertex(0,20,green)
+AddVertex(10,10,blue)
+
+AddVertex(0,0,red)
+AddVertex(20,0,green)
+AddVertex(10,10,blue)
+EndDraw()

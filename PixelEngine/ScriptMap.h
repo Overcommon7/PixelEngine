@@ -1,4 +1,5 @@
 #pragma once
+#include "UserScripts/SetFillMode.h"
 #include "UserScripts/AddVertex.h"
 #include "UserScripts/EndDraw.h"
 #include "UserScripts/BeginDraw.h"
@@ -11,6 +12,7 @@
 class ScriptMap
 {
 private:
+    inline static const SETFILLMODE setfillmode = {};
     inline static const ADDVERTEX addvertex = {};
     inline static const ENDDRAW enddraw = {};
     inline static const BEGINDRAW begindraw = {};
@@ -27,10 +29,12 @@ private:
         { begindraw.GetName(), &begindraw },
         { enddraw.GetName(), &enddraw },
         { addvertex.GetName(), &addvertex },
+        { setfillmode.GetName(), &setfillmode },
 	};
 public:
 	static void InvokeScript(const string& s, const vector<string>& params);
 };
+
 
 
 

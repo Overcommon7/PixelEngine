@@ -1,0 +1,8 @@
+Init(2, 300, 200)
+
+ToggleGrid(false)
+BeginDraw(Triangle)
+AddVertex(0,0,red)
+AddVertex(240,0,green)
+AddVertex(120,120,blue)
+EndDraw()

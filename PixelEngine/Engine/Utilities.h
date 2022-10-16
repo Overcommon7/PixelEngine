@@ -131,14 +131,4 @@ namespace Utils
             255
         );
     }
-
-   /* static Color LerpColor(const Color& c1, const Color& c2, const float& numOfPoints, const float& currentPoint)
-    {
-        return Color(
-            (c1.r + currentPoint) / (numOfPoints * (c1.r * c2.r)),
-            (c1.b + currentPoint) / (numOfPoints * (c1.b * c2.b)),
-            (c1.g + currentPoint) / (numOfPoints * (c1.g * c2.g)),
-            255
-        );
-    }*/
 }

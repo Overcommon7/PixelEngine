@@ -1,0 +1,4 @@
+Init(25, 50, 15)
+
+BeginDraw(Line)
+AddVertex()

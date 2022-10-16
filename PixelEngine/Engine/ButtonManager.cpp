@@ -40,6 +40,7 @@ void ButtonManager::Initialize(string* s)
 {
 	script = s;
 	Vector2 pos = { 0, 0 };
+	buttons.clear();
 	for (const auto& file : fs::recursive_directory_iterator(filepath))
 	{
 		buttons.push_back(Button(file.path().filename().generic_string(), pos, &LoadIntoScript));

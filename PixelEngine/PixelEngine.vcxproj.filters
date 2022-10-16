@@ -194,12 +194,24 @@
     <ClInclude Include="UserScripts\AddVertex.h">
       <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="UserScripts\SetFillMode.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BaseScripts\BaseScriptsSyntax.txt">
       <Filter>Source Files\BaseScripts</Filter>
     </Text>
-    <Text Include="..\Scripts\NewPixelScript1.txt">
+    <Text Include="..\Scripts\TestTriangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\HighResTriangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\Line.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\Triangle.txt">
       <Filter>Scripts</Filter>
     </Text>
   </ItemGroup>

@@ -57,6 +57,10 @@ namespace Math
 			const float mag = Magnitude();
 			return Vector2(x / mag, y / mag);			
 		}
+		float Distance(const Vector2& vec)
+		{
+			return sqrtf(((x - vec.x) * (x - vec.x)) + ((y - vec.y) * (y - vec.y)));
+		}
 	};
 };
 

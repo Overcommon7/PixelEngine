@@ -77,7 +77,8 @@ void System::OnResize()
 
 void System::SystemDraw()
 {
-    Draw::Drawing();
+    if (state == ApplicationState::Scripting)
+        Draw::Drawing();
 }
 
 int System::Run()

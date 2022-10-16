@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 #include "ScriptManager.h"
+#include "Defines.h"
 
 
 void Application::SaveNewScreenShot()
@@ -73,6 +74,8 @@ void Application::Logic(ApplicationState& state)
 	scriptFile.clear();
 	Draw::SetBGColor(WHITE);
 	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	windowResized = true;
+	Application::Initalize();	
 	state = ApplicationState::TitleScreen;
 }
 
