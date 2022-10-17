@@ -13,6 +13,8 @@
 #include <future>
 #include <mutex>
 #include <filesystem>
+#include <future>
+#include <mutex>
 #include "raylib.h"
 
 #pragma endregion SDL
@@ -47,6 +49,9 @@ using std::stof;
 using std::stol;
 using std::stoull;
 using std::getline;
+using std::future;
+using std::mutex;
+using std::async;
 	  
 
 #define fs std::filesystem
