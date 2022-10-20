@@ -32,6 +32,7 @@ class ScriptParser
     static inline vector<Command> commands = {};
     static inline int lineNumber = 0;
     static inline int printStatemets = 0;
+    static inline stringstream ss = {};
 public:
     ScriptParser() = delete;
     ScriptParser(const ScriptParser& s) = delete;

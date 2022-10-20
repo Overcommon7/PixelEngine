@@ -1,9 +1,11 @@
 Init(25, 21, 20)
 
-ToggleGrid(true)
+ToggleGrid(false)
+
+float x = 0
 BeginDraw(Triangle)
-AddVertex(0,0,red)
-AddVertex(20,0,green)
+AddVertex(0,0,brown)
+AddVertex(x,0,green)
 AddVertex(10,10,blue)
 
 AddVertex(20,20,red)
@@ -11,6 +13,6 @@ AddVertex(0,20,green)
 AddVertex(10,10,blue)
 
 AddVertex(0,0,red)
-AddVertex(20,0,green)
-AddVertex(10,10,blue)
+AddVertex(20,0,brown)
+AddVertex(10,10,pink)
 EndDraw()

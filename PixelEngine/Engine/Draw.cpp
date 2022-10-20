@@ -16,8 +16,9 @@ void Draw::Initalize(int pixelSize, int width, int height)
 	SetPixelResolution(width, height);
 }
 
-void Draw::DrawPixel(int x, int y)
+void Draw::DrawScaledPixel(int x, int y)
 {
+	if (pixel.width <= 1.1f) DrawPixel(x, y, color);
 	pixel.x = x * pixel.width;
 	pixel.y = y * pixel.width;
 	Utils::DrawRectangle(pixel, color);

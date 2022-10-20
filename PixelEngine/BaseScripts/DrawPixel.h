@@ -17,6 +17,6 @@ public:
         int x = stoi(params[0]), y = stoi(params[1]);
         if (x < 0 || x > screenWidth / Draw::GetPixelSize()) return;
         if (y < 0 || y > screenHeight / Draw::GetPixelSize()) return;
-        Draw::DrawPixel(x, y);
+        Draw::DrawScaledPixel(x, y);
     }
 };

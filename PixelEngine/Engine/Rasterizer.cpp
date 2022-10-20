@@ -21,7 +21,7 @@ void Rasterizer::PlotLineHigh(const Vertex& start, const Vertex& end)
 
     for (float y = start.pos.y; y <= end.pos.y; y++)
     {
-        Rasterizer::DrawPixel(Vertex(Math::Vector3(x, y, 0), Utils::LerpColor(start.color, end.color, (y - start.pos.y) / (end.pos.y - start.pos.y))));
+        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, 0), Utils::LerpColor(start.color, end.color, (y - start.pos.y) / (end.pos.y - start.pos.y))));
         if (D > 0)
         {
             x = x + xi;
@@ -49,7 +49,7 @@ void Rasterizer::PlotLineLow(const Vertex& start, const Vertex& end)
 
     for (float x = start.pos.x; x <= end.pos.x; x++)
     {
-        Rasterizer::DrawPixel(Vertex(Math::Vector3(x, y, 0), Utils::LerpColor(start.color, end.color, (x - start.pos.x) / (end.pos.x - start.pos.x))));
+        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, 0), Utils::LerpColor(start.color, end.color, (x - start.pos.x) / (end.pos.x - start.pos.x))));
         if (D > 0)
         {
             y = y + yi;
@@ -83,13 +83,13 @@ vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector3& vec, const Vector
     return verticies;
 }
 
-void Rasterizer::DrawPixel(const Vertex& v)
+void Rasterizer::DrawScaledPixel(const Vertex& v)
 {
     if (v.pos.x < 0 || v.pos.x > screenWidth / Draw::GetPixelSize()) return;
     if (v.pos.y < 0 || v.pos.y > screenHeight / Draw::GetPixelSize()) return;
     Color temp = Draw::GetPixelColor();
     Draw::ChangePixelColor(v.color);
-    Draw::DrawPixel(v.pos.x, v.pos.y);
+    Draw::DrawScaledPixel(v.pos.x, v.pos.y);
     Draw::ChangePixelColor(temp);
 }
 
@@ -116,8 +116,6 @@ void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& 
         c = Math::Vector2(Math::Vector2(v3.pos.x, v3.pos.y) - Math::Vector2(v1.pos.x, v1.pos.y)).Magnitude();
     if (a + b <= c || a + c <= b || b + c <= a) return;
     const float totalArea = AreaOfTriangle(a, b, c);
-    /* float base = std::max(std::max(a, b), c);
-     float height = (2 * totalArea) / base;*/
     const Rectangle rec = {
         std::min(std::min(v1.pos.x, v2.pos.x), v3.pos.x),
         std::min(std::min(v1.pos.y, v2.pos.y), v3.pos.y),
@@ -130,14 +128,14 @@ void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& 
         vector<future<vector<Vertex>>> futures;
         futures.reserve(rec.height);
         for (float y = rec.y; y < rec.y + rec.height; y++)
-            futures.push_back(async(std::launch::async, FillBetweenVerticies, Vector3(a, b, c), Vector2(rec.x, rec.width), y, totalArea, v1, v2, v3));
+            futures.push_back(async(FillBetweenVerticies, Vector3(a, b, c), Vector2(rec.x, rec.width), y, totalArea, v1, v2, v3));
 
         for (const auto& f : futures)
             if (f.valid()) f.wait();
 
         for (auto& fut : futures)
             for (const auto& f : fut.get())
-                DrawPixel(f);
+                DrawScaledPixel(f);
         futures.clear();
         futures.shrink_to_fit();
     }

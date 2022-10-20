@@ -414,10 +414,11 @@
     <Text Include="..\Scripts\TestTriangle.txt" />
     <Text Include="..\Scripts\HighResTriangle.txt" />
     <Text Include="..\Scripts\Triangle.txt" />
-  <ClInclude Include="UserScripts\SetFillMode.h" />
+    <ClInclude Include="UserScripts\SetFillMode.h" />
     <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+

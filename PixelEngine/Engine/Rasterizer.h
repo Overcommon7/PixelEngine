@@ -16,7 +16,7 @@ class Rasterizer
     static vector<Vertex> FillBetweenVerticies(const Vector3& vec, const Vector2& X, const float y, const float& totalArea, const Vertex& v1, const Vertex& v2, const Vertex& v3);
     static inline FillMode mode = FillMode::Solid;
 public:
-    static void DrawPixel(const Vertex& v);
+    static void DrawScaledPixel(const Vertex& v);
     static void DrawLine(const Vertex& v1, const Vertex& v2);
     static void DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& v3);
     static float AreaOfTriangle(const float& a, const float& b, const float& c);

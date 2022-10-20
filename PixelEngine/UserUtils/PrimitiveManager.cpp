@@ -10,7 +10,7 @@ bool PrimitiveManager::EndDraw()
     case Topolgy::Point:
         for (int i = 0; i < vertexBuffer.size(); i++)
         {
-            Rasterizer::DrawPixel(vertexBuffer[i]);
+            Rasterizer::DrawScaledPixel(vertexBuffer[i]);
         }
         break;
     case Topolgy::Line:

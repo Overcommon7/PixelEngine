@@ -197,6 +197,9 @@
     <ClInclude Include="UserScripts\SetFillMode.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
+    <ClInclude Include="UserScripts\DrawSomething.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BaseScripts\BaseScriptsSyntax.txt">

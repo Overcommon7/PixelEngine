@@ -12,7 +12,7 @@ class Draw
    
 public:
     static void Initalize(int pixelSize, int width, int height);
-    static void DrawPixel(int x, int y);
+    static void DrawScaledPixel(int x, int y);
     static int GetPixelSize() { return (int)pixel.width; }
     static void ChangePixelColor(const Color& c);
     static void ChangePixelSize(int size);

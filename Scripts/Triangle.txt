@@ -1,16 +1,16 @@
-Init(5, 130, 40)
+Init(1, 1300, 400)
 
 SetFillMode(wireframe)
 BeginDraw(Triangle)
-AddVertex(10, 0, red)
-AddVertex(60, 0, green)
-AddVertex(35, 35, blue)
+AddVertex(100, 0, red)
+AddVertex(600, 0, green)
+AddVertex(350, 350, blue)
 EndDraw()
 
 SetFillMode(solid)
 
 BeginDraw(Triangle)
-AddVertex(70, 0, red)
-AddVertex(120, 0, green)
-AddVertex(95, 35, blue)
+AddVertex(700, 0, red)
+AddVertex(1200, 0, green)
+AddVertex(950, 350, blue)
 EndDraw()
