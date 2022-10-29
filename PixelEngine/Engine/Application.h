@@ -25,5 +25,6 @@ public:
     static void MenuDraw();
     static void Logic(ApplicationState& state);
     static void Draw();
+    static void ShutDown();
 };
 

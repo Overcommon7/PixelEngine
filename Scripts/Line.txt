@@ -1,1 +1,17 @@
-Init(25, 50, 15)
+Init(25, 20, 20)
+
+SetViewport(2, 2, 15, 10)
+ShowViewport(true, blue)
+SetClipping(false)
+SetClipping(true)
+
+BeginDraw(Line)
+AddVertex(23, 50, yellow)
+AddVertex(2, -6, red)
+//AddVertex(4, 9, blue)
+//AddVertex(7, 5, green)
+//AddVertex(0, 1, pink)
+//AddVertex(20, 10, maroon)
+EndDraw();
+
+

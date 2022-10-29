@@ -1,5 +1,6 @@
 #pragma once
-
+#include <exception>
+#include <sys/types.h>  
 
 //Standard Library load
 #pragma region SDL
@@ -15,6 +16,7 @@
 #include <filesystem>
 #include <future>
 #include <mutex>
+#include <bitset>
 #include "raylib.h"
 
 #pragma endregion SDL
@@ -52,6 +54,7 @@ using std::getline;
 using std::future;
 using std::mutex;
 using std::async;
+using std::bitset;
 	  
 
 #define fs std::filesystem

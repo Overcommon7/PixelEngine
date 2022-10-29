@@ -13,7 +13,7 @@ class Rasterizer
     Rasterizer& operator=(const Rasterizer& p) = delete;
     static void PlotLineHigh(const Vertex& start, const Vertex& end);
     static void PlotLineLow(const Vertex& start, const Vertex& end);
-    static vector<Vertex> FillBetweenVerticies(const Vector3& vec, const Vector2& X, const float y, const float& totalArea, const Vertex& v1, const Vertex& v2, const Vertex& v3);
+    static vector<Vertex> FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3);
     static inline FillMode mode = FillMode::Solid;
 public:
     static void DrawScaledPixel(const Vertex& v);
@@ -24,5 +24,6 @@ public:
     static void SetPixelColor(const Color& c);
     static void SetFillMode(const FillMode& m) { mode = m; }
     static Color& GetPixelColor();
+    static const FillMode& GetFillMode() { return mode; }
 };
 

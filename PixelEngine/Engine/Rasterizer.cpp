@@ -59,22 +59,25 @@ void Rasterizer::PlotLineLow(const Vertex& start, const Vertex& end)
     }
 }
 
-vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector3& vec, const Vector2& X, const float y, const float& totalArea, const Vertex& v1, const Vertex& v2, const Vertex& v3)
+vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3)
 {
     vector<Vertex> verticies;
     verticies.reserve(X.y);
     for (float x = X.x; x < X.x + X.y; x++)
     {
-        auto point = Math::Vector2(x, y);
-        float AP = Math::Vector2(point - Math::Vector2(v1.pos.x, v1.pos.y)).Magnitude();
-        float BP = Math::Vector2(point - Math::Vector2(v2.pos.x, v2.pos.y)).Magnitude();
-        float CP = Math::Vector2(point - Math::Vector2(v3.pos.x, v3.pos.y)).Magnitude();
-        float area = Rasterizer::AreaOfTriangle(AP, BP, vec.x) + Rasterizer::AreaOfTriangle(BP, CP, vec.y) + Rasterizer::AreaOfTriangle(AP, CP, vec.z);
-        if (area <= totalArea + 0.5f && area >= totalArea - 0.5f)
+        float wd = ((v2.pos.y - v3.pos.y) * (v1.pos.x - v3.pos.x)) + ((v3.pos.x - v2.pos.x) * (v1.pos.y - v3.pos.y));
+        float w1n = ((v2.pos.y - v3.pos.y) * (x - v3.pos.x)) + ((v3.pos.x - v2.pos.x) * (y - v3.pos.y));
+        float w2n = ((v3.pos.y - v1.pos.y) * (x - v3.pos.x)) + ((v1.pos.x - v3.pos.x) * (y - v3.pos.y));
+
+        float w1 = w1n / wd;
+        float w2 = w2n / wd;
+        float w3 = 1 - w1 - w2;
+
+        if (w1 >= 0 && w2 >= 0 && w3 >= 0)
         {
-            auto c1 = v1.GetColorAsVector3() * (1 - (AP / std::max(vec.x, vec.z)));
-            auto c2 = v2.GetColorAsVector3() * (1 - (BP / std::max(vec.x, vec.y)));
-            auto c3 = v3.GetColorAsVector3() * (1 - (CP / std::max(vec.y, vec.z)));
+            auto c1 = v1.GetColorAsVector3() * w1;
+            auto c2 = v2.GetColorAsVector3() * w2;
+            auto c3 = v3.GetColorAsVector3() * w3;
             auto color = c1 + c2 + c3;
             Color c = { (unsigned char)std::min(color.x, 255.f), (unsigned char)std::min(color.y, 255.f), (unsigned char)std::min(color.z, 255.f), 255 };
             verticies.push_back(Vertex({ x, y }, c));
@@ -109,13 +112,6 @@ void Rasterizer::DrawLine(const Vertex& v1, const Vertex& v2)
 
 void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& v3)
 {
-
-    const float
-        a = Math::Vector2(Math::Vector2(v1.pos.x, v1.pos.y) - Math::Vector2(v2.pos.x, v2.pos.y)).Magnitude(),
-        b = Math::Vector2(Math::Vector2(v2.pos.x, v2.pos.y) - Math::Vector2(v3.pos.x, v3.pos.y)).Magnitude(),
-        c = Math::Vector2(Math::Vector2(v3.pos.x, v3.pos.y) - Math::Vector2(v1.pos.x, v1.pos.y)).Magnitude();
-    if (a + b <= c || a + c <= b || b + c <= a) return;
-    const float totalArea = AreaOfTriangle(a, b, c);
     const Rectangle rec = {
         std::min(std::min(v1.pos.x, v2.pos.x), v3.pos.x),
         std::min(std::min(v1.pos.y, v2.pos.y), v3.pos.y),
@@ -128,7 +124,7 @@ void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& 
         vector<future<vector<Vertex>>> futures;
         futures.reserve(rec.height);
         for (float y = rec.y; y < rec.y + rec.height; y++)
-            futures.push_back(async(FillBetweenVerticies, Vector3(a, b, c), Vector2(rec.x, rec.width), y, totalArea, v1, v2, v3));
+            futures.push_back(async(FillBetweenVerticies, Vector2(rec.x, rec.width), y, v1, v2, v3));
 
         for (const auto& f : futures)
             if (f.valid()) f.wait();
@@ -143,6 +139,7 @@ void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& 
     DrawLine(v1, v2);
     DrawLine(v1, v3);
     DrawLine(v2, v3);
+ 
 }
 
 float Rasterizer::AreaOfTriangle(const float& a, const float& b, const float& c)

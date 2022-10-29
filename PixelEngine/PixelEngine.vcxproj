@@ -369,6 +369,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ScriptMap.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UserUtils\Clipper.cpp" />
     <ClCompile Include="UserUtils\PrimitiveManager.cpp" />
     <ClCompile Include="UserUtils\Vertex.cpp" />
   </ItemGroup>
@@ -400,6 +401,7 @@
     <ClInclude Include="Engine\Vector3.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
+    <ClInclude Include="UserUtils\Clipper.h" />
     <ClInclude Include="UserUtils\PrimitiveManager.h" />
     <ClInclude Include="UserUtils\Vertex.h" />
   </ItemGroup>
@@ -410,11 +412,15 @@
     <ClInclude Include="UserScripts\BeginDraw.h" />
     <ClInclude Include="UserScripts\EndDraw.h" />
     <ClInclude Include="UserScripts\AddVertex.h" />
+    <Text Include="..\Scripts\ClippedTriangle.txt" />
     <Text Include="..\Scripts\Line.txt" />
     <Text Include="..\Scripts\TestTriangle.txt" />
     <Text Include="..\Scripts\HighResTriangle.txt" />
     <Text Include="..\Scripts\Triangle.txt" />
     <ClInclude Include="UserScripts\SetFillMode.h" />
+    <ClInclude Include="UserScripts\SetViewport.h" />
+    <ClInclude Include="UserScripts\ShowViewport.h" />
+    <ClInclude Include="UserScripts\SetClipping.h" />
     <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

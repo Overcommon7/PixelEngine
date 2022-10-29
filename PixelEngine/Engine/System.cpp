@@ -12,7 +12,6 @@ void System::Initialize()
     SetTargetFPS(targetFPS);
     Application::Initalize();
     Mouse::Initialize();
- 
 }
 
 void System::Running()
@@ -50,6 +49,7 @@ void System::Running()
 int System::Shutdown()
 {
     system("cls");
+    Application::ShutDown();
     CloseWindow();
     return 0;
 }

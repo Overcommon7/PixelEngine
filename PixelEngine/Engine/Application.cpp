@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Application.h"
 #include "ScriptManager.h"
+#include "ScriptMap.h"
 #include "Defines.h"
+#include "Clipper.h"
 
 
 void Application::SaveNewScreenShot()
@@ -48,6 +50,10 @@ void Application::SaveNewScreenShot()
 void Application::Initalize()
 {
 	ButtonManager::Initialize(&scriptFile);
+	ScriptMap::Initialize();
+	int cm = GetCurrentMonitor();
+	monitorHeight = GetMonitorHeight(cm);
+	monitorWidth = GetMonitorWidth(cm);
 }
 
 void Application::MenuLogic(ApplicationState& state)
@@ -82,4 +88,12 @@ void Application::Logic(ApplicationState& state)
 void Application::Draw()
 {
 	ScriptManager::RunScripts();
+	Clipper::Draw();
 }
+
+void Application::ShutDown()
+{
+	ScriptMap::ShutDown();
+}
+
+

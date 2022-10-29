@@ -108,6 +108,9 @@
     <ClCompile Include="UserUtils\Vertex.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
+    <ClCompile Include="UserUtils\Clipper.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -161,12 +164,6 @@
     <ClInclude Include="UserScripts\ChangeColor.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Vector2.h">
-      <Filter>Source Files\Utils\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Vector3.h">
-      <Filter>Source Files\Utils\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="BaseScripts\Init.h">
       <Filter>Source Files\BaseScripts</Filter>
     </ClInclude>
@@ -197,8 +194,23 @@
     <ClInclude Include="UserScripts\SetFillMode.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\DrawSomething.h">
+    <ClInclude Include="UserScripts\SetViewport.h">
       <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\ShowViewport.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserScripts\SetClipping.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserUtils\Clipper.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Vector3.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Vector2.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +227,9 @@
       <Filter>Scripts</Filter>
     </Text>
     <Text Include="..\Scripts\Triangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\ClippedTriangle.txt">
       <Filter>Scripts</Filter>
     </Text>
   </ItemGroup>

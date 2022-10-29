@@ -1,4 +1,7 @@
 #pragma once
+#include "UserScripts/SetClipping.h"
+#include "UserScripts/ShowViewport.h"
+#include "UserScripts/SetViewport.h"
 #include "UserScripts/SetFillMode.h"
 #include "UserScripts/AddVertex.h"
 #include "UserScripts/EndDraw.h"
@@ -12,6 +15,9 @@
 class ScriptMap
 {
 private:
+    inline static const SETCLIPPING setclipping = {};
+    inline static const SHOWVIEWPORT showviewport = {};
+    inline static const SETVIEWPORT setviewport = {};
     inline static const SETFILLMODE setfillmode = {};
     inline static const ADDVERTEX addvertex = {};
     inline static const ENDDRAW enddraw = {};
@@ -20,6 +26,7 @@ private:
     inline static const DRAWPIXEL drawpixel = {};
     inline static const ToggleGrid togglegrid = {};
     inline static const Init init = {};
+    inline static const string file = "TextEditorCommands.txt";
 	inline const static unordered_map<string, const Commands*> scripts =
 	{
         { init.GetName(), &init},
@@ -30,10 +37,20 @@ private:
         { enddraw.GetName(), &enddraw },
         { addvertex.GetName(), &addvertex },
         { setfillmode.GetName(), &setfillmode },
+        { setviewport.GetName(), &setviewport },
+        { showviewport.GetName(), &showviewport },
+        { setclipping.GetName(), &setclipping },
 	};
 public:
 	static void InvokeScript(const string& s, const vector<string>& params);
+    static void Initialize();
+    static void ShutDown();
 };
+
+
+
+
+
 
 
 
