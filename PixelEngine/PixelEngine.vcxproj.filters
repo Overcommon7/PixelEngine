@@ -96,19 +96,22 @@
     <ClCompile Include="Engine\SymbolDefines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Rasterizer.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PixelFloat.cpp">
       <Filter>Source Files\GameClasses\CPPS</Filter>
     </ClCompile>
-    <ClCompile Include="UserUtils\PrimitiveManager.cpp">
+    <ClCompile Include="UserEngineCode\Vertex.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
-    <ClCompile Include="UserUtils\Vertex.cpp">
+    <ClCompile Include="UserEngineCode\Rasterizer.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
-    <ClCompile Include="UserUtils\Clipper.cpp">
+    <ClCompile Include="UserEngineCode\PrimitiveManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Clipper.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Matrix4.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,12 +161,6 @@
     <ClInclude Include="Engine\SymbolDefines.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Rasterizer.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="UserScripts\ChangeColor.h">
-      <Filter>UserCommands</Filter>
-    </ClInclude>
     <ClInclude Include="BaseScripts\Init.h">
       <Filter>Source Files\BaseScripts</Filter>
     </ClInclude>
@@ -176,40 +173,49 @@
     <ClInclude Include="Engine\PixelFloat.h">
       <Filter>Source Files\GameClasses\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UserUtils\PrimitiveManager.h">
-      <Filter>UserSourceCode\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="UserUtils\Vertex.h">
-      <Filter>UserSourceCode\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="UserScripts\BeginDraw.h">
-      <Filter>Source Files\BaseScripts</Filter>
-    </ClInclude>
-    <ClInclude Include="UserScripts\EndDraw.h">
-      <Filter>Source Files\BaseScripts</Filter>
-    </ClInclude>
-    <ClInclude Include="UserScripts\AddVertex.h">
-      <Filter>UserSourceCode\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="UserScripts\SetFillMode.h">
+    <ClInclude Include="UserCommands\AddVertex.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\SetViewport.h">
+    <ClInclude Include="UserCommands\BeginDraw.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\ShowViewport.h">
+    <ClInclude Include="UserCommands\ChangeColor.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="UserScripts\SetClipping.h">
+    <ClInclude Include="UserCommands\EndDraw.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="UserUtils\Clipper.h">
+    <ClInclude Include="UserCommands\SetClipping.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetFillMode.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetViewport.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\ShowViewport.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Clipper.h">
       <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Vector3.h">
+    <ClInclude Include="UserEngineCode\PrimitiveManager.h">
       <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Vector2.h">
+    <ClInclude Include="UserEngineCode\Rasterizer.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Vector2.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Vector3.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Vertex.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Matrix4.h">
       <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
   </ItemGroup>
