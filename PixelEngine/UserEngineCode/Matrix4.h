@@ -5,6 +5,8 @@ namespace Math
 {
 	class Matrix4
 	{
+		float Get3x3Determinant(const vector<vector<float>>& matrix) const;
+		vector<vector<float>> GetMinorMatrix(short row, short column) const;
 	public:
 		float
 			_11, _21, _31, _41,
@@ -14,11 +16,14 @@ namespace Math
 
 		Matrix4() = default;
 		Matrix4(const Matrix4& m) = default;
+		Matrix4(const vector<float>& f);
+		Matrix4(const vector<vector<float>>& f);
+		Matrix4(const std::initializer_list<float> f);
 		Matrix4& operator= (const Matrix4& m) = default;
-		Matrix4(const vector<float> f);
 
 
 		Matrix4 operator+(const Matrix4& m) const;
+		Matrix4 operator-(const Matrix4& m) const;
 		Matrix4 operator*(const Matrix4& m) const;
 		Matrix4 operator*(const float& f) const;
 
@@ -32,13 +37,15 @@ namespace Math
 		static Matrix4 Translation(Vector3 d);
 		static Matrix4 Translation(float dx, float dy, float dz);
 
-		Vector3 TransformCoord(Vector3 v, Matrix4 m); // assume w = 1
-		Vector3 TransformNormal(Vector3 v, Matrix4 m); // assume w = 0
-		float Determinant(Matrix4 m);
-		Matrix4 Adjoint(Matrix4 m);
-		Matrix4 Transpose(Matrix4 m);
-		Matrix4 Inverse(Matrix4 m);
-		vector<float*> ToVector();
+		Vector3 TransformCoord(Vector3 v); // assume w = 1
+		Vector3 TransformNormal(Vector3 v); // assume w = 0
+		float Determinant();
+		Matrix4 Adjoint();
+		Matrix4 Transpose();
+		Matrix4 Inverse();
+		vector<float*> GetVector();
+		vector<float> ToVector() const;
+		vector<vector<float>> To2DVector() const;
 	};
 }
 
