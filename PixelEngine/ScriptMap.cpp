@@ -23,6 +23,6 @@ void ScriptMap::Initialize()
 
 void ScriptMap::ShutDown()
 {
-	if (fs::exists("TextEditorCommands.txt"))
-		fs::remove("TextEditorCommands.txt");
+	if (fs::exists(file))
+		fs::remove(file);
 }

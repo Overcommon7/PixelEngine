@@ -19,15 +19,6 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{ad4ba9fd-dbdc-4609-b3ca-1645063ba057}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameClasses">
-      <UniqueIdentifier>{dbd5d45d-da92-4d55-bc80-6f60fbf7268d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameClasses\CPPS">
-      <UniqueIdentifier>{642285b5-fb00-4120-8e28-fbec95da4d89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameClasses\Headers">
-      <UniqueIdentifier>{7f7d462f-f073-4ac8-a44e-078bb28e7399}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utils\CPPs">
       <UniqueIdentifier>{64409710-a2fc-4c39-83fa-3a7a3db28930}</UniqueIdentifier>
     </Filter>
@@ -52,6 +43,15 @@
     <Filter Include="UserCommands">
       <UniqueIdentifier>{31dacc6d-0617-4aca-b64d-45cf0a6df4c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ApplicationClasses">
+      <UniqueIdentifier>{dbd5d45d-da92-4d55-bc80-6f60fbf7268d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ApplicationClasses\CPPS">
+      <UniqueIdentifier>{642285b5-fb00-4120-8e28-fbec95da4d89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ApplicationClasses\Headers">
+      <UniqueIdentifier>{7f7d462f-f073-4ac8-a44e-078bb28e7399}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -61,7 +61,7 @@
       <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Draw.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="Engine\System.cpp">
       <Filter>Source Files\Managers\CPPs</Filter>
@@ -73,7 +73,7 @@
       <Filter>Source Files\Utils\CPPs</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Button.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="Engine\ButtonManager.cpp">
       <Filter>Source Files\Managers\CPPs</Filter>
@@ -82,22 +82,22 @@
       <Filter>Source Files\Managers\CPPs</Filter>
     </ClCompile>
     <ClCompile Include="Engine\ScriptParser.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="Engine\User.cpp">
       <Filter>Source Files\Utils\CPPs</Filter>
     </ClCompile>
     <ClCompile Include="ScriptMap.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Commands.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="Engine\SymbolDefines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\PixelFloat.cpp">
-      <Filter>Source Files\GameClasses\CPPS</Filter>
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
     <ClCompile Include="UserEngineCode\Vertex.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
@@ -120,7 +120,7 @@
       <Filter>PCH</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Draw.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Application.h">
       <Filter>Source Files\Managers\Headers</Filter>
@@ -135,7 +135,7 @@
       <Filter>Source Files\Utils\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Button.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utilities.h">
       <Filter>Source Files\Utils\Headers</Filter>
@@ -147,16 +147,16 @@
       <Filter>Source Files\Managers\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\ScriptParser.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\User.h">
       <Filter>Source Files\Utils\Headers</Filter>
     </ClInclude>
     <ClInclude Include="ScriptMap.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Commands.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\SymbolDefines.h">
       <Filter>Source Files</Filter>
@@ -171,7 +171,7 @@
       <Filter>Source Files\BaseScripts</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PixelFloat.h">
-      <Filter>Source Files\GameClasses\Headers</Filter>
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
     <ClInclude Include="UserCommands\AddVertex.h">
       <Filter>UserCommands</Filter>

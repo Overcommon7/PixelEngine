@@ -5,7 +5,7 @@ ShowViewport(true, blue)
 SetClipping(false)
 SetClipping(true)
 SetFillMode(Wireframe)
-//SetFillMode(solid)
+SetFillMode(solid)
 
 
 float x = 5

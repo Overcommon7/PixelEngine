@@ -198,7 +198,7 @@ vector<Command> ScriptParser::ParseText(const vector<string>& instructions, unor
 	for (const auto& line : instructions)
 	{
 		++lineNumber;
-		if (line.empty()) continue;
+		if (line.length() < 2) continue;
 		if (line[0] == '/' && line[1] == '/') continue;
 
 		bool equals = line.find('=') != string::npos;
