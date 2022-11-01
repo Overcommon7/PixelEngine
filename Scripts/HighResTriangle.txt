@@ -1,9 +1,7 @@
 Init(5, 300, 200)
-
-ToggleGrid(false)
 SetClipping(false)
 BeginDraw(Triangle)
-AddVertex(30,0,red)
-AddVertex(270,0,pink)
+AddVertex(x,0,red)
+AddVertex(x,0,pink)
 AddVertex(150,120,brown)
 EndDraw()

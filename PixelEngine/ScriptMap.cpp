@@ -19,6 +19,8 @@ void ScriptMap::Initialize()
 		inFile << commmand.first << '\n';
 	inFile << "Print\n";
 	inFile.close();
+
+	system("start ..\\TextEditor\\TextEditorFrontEnd.exe");
 }
 
 void ScriptMap::ShutDown()

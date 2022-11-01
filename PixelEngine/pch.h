@@ -17,6 +17,7 @@
 #include <future>
 #include <mutex>
 #include <bitset>
+#include <set>
 #include "raylib.h"
 
 #pragma endregion SDL
@@ -55,6 +56,7 @@ using std::future;
 using std::mutex;
 using std::async;
 using std::bitset;
+using std::set;
 	  
 
 #define fs std::filesystem

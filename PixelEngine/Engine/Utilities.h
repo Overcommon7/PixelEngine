@@ -3,6 +3,37 @@
 
 namespace Utils
 {
+
+    const inline static std::unordered_map<string, Color> colors = {
+        {"LIGHTGRAY", LIGHTGRAY },
+        {"GRAY",      GRAY      },
+        {"DARKGRAY",  DARKGRAY  },
+        {"YELLOW",    YELLOW    },
+        {"GOLD",      GOLD      },
+        {"ORANGE",    ORANGE    },
+        {"PINK",      PINK      },
+        {"RED",       RED       },
+        {"MAROON",    MAROON    },
+        {"GREEN",     GREEN     },
+        {"LIME",      LIME      },
+        {"DARKGREEN", DARKGREEN },
+        {"SKYBLUE",   SKYBLUE   },
+        {"BLUE",      BLUE      },
+        {"DARKBLUE",  DARKBLUE  },
+        {"PURPLE",    PURPLE    },
+        {"VIOLET",    VIOLET    },
+        {"DARKPURPLE",DARKPURPLE},
+        {"BEIGE",     BEIGE     },
+        {"BROWN",     BROWN     },
+        {"DARKBROWN", DARKBROWN },
+        {"WHITE",     WHITE     },
+        {"BLACK",     BLACK     },
+        {"BLANK",     BLANK     },
+        {"MAGENTA",   MAGENTA   },
+        {"RAYWHITE",  RAYWHITE  }
+    };
+
+
     static string ToLowerString(const string& s)
     {
         string temp;
@@ -73,32 +104,7 @@ namespace Utils
     static Color StringToColor(const string& s)
     {
         string str = ToUpperString(s);
-        if (str == "LIGHTGRAY" || str == "LIGHTGREY") return LIGHTGRAY;
-        if (str == "GRAY" || str == "GREY") return GRAY;
-        if (str == "DARKGRAY") return DARKGRAY;
-        if (str == "YELLOW") return YELLOW;
-        if (str == "GOLD") return GOLD;
-        if (str == "ORANGE") return ORANGE;
-        if (str == "PINK") return PINK;
-        if (str == "RED") return RED;
-        if (str == "MAROON") return MAROON;
-        if (str == "GREEN") return GREEN;
-        if (str == "LIME") return LIME;
-        if (str == "DARKGREEN") return DARKGREEN;
-        if (str == "SKYBLUE") return SKYBLUE;
-        if (str == "BLUE") return BLUE;
-        if (str == "DARKBLUE") return DARKBLUE;
-        if (str == "PURPLE") return PURPLE;
-        if (str == "VIOLET") return VIOLET;
-        if (str == "DARKPURPLE") return DARKPURPLE;
-        if (str == "BEIGE") return BEIGE;
-        if (str == "BROWN") return BROWN;
-        if (str == "DARKBROWN") return DARKBROWN;
-        if (str == "WHITE") return WHITE;
-        if (str == "BLACK") return BLACK;
-        if (str == "BLANK") return BLANK;
-        if (str == "MAGENTA") return MAGENTA;
-        if (str == "RAYWHITE") return RAYWHITE;
+        if (colors.find(str) != colors.end()) return colors.at(str);
         return WHITE;
     }
 
