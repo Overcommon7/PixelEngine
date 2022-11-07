@@ -21,6 +21,10 @@ public:
 	Matrix4 operator-(const Matrix4& m) const;
 	Matrix4 operator*(const Matrix4& m) const;
 	Matrix4 operator*(const float& f) const;
+	void operator+=(const Matrix4& m);
+	void operator-=(const Matrix4& m);
+	void operator*=(const Matrix4& right);
+	void operator*=(const float& f);
 
 	static Matrix4 Identity();
 	static Matrix4 RotationX(float rad);

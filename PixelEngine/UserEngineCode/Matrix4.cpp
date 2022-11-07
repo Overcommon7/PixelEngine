@@ -51,6 +51,25 @@ Matrix4::Matrix4(const vector<vector<float>>& f)
 }
 Matrix4::Matrix4(const std::initializer_list<float> f)
 {
+    if (f.size() == 1)
+    {
+        _11 = *f.begin();
+        _12 = *f.begin();
+        _13 = *f.begin();
+        _14 = *f.begin();
+        _21 = *f.begin();
+        _22 = *f.begin();
+        _23 = *f.begin();
+        _24 = *f.begin();
+        _31 = *f.begin();
+        _32 = *f.begin();
+        _33 = *f.begin();
+        _34 = *f.begin();
+        _41 = *f.begin();
+        _42 = *f.begin();
+        _43 = *f.begin();
+        _44 = *f.begin();
+    }
     if (f.size() < 16)
     {
         *this = Matrix4();
@@ -151,6 +170,76 @@ Matrix4 Matrix4::operator*(const float& f) const
     for (auto& v : result)
         v *= f;
     return Matrix4(result);
+}
+
+void Matrix4::operator+=(const Matrix4& m)
+{
+    this->_11 += m._11;
+    this->_12 += m._12;
+    this->_13 += m._13;
+    this->_14 += m._14;
+    this->_21 += m._21;
+    this->_22 += m._22;
+    this->_23 += m._23;
+    this->_24 += m._24;
+    this->_31 += m._31;
+    this->_32 += m._32;
+    this->_33 += m._33;
+    this->_34 += m._34;
+    this->_41 += m._41;
+    this->_42 += m._42;
+    this->_43 += m._43;
+    this->_44 += m._44;
+}
+
+void Matrix4::operator-=(const Matrix4& m)
+{
+    this->_11 -= m._11;
+    this->_12 -= m._12;
+    this->_13 -= m._13;
+    this->_14 -= m._14;
+    this->_21 -= m._21;
+    this->_22 -= m._22;
+    this->_23 -= m._23;
+    this->_24 -= m._24;
+    this->_31 -= m._31;
+    this->_32 -= m._32;
+    this->_33 -= m._33;
+    this->_34 -= m._34;
+    this->_41 -= m._41;
+    this->_42 -= m._42;
+    this->_43 -= m._43;
+    this->_44 -= m._44;
+}
+
+void Matrix4::operator*=(const Matrix4& right)
+{
+    Matrix4 result;
+
+    result._11 = this->_11 * right._11 + this->_12 * right._21 + this->_13 * right._31 + this->_14 * right._41;
+    result._12 = this->_11 * right._12 + this->_12 * right._22 + this->_13 * right._32 + this->_14 * right._42;
+    result._13 = this->_11 * right._13 + this->_12 * right._23 + this->_13 * right._33 + this->_14 * right._43;
+    result._14 = this->_11 * right._14 + this->_12 * right._24 + this->_13 * right._34 + this->_14 * right._44;
+    result._21 = this->_21 * right._11 + this->_22 * right._21 + this->_23 * right._31 + this->_24 * right._41;
+    result._22 = this->_21 * right._12 + this->_22 * right._22 + this->_23 * right._32 + this->_24 * right._42;
+    result._23 = this->_21 * right._13 + this->_22 * right._23 + this->_23 * right._33 + this->_24 * right._43;
+    result._24 = this->_21 * right._14 + this->_22 * right._24 + this->_23 * right._34 + this->_24 * right._44;
+    result._31 = this->_31 * right._11 + this->_32 * right._21 + this->_33 * right._31 + this->_34 * right._41;
+    result._32 = this->_31 * right._12 + this->_32 * right._22 + this->_33 * right._32 + this->_34 * right._42;
+    result._33 = this->_31 * right._13 + this->_32 * right._23 + this->_33 * right._33 + this->_34 * right._43;
+    result._34 = this->_31 * right._14 + this->_32 * right._24 + this->_33 * right._34 + this->_34 * right._44;
+    result._41 = this->_41 * right._11 + this->_42 * right._21 + this->_43 * right._31 + this->_44 * right._41;
+    result._42 = this->_41 * right._12 + this->_42 * right._22 + this->_43 * right._32 + this->_44 * right._42;
+    result._43 = this->_41 * right._13 + this->_42 * right._23 + this->_43 * right._33 + this->_44 * right._43;
+    result._44 = this->_41 * right._14 + this->_42 * right._24 + this->_43 * right._34 + this->_44 * right._44;
+
+    *this = result;
+}
+
+void Matrix4::operator*=(const float& f)
+{
+    for (auto& v : GetVector())
+        *v *= f;
 }
 
 Matrix4 Matrix4::Identity()

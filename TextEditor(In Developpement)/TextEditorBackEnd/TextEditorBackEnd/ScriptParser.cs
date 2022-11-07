@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,11 @@ namespace TextEditorBackEnd
             return errorLine;
         }
     }
+
     public static class ScriptParser
     {
         //Impletement Base Script Syntax Detection
-        static HashSet<string> commands = new HashSet<string>();
+        static Dictionary<string, List<List<string>>> commands = new Dictionary<string, List<List<string>>>();
         static HashSet<Error> flaggedLines = new HashSet<Error>();
         static List<string> errorlessContents = new List<string>();
         static HashSet<string> variables = new HashSet<string>();
@@ -68,7 +70,14 @@ namespace TextEditorBackEnd
         static int lineNumber = 0;
         public static void LoadCommands(string filepath)
         {
-            commands = FileManager.LoadFile(filepath).ToHashSet();
+            var temp = FileManager.LoadFile(filepath).ToHashSet();            
+            foreach (var str in temp)
+            {
+                int bracketIndex = str.LastIndexOf('(');
+                var name = str.Remove(bracketIndex);               
+                if (!commands.ContainsKey(name)) commands.Add(name, new List<List<string>>());
+                commands[name].Add(new List<string>(str.Substring(bracketIndex + 1, str.Length - bracketIndex - 2).Split(',', StringSplitOptions.TrimEntries)));
+            }
         }
 
         public static bool CheckForErrors(ref string contents)
@@ -108,7 +117,7 @@ namespace TextEditorBackEnd
                 else
                 {
                     var commandName = line.Remove(bracketIndex);
-                    if (commands.Contains(commandName))
+                    if (commands.ContainsKey(commandName))
                     {
                         int index = line.LastIndexOf(')');
                         if (index == -1) AddError("Invalid Command Declaration: Missing Ending Parantheses");                    
@@ -119,31 +128,71 @@ namespace TextEditorBackEnd
                         {
                             case "Init":
                                 if (init) AddError("Only One Init Command Allowed");
-                                else if (CheckInit(ref parameters))
-                                {
-                                    errorlessContents.Add(line);
-                                    init = true;
-                                }
-                                break;
-                            case "DrawPixel":
-                                if (CheckDrawPixel(ref parameters))
-                                    errorlessContents.Add(line);
+                                else init = true;
                                 break;
                             case "ToggleGrid":
                                 if (toggle) AddError("Only One Toggle Grid Command Allowed");
-                                else if (CheckToggleGrid(ref parameters))
-                                {
-                                    errorlessContents.Add(line);
-                                    toggle = true;
-                                }
+                                else toggle = true;
                                 break;
-                            case "ChangeColor":
-                                if (CheckChangeColor(ref parameters))
-                                    errorlessContents.Add(line);
-                                break;
-                            default:
-                                errorlessContents.Add(line);
-                                break;
+                        }
+
+                        bool validAmount = false;
+                        int idx = 0;
+                        for (; idx < commands[commandName].Count; idx++)
+                        {
+                            if (commands[commandName][idx] == null) continue;
+                            if (commands[commandName][idx].Count == parameters.Length) validAmount = true;
+                            if (validAmount) break;
+                        }
+                        if (!validAmount)
+                        {
+                            AddError($"Command {commandName} Does Not Take {parameters.Length} Overloads");
+                            continue;
+                        }
+                        for(int i = 0; i < parameters.Length; i++)
+                        {
+                            float rF;
+                            int rI;
+                            switch (commands[commandName][idx][i])
+                            {   
+                                case "int":
+                                    if (!int.TryParse(parameters[i], out rI)) AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Int");
+                                    break;
+                                case "float":
+                                    if (float.TryParse(parameters[i], out rF)) AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Float");
+                                    break;
+                                case "bool":
+                                    if (parameters[i] != "true" && parameters[i] != "false") AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Bool");
+                                    break;
+                                case "color":
+                                    if (!float.TryParse(parameters[i], out rF) && !variables.Contains(parameters[i]))
+                                    {
+                                        if (!colors.Contains(parameters[i])) AddError($"Parameter {i + 1} of command {commandName} takes in type: Color");
+                                    }
+                                    else if (parameters.Length <= i + 2) AddError($"Parameters {i + 1} - {i + 3} of command {commandName} must make up a valid RGB Color");
+                                    else
+                                    {
+                                        ++i;
+                                        if (!float.TryParse(parameters[i], out rF) && !variables.Contains(parameters[i])) 
+                                            AddError($"Parameters {i} - {i + 2} of command {commandName} must make up a valid RGB Color");
+                                        ++i;
+                                        if (!float.TryParse(parameters[i], out rF) && !variables.Contains(parameters[i]))
+                                            AddError($"Parameters {i - 1} - {i + 1} of command {commandName} must make up a valid RGB Color");
+                                    }
+                                    break;
+                                case "vector3":
+                                    if (parameters.Length <= i + 2) AddError($"Parameters {i + 1} - {i + 3} of command {commandName} must make up a valid Vector3");
+                                    for (int j = i; i < j + 2; i++)
+                                        if (!float.TryParse(parameters[i], out rF))
+                                            AddError($"Parameters {i + 1} - {i + 3} of command {commandName} must make up a valid Vector3");
+                                    break;
+                                case "vector2":
+                                    if (parameters.Length <= i + 1) AddError($"Parameters {i + 1} & {i + 2} of command {commandName} must make up a valid Vector2");
+                                    if (!float.TryParse(parameters[i], out rF)) AddError($"Parameters {i + 1} & {i + 2} of command {commandName} must make up a valid Vector2");
+                                    ++i;
+                                    if (!float.TryParse(parameters[i], out rF)) AddError($"Parameters {i} & {i + 1} of command {commandName} must make up a valid Vector2");
+                                    break;
+                            }
                         }
                     }
                     else if (line.Contains('=')) CheckArithemticErrors(ref line);
@@ -195,75 +244,9 @@ namespace TextEditorBackEnd
             else errorlessContents.Add(line);
         }
 
-        static bool CheckInit(ref string[] parameters)
-        {
+        
 
-            if (parameters.Length != 3)
-            {
-                AddError("Init Fucntion Takes Three Arguments");
-                return false;
-            }
-            foreach (var p in parameters)
-            {
-                if (variables.Contains(p)) continue;
-                int result;
-                if (int.TryParse(p, out result)) continue;
-                AddError("Init Command Arguments Must Be Of Type: Int");
-                return false;
-            }
-            return true;
-        }
-
-        static bool CheckDrawPixel(ref string[] parameters)                                
-        {
-            if (parameters.Length != 2)
-            {
-                AddError("Draw Pixel Command Takes Two Interger Argumnets");
-                return false;
-            }
-            foreach (var p in parameters)
-            {
-                if (variables.Contains(p)) continue;
-                int result;
-                if (int.TryParse(p, out result)) continue;
-                AddError("Init Command Arguments Must Be Of Type: Int");
-                return false;
-            }
-            return true;
-
-        }
-
-        static bool CheckChangeColor(ref string[] parameters)
-        {
-            if (parameters.Length == 1 && !colors.Contains(parameters[0].ToUpper()))
-            {
-                AddError("Invalid Color Passed: See Utils::Colors for a complete list of Colors");
-                return false;
-            }
-
-            foreach (var p in parameters)
-            {
-                if (variables.Contains(p)) continue;
-                float result;
-                if (float.TryParse(p, out result))
-                {
-                    if (result < 0f || result > 255f) return false;
-                    continue;
-                }
-                AddError("Init Command Arguments Must Be Of Type: Int");
-                return false;
-            }
-            return true;
-        }
-
-        static bool CheckToggleGrid(ref string[] parameters)
-        {
-            if (parameters.Length != 1) AddError("Toggle Grid Only Takes One Argument");
-            else if (parameters[0].ToLower() == "true" || parameters[0].ToLower() == "false") return true;
-            else AddError("Invalid Argumnet Passed: Toggle Grid Command");
-            return false;
-        }
-
+       
         static void CheckArithemticErrors(ref string line) 
         {
             var parameters = GetParams(line, ' ');

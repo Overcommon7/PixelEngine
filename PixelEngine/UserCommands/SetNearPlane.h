@@ -12,6 +12,9 @@ public:
     //Invoke Gets Called When A PixelScript Calls The Name Of The Fuction
     void Invoke(const vector<string>& params) const override
     {
-
+        if (params.empty()) return;
+        float pos = 0;
+        if (!Utils::TryParse(params.front(), pos)) return;
+        PixelCamera::SetNearPlane(pos);
     }
 };
