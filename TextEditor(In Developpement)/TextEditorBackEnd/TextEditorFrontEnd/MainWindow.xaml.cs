@@ -18,6 +18,7 @@ namespace TextEditorFrontEnd
         public string filepath = string.Empty;
         public readonly string commandFilePath = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + "\\PixelEngine\\TextEditorCommands.txt";
         bool saved = true;
+        public virtual int ItemHeight { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace TextEditorFrontEnd
             CommandBindings.Add(new CommandBinding(load, Open_Click));
             RoutedCommand compile = new RoutedCommand();
             compile.InputGestures.Add(new KeyGesture(Key.B, ModifierKeys.Control));
-            CommandBindings.Add(new CommandBinding(compile, Complie_Click));
+            CommandBindings.Add(new CommandBinding(compile, Compilie_Click));
             TextField.AcceptsReturn = true;
             TextField.AcceptsTab = true;
             TextField.Focusable = false;
@@ -37,7 +38,7 @@ namespace TextEditorFrontEnd
             TextField.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
             TextField.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;           
             ScriptParser.LoadCommands(commandFilePath);
-            LostFocus += MainWindow_LostFocus;
+            Deactivated += MainWindow_LostFocus;
             Closing += MainWindow_Closed;
         }
 
@@ -56,8 +57,9 @@ namespace TextEditorFrontEnd
             FileManager.SaveFile(ref contents, filepath);
         }
 
-        private void MainWindow_LostFocus(object sender, RoutedEventArgs e)
+        private void MainWindow_LostFocus(object? sender, EventArgs e)
         {
+            Compilie_Click(null, null);
             ScriptParser.SaveValidScript(filepath, TextField.Text);
         }
 
@@ -71,6 +73,9 @@ namespace TextEditorFrontEnd
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+
+
             if (string.IsNullOrEmpty(Title) || Title.EndsWith('*')) return;
             saved = false;
             Title += "*";
@@ -90,11 +95,12 @@ namespace TextEditorFrontEnd
             {
                 filepath = dlg.FileName;
                 TextField.Text = FileManager.LoadFileAsSingleString(filepath);
-                ErrorList.Text = string.Empty;
+                ErrorList.Items.Clear();
                 Title = "Script Editor - " + Path.GetFileName(filepath);
                 saved = true;
                 TextField.Focusable = true;
                 TextField.IsEnabled = true;
+
             }
             
         }
@@ -110,6 +116,7 @@ namespace TextEditorFrontEnd
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            Compilie_Click(sender, e);
             switch (SaveWithErrors())
             {
                 case MessageBoxResult.None:
@@ -125,9 +132,9 @@ namespace TextEditorFrontEnd
                     break;
             }
 
-            ErrorList.Text = string.Empty;
+            ErrorList.Items.Clear();
             foreach (var error in ScriptParser.Errors)
-                ErrorList.Text += error.ToString();
+                ErrorList.Items.Add(error.ToString());
             Title = "Script Editor - " + Path.GetFileName(filepath);
             saved = true;
         }
@@ -136,7 +143,7 @@ namespace TextEditorFrontEnd
         {
             string name = Path.GetFileNameWithoutExtension(filepath) + "_Copy";
             int copyNumber = 0;
-            while (File.Exists(name + copyNumber.ToString()))
+            while (File.Exists(name + copyNumber.ToString() + ".txt"))
                 ++copyNumber;
             if (copyNumber != 0)
                 name = name + copyNumber.ToString();
@@ -152,6 +159,7 @@ namespace TextEditorFrontEnd
             // Process save file dialog box results
             if (result == true)
             {
+                Compilie_Click(sender, e);
                 File.Copy(filepath, dlg.FileName, true);
                 filepath = dlg.FileName;
                 switch (SaveWithErrors())
@@ -168,21 +176,24 @@ namespace TextEditorFrontEnd
                         FileManager.SaveFile(ref contents, filepath);
                         break;
                 }
-                ErrorList.Text = string.Empty;
+                ErrorList.Items.Clear();
                 Title = "Script Editor - " + Path.GetFileName(filepath);
                 saved = true;
             }    
         }
-        private void Complie_Click(object sender, RoutedEventArgs e)
+        private void Compilie_Click(object sender, RoutedEventArgs e)
         {
             string contents = TextField.Text;
             if (ScriptParser.CheckForErrors(ref contents))
-                ErrorList.Text = "No Complilation Errors";
+            {
+                ErrorList.Items.Clear();
+                ErrorList.Items.Add("No Complilation Errors");
+            }
             else
             {
-                ErrorList.Text = string.Empty;
+                ErrorList.Items.Clear();
                 foreach (var error in ScriptParser.Errors)
-                    ErrorList.Text += error.ToString();
+                    ErrorList.Items.Add(error.ToString());
             }
                
         }

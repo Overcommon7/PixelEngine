@@ -33,6 +33,9 @@ static void CreateNewScript()
 		}
 	}
 	fs::remove(newPix + to_string(i) + ".txt");
+	fstream inFile(filepath + newPix + to_string(i) + ".txt");
+	inFile << "Init(25, 30, 30)";
+	inFile.close();
 }
 #pragma endregion
 

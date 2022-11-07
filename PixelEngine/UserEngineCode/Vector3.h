@@ -18,7 +18,7 @@ namespace Math
 			{
 				x = *list.begin();
 				y = *list.begin();
-				z = *list.begin();				
+				z = *list.begin();
 				return;
 			}
 			int i = 0;
@@ -33,14 +33,15 @@ namespace Math
 		}
 		Vector3(const Vector3& vec) = default;
 		Vector3& operator=(const Vector3& vec) = default;
-
+		Vector3& operator=(const rVector3& vec) { x = vec.x; y = vec.y; x = vec.z; };
+		Vector3(const rVector3 vec) : x(vec.x), y(vec.y), z(vec.z) {}
 		bool operator==(const Vector3& vec) const { return vec.x == this->x && vec.y == this->y && vec.z == this->z; }
 		bool operator!=(const Vector3& vec) const { return vec.x != this->x || vec.y != this->y && vec.z != this->z; }
 		Vector3 operator+(const Vector3& vec) const { return Vector3(this->x + vec.x, this->y + vec.y, this->z + vec.z); }
 		Vector3 operator-(const Vector3& vec) const { return Vector3(this->x - vec.x, this->y - vec.y, this->z - vec.z); }
 		Vector3 operator/(const float& f) const { if (f == 0) return *this; return Vector3(this->x / f, this->y / f, this->z / f); }
 		Vector3 operator*(const float& f) const { return Vector3(this->x * f, this->y * f, this->z * f); }
-		
+
 		float Magnitude() const
 		{
 			return sqrtf((x * x) + (y * y) + (z * z));
@@ -62,8 +63,8 @@ namespace Math
 		Vector3 CrossProduct(const Vector3& w) const
 		{
 			return Vector3(
-				(this->y * w.z) - (w.y * this->z), 
-				(this->z * w.x) - (w.z * this->x), 
+				(this->y * w.z) - (w.y * this->z),
+				(this->z * w.x) - (w.z * this->x),
 				(this->x * w.y) - (w.x * this->y));
 		}
 		Vector3 Lerp(const Vector3& vec, const float& t) const
@@ -73,8 +74,16 @@ namespace Math
 				std::lerp(y, vec.y, t),
 				std::lerp(z, vec.z, t));
 		}
+
+		rVector3 Convert()
+		{
+			return rVector3(x, y, z);
+		}
 	};
-};
+
+}
+
+
 
 
 

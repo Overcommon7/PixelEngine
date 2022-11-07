@@ -4,6 +4,8 @@
 #include "ScriptMap.h"
 #include "Defines.h"
 #include "Clipper.h"
+#include "MatrixStack.h"
+#include "PrimitiveManager.h"
 
 
 void Application::SaveNewScreenShot()
@@ -73,7 +75,13 @@ void Application::MenuDraw()
 
 void Application::Logic(ApplicationState& state)
 {
-	ScriptManager::Update();
+	bool scriptReloaded = User::GetKey() == KEY_F5;
+	if (scriptReloaded)
+	{
+		PrimitiveManager::OnScriptReload();
+	}
+	MatrixStack::Update();
+	ScriptManager::Update(scriptReloaded);
 	if (User::GetKey() == KEY_F10) SaveNewScreenShot();
 	if (User::GetKey() != KEY_ESCAPE) return;
 	system("cls");

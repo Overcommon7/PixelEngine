@@ -2,10 +2,33 @@
 #include "PrimitiveManager.h"
 #include "Rasterizer.h"
 #include "Clipper.h"
+#include "MatrixStack.h"
+#include "Camera.h"
 
-bool PrimitiveManager::EndDraw()
+Matrix4 PrimitiveManager::GetScreenTransform()
+{
+    float hw = screenWidth * 0.5f;
+    float hh = screenHeight * 0.5f;
+
+    return Matrix4{
+        hw, 0, 0, 0,
+        0, -hh, 0, 0,
+        0, 0, 1, 1,
+        hw, hh, 0, 1
+    };
+}
+
+bool PrimitiveManager::EndDraw(bool applyTransform)
 {
     if (!mBeginDraw) return false;
+
+    if (applyTransform)
+    {
+        Matrix4 matFinal = MatrixStack::GetTransform() * PixelCamera::GetViewMatrix() * PixelCamera::GetProjectionMatrix() * GetScreenTransform();
+        for (auto& v : vertexBuffer)
+            v.pos = matFinal.TransformCoord(v.pos.Convert());
+    }
+    
     switch (mTopology)
     {
     case Topolgy::Point:
@@ -36,21 +59,9 @@ bool PrimitiveManager::EndDraw()
         break;
     }
     mBeginDraw = false;
+    mApplyTransform = false;
     vertexBuffer.clear();
     return true;
 }
 
-/*if (k % 2 == 0)
-                  {
-                      Draw::ChangePixelColor(WHITE);
-                      verticies.front().color = Draw::GetPixelColor();
-                      verticies[k - 1].color = Draw::GetPixelColor();
-                      verticies[k].color = Draw::GetPixelColor();
-                  }
-                  else
-                  {
-                      Draw::ChangePixelColor(RED);
-                      verticies.front().color = Draw::GetPixelColor();
-                      verticies[k - 1].color = Draw::GetPixelColor();
-                      verticies[k].color = Draw::GetPixelColor();
-                  }*/
+

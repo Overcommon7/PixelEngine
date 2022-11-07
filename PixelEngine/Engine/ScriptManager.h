@@ -14,6 +14,6 @@ public:
     ScriptManager& operator=(const ScriptManager& s) = delete;
 
     static void LoadScript(const string& script);
-    static void Update();
+    static void Update(bool reload);
     static void RunScripts();
 };

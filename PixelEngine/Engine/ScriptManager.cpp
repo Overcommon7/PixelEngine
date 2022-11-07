@@ -21,10 +21,9 @@ void ScriptManager::LoadScript(const string& script)
 	commands = ScriptParser::ParseText(lines, variables);
 }
 
-void ScriptManager::Update()
+void ScriptManager::Update(bool reload)
 {
-	if (User::GetKey() == KEY_F5)
-		LoadScript(scriptName);
+	if (reload)	LoadScript(scriptName);
 	for (auto& var : variables)
 		var.second.ResetCurrentValue();
 }

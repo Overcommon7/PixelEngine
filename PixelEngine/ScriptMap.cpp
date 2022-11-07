@@ -20,7 +20,8 @@ void ScriptMap::Initialize()
 	inFile << "Print\n";
 	inFile.close();
 
-	system("start ..\\TextEditor\\TextEditorFrontEnd.exe");
+	if (!textEditorOpened) system("start ..\\TextEditor\\TextEditorFrontEnd.exe");
+	textEditorOpened = true;
 }
 
 void ScriptMap::ShutDown()

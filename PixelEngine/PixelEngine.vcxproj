@@ -368,8 +368,10 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ScriptMap.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UserEngineCode\Camera.cpp" />
     <ClCompile Include="UserEngineCode\Clipper.cpp" />
     <ClCompile Include="UserEngineCode\Matrix4.cpp" />
+    <ClCompile Include="UserEngineCode\MatrixStack.cpp" />
     <ClCompile Include="UserEngineCode\PrimitiveManager.cpp" />
     <ClCompile Include="UserEngineCode\Rasterizer.cpp" />
     <ClCompile Include="UserEngineCode\Vertex.cpp" />
@@ -399,8 +401,10 @@
     <ClInclude Include="Engine\Utilities.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
+    <ClInclude Include="UserEngineCode\Camera.h" />
     <ClInclude Include="UserEngineCode\Clipper.h" />
     <ClInclude Include="UserEngineCode\Matrix4.h" />
+    <ClInclude Include="UserEngineCode\MatrixStack.h" />
     <ClInclude Include="UserEngineCode\PrimitiveManager.h" />
     <ClInclude Include="UserEngineCode\Rasterizer.h" />
     <ClInclude Include="UserEngineCode\Vector2.h" />
@@ -423,9 +427,24 @@
     <Text Include="..\Scripts\TestTriangle.txt" />
     <Text Include="..\Scripts\HighResTriangle.txt" />
     <Text Include="..\Scripts\Triangle.txt" />
+    <ClInclude Include="UserCommands\PushTranslation.h" />
+    <ClInclude Include="UserCommands\PushRotationX.h" />
+    <ClInclude Include="UserCommands\PushRotationY.h" />
+    <ClInclude Include="UserCommands\PushRotationZ.h" />
+    <ClInclude Include="UserCommands\PushScaling.h" />
+    <ClInclude Include="UserCommands\PopMatrix.h" />
+  <ClInclude Include="UserCommands\SetCameraPosition.h" />
+  <ClInclude Include="UserCommands\SetCameraDirection.h" />
+  <ClInclude Include="UserCommands\SetNearPlane.h" />
+  <ClInclude Include="UserCommands\SetFarPlane.h" />
+  <ClInclude Include="UserCommands\SetFOV.h" />
     <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+
+
+
+

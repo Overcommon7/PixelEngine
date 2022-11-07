@@ -16,7 +16,6 @@
 #include <filesystem>
 #include <future>
 #include <mutex>
-#include <bitset>
 #include <set>
 #include "raylib.h"
 
@@ -55,9 +54,9 @@ using std::getline;
 using std::future;
 using std::mutex;
 using std::async;
-using std::bitset;
 using std::set;
-	  
+
+typedef Vector3 rVector3;
 
 #define fs std::filesystem
 

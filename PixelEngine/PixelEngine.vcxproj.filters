@@ -114,6 +114,12 @@
     <ClCompile Include="UserEngineCode\Matrix4.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
+    <ClCompile Include="UserEngineCode\MatrixStack.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Camera.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -217,6 +223,45 @@
     </ClInclude>
     <ClInclude Include="UserCommands\ChangeColor.h">
       <Filter>Source Files\BaseScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\MatrixStack.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PopMatrix.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushRotationX.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushRotationY.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushRotationZ.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushScaling.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushTranslation.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Camera.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetCameraDirection.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetCameraPosition.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetFarPlane.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetFOV.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetNearPlane.h">
+      <Filter>UserCommands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

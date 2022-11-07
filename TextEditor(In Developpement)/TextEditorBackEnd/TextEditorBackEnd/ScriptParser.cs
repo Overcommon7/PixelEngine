@@ -83,6 +83,12 @@ namespace TextEditorBackEnd
             variables.Clear();
             lineNumber = 0;
             bool init = false, toggle = false;
+            if (array.Count == 0) return true;
+            if (!array[0].StartsWith("Init"))
+            {
+                AddError("Script Must Start With Init Command");
+                return false;
+            }
             foreach (var arg in array)
             {
                 ++lineNumber;

@@ -1,5 +1,7 @@
 #pragma once
 #include "Vertex.h"
+#include "Matrix4.h"
+
 enum class Topolgy
 {
     Point,
@@ -15,6 +17,9 @@ class PrimitiveManager
     static inline vector<Vertex> vertexBuffer = {};
     static inline Topolgy mTopology = Topolgy::Triangle;
     static inline bool mBeginDraw = false;
+    inline static bool mApplyTransform = false;
+    static Matrix4 GetScreenTransform();
+
 public:
     static void AddVertex(const Vertex& vertex)
     {
@@ -26,6 +31,6 @@ public:
         mTopology = mode;
         mBeginDraw = true;
     }
-    static bool EndDraw();    
+    static bool EndDraw(bool applyTransform = false);
 };
 
