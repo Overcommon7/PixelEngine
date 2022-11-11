@@ -13,6 +13,7 @@ public:
     //Invoke Gets Called When A PixelScript Calls The Name Of The Fuction
     void Invoke(const vector<string>& params) const override
     {
-        PrimitiveManager::EndDraw();
+        if (params.empty() || Utils::ToLowerString(params.front()) != "true") PrimitiveManager::EndDraw();
+        else PrimitiveManager::EndDraw(true);        
     }
 };

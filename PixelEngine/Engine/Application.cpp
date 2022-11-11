@@ -60,6 +60,7 @@ void Application::Initalize()
 
 void Application::MenuLogic(ApplicationState& state)
 {
+	if (User::GetKey() == KEY_F5) Initalize();	
 	ButtonManager::Update();
 	if (scriptFile.empty()) return;
 	Draw::Initalize(20, 10, 10);
@@ -76,10 +77,6 @@ void Application::MenuDraw()
 void Application::Logic(ApplicationState& state)
 {
 	bool scriptReloaded = User::GetKey() == KEY_F5;
-	if (scriptReloaded)
-	{
-		PrimitiveManager::OnScriptReload();
-	}
 	MatrixStack::Update();
 	ScriptManager::Update(scriptReloaded);
 	if (User::GetKey() == KEY_F10) SaveNewScreenShot();

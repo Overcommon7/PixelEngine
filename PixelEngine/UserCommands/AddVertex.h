@@ -45,7 +45,7 @@ public:
                 for (short i = 0; i < params.size(); i++)
                     if (!Utils::TryParse(params[i], f[i])) return;
             }
-            v = Vertex({ f.front(), f[1], f[3] }, Color(f[3], f[4], f.back(), 255));
+            v = Vertex({ f.front(), f[1], f[2] }, Color(f[3], f[4], f.back(), 255));
             break;
         default:
             return;

@@ -36,12 +36,12 @@ public:
 	static Matrix4 Translation(Vector3 d);
 	static Matrix4 Translation(float dx, float dy, float dz);
 
-	Vector3 TransformCoord(Vector3 v); // assume w = 1
-	Vector3 TransformNormal(Vector3 v); // assume w = 0
-	float Determinant();
-	Matrix4 Adjoint();
-	Matrix4 Transpose();
-	Matrix4 Inverse();
+	Vector3 TransformCoord(Vector3 v) const; // assume w = 1
+	Vector3 TransformNormal(Vector3 v) const; // assume w = 0
+	float Determinant() const;
+	Matrix4 Adjoint() const;
+	Matrix4 Transpose() const;
+	Matrix4 Inverse() const;
 	vector<float*> GetVector();
 	vector<float> ToVector() const;
 	vector<vector<float>> To2DVector() const;

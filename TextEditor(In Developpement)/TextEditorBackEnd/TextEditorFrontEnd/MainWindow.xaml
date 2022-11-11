@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextEditorFrontEnd"
         mc:Ignorable="d"
-        Title="Pixel Engine Script Editor" Height="650" Width="450">
+        Title="Pixel Engine Script Editor" Height="750" Width="550">
     <Grid>
-        <TextBox x:Name="TextField" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" Height="390" TextChanged="TextBox_TextChanged" Margin="0,43,0,0"/>
-        <TextBlock x:Name="ErrorListHeading" HorizontalAlignment="Left" Margin="10,434,0,0" TextWrapping="Wrap" Text="Error List" VerticalAlignment="Top"/>
-        <Button x:Name="Open" Content="Open" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Width="80" Click="Open_Click"/>
-        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="236,10,0,0" VerticalAlignment="Top" Width="80" Click="Save_Click"/>
-        <Button x:Name="Save_As" Content="Save As" HorizontalAlignment="Left" Margin="335,10,0,0" VerticalAlignment="Top" Width="80" Click="Save_As_Click"/>
-        <Button x:Name="Complie" Content="Compile" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top" Width="80" Click="Compilie_Click"/>
-        <ListBox x:Name="ErrorList" HorizontalAlignment="Center" Height="108" Margin="0,455,0,0" VerticalAlignment="Top" Width="380" d:ItemsSource="{d:SampleData ItemCount=0}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="TextField" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="455" Height="421" TextChanged="TextBox_TextChanged" Margin="0,43,0,0"/>
+        <TextBlock x:Name="ErrorListHeading" HorizontalAlignment="Left" Margin="10,475,0,0" TextWrapping="Wrap" Text="Error List" VerticalAlignment="Top"/>
+        <Button x:Name="Open" Content="Open" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Width="80" Click="Open_Click"/>
+        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="294,10,0,0" VerticalAlignment="Top" Width="80" Click="Save_Click"/>
+        <Button x:Name="Save_As" Content="Save As" HorizontalAlignment="Left" Margin="393,10,0,0" VerticalAlignment="Top" Width="80" Click="Save_As_Click"/>
+        <Button x:Name="Complie" Content="Compile" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="80" Click="Compilie_Click"/>
+        <ListBox x:Name="ErrorList" HorizontalAlignment="Center" Height="190" Margin="0,499,0,0" VerticalAlignment="Top" Width="454" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="ErrorList_SelectionChanged"/>
+
 
     </Grid>
 </Window>

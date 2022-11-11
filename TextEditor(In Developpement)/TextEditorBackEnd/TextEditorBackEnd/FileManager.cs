@@ -30,7 +30,8 @@ namespace TextEditorBackEnd
                 using (var sw = new StreamWriter(fs))
                 {
                     for (int i = 0; i < contents.Count - 1; i++)
-                        sw.WriteLine(contents[i]);
+                        if (contents[i] == string.Empty || contents[i] == "\n") sw.Write('\n');
+                        else sw.WriteLine(contents[i]);
                     sw.Write(contents.Last());        
                 }
             }

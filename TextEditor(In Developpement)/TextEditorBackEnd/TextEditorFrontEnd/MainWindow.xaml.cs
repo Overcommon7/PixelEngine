@@ -16,8 +16,25 @@ namespace TextEditorFrontEnd
     public partial class MainWindow : Window
     {
         public string filepath = string.Empty;
-        public readonly string commandFilePath = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + "\\PixelEngine\\TextEditorCommands.txt";
+        public readonly string commandFilePath =
+#if DEBUG
+            Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName + '\\' +
+#else
+            Directory.GetCurrentDirectory() + '\\' +
+#endif
+            "TextEditorCommands.txt"; 
+
+        public readonly string enumsFilePath =
+#if DEBUG
+          Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName + '\\' +
+#else
+          Directory.GetCurrentDirectory() + '\\' +
+#endif
+          "TextEditorEnums.txt";
+
         bool saved = true;
+        bool saveOnExit = false;
+        bool saveFullFile = false;
         public virtual int ItemHeight { get; set; }
         public MainWindow()
         {
@@ -36,10 +53,22 @@ namespace TextEditorFrontEnd
             TextField.Focusable = false;
             TextField.IsEnabled = false;
             TextField.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-            TextField.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;           
+            TextField.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            ErrorList.MaxHeight = 400;
+            ErrorList.MaxWidth = 1000;
             ScriptParser.LoadCommands(commandFilePath);
+            ScriptParser.LoadEnums(enumsFilePath);
             Deactivated += MainWindow_LostFocus;
-            Closing += MainWindow_Closed;
+            Closing += MainWindow_Closing;
+            Closed += MainWindow_Closed;
+        }
+
+        private void MainWindow_Closed(object? sender, EventArgs e)
+        {
+            if (!saveFullFile && !saveOnExit) return;
+
+            var contents = GetFormattedString(TextField.Text);
+            FileManager.SaveFile(ref contents, filepath);
         }
 
         List<string> GetFormattedString(string contents)
@@ -49,12 +78,10 @@ namespace TextEditorFrontEnd
             return contents.Split('\n').ToList();
         }
 
-        private void MainWindow_Closed(object? sender, EventArgs e)
+        private void MainWindow_Closing(object? sender, EventArgs e)
         {
             if (saved) return;
-            if (MessageBox.Show("Save the File?", "Script Editor", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
-            var contents = GetFormattedString(TextField.Text);
-            FileManager.SaveFile(ref contents, filepath);
+            saveOnExit = MessageBox.Show("Save the File?", "Script Editor", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;           
         }
 
         private void MainWindow_LostFocus(object? sender, EventArgs e)
@@ -63,19 +90,16 @@ namespace TextEditorFrontEnd
             ScriptParser.SaveValidScript(filepath, TextField.Text);
         }
 
-        void AddLine(object sender, RoutedEventArgs e)
-        {
-            if (!TextField.IsFocused) return;
+        //void AddLine(object sender, RoutedEventArgs e)
+        //{
+        //    if (!TextField.IsFocused) return;
 
-            int temp = TextField.SelectionStart;
-            TextField.Text = TextField.Text.Insert(temp, "\n");
-            TextField.SelectionStart = temp + 1; 
-        }
+        //    int temp = TextField.SelectionStart;
+        //    TextField.Text = TextField.Text.Insert(temp, "\n");
+        //    TextField.SelectionStart = temp + 1; 
+        //}
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-
-
             if (string.IsNullOrEmpty(Title) || Title.EndsWith('*')) return;
             saved = false;
             Title += "*";
@@ -93,6 +117,8 @@ namespace TextEditorFrontEnd
             // Process save file dialog box results
             if (result == true)
             {
+                MainWindow_Closing(sender, e);
+                MainWindow_Closed(sender, e);
                 filepath = dlg.FileName;
                 TextField.Text = FileManager.LoadFileAsSingleString(filepath);
                 ErrorList.Items.Clear();
@@ -109,7 +135,7 @@ namespace TextEditorFrontEnd
         {
             if (ScriptParser.Errors.Count == 0) return MessageBoxResult.OK;
 
-            string message = "File Contains Scripting Errors\nSave Without Errors?";
+            string message = "File Contains Scripting Errors\nSave With Errors?";
             string caption = "Text Editor";
             return MessageBox.Show(message, caption, MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
         }
@@ -124,11 +150,13 @@ namespace TextEditorFrontEnd
                     return;
                 case MessageBoxResult.Yes:
                 case MessageBoxResult.OK:
-                    ScriptParser.SaveValidScript(filepath, TextField.Text);
-                    break;
-                case MessageBoxResult.No:
                     var contents = GetFormattedString(TextField.Text);
                     FileManager.SaveFile(ref contents, filepath);
+                    saveFullFile = true;
+                    break;
+                case MessageBoxResult.No:
+                    ScriptParser.SaveValidScript(filepath, TextField.Text);
+                    saveFullFile = false;
                     break;
             }
 
@@ -196,6 +224,26 @@ namespace TextEditorFrontEnd
                     ErrorList.Items.Add(error.ToString());
             }
                
+        }
+
+        private void ErrorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ErrorList.SelectedItem == null) return;
+            var str = ErrorList.SelectedItem.ToString();
+            if (string.IsNullOrEmpty(str)) return;
+            if (!str.StartsWith("Error on Line: "))
+            {
+                ErrorList.UnselectAll();
+                return;
+            }
+            Error err;
+            ScriptParser.Errors.TryGetValue((Error)str, out err);
+            if (err.ErrorLine == 0) return;
+            var text = TextField.GetLineText(err.ErrorLine - 1);
+            ErrorList.UnselectAll();
+            ErrorList.ReleaseMouseCapture();
+            TextField.Focus();
+            TextField.Select(TextField.Text.IndexOf(text), text.Length - 2);    
         }
     }
 }

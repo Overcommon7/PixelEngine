@@ -31,9 +31,10 @@ namespace Math
 				else return;
 			}
 		}
+		operator rVector3() const { return rVector3(x, y, z); }
 		Vector3(const Vector3& vec) = default;
 		Vector3& operator=(const Vector3& vec) = default;
-		Vector3& operator=(const rVector3& vec) { x = vec.x; y = vec.y; x = vec.z; };
+		Vector3& operator=(const rVector3& vec) { x = vec.x; y = vec.y;	z = vec.z; return *this; }
 		Vector3(const rVector3 vec) : x(vec.x), y(vec.y), z(vec.z) {}
 		bool operator==(const Vector3& vec) const { return vec.x == this->x && vec.y == this->y && vec.z == this->z; }
 		bool operator!=(const Vector3& vec) const { return vec.x != this->x || vec.y != this->y && vec.z != this->z; }
@@ -75,10 +76,6 @@ namespace Math
 				std::lerp(z, vec.z, t));
 		}
 
-		rVector3 Convert()
-		{
-			return rVector3(x, y, z);
-		}
 	};
 
 }

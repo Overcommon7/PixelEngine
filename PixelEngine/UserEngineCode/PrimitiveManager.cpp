@@ -7,13 +7,13 @@
 
 Matrix4 PrimitiveManager::GetScreenTransform()
 {
-    float hw = screenWidth * 0.5f;
-    float hh = screenHeight * 0.5f;
+    float hw = (screenWidth / Draw::GetPixelSize()) * 0.5f;
+    float hh = (screenHeight / Draw::GetPixelSize()) * 0.5f;
 
     return Matrix4{
         hw, 0, 0, 0,
         0, -hh, 0, 0,
-        0, 0, 1, 1,
+        0, 0, 1, 0,
         hw, hh, 0, 1
     };
 }
@@ -24,9 +24,13 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
 
     if (applyTransform)
     {
-        Matrix4 matFinal = MatrixStack::GetTransform() * PixelCamera::GetViewMatrix() * PixelCamera::GetProjectionMatrix() * GetScreenTransform();
+        const Matrix4 matWorld = MatrixStack::GetTransform();
+        const Matrix4 matView = PixelCamera::GetViewMatrix();
+        const Matrix4 matProj = PixelCamera::GetProjectionMatrix();
+        const Matrix4 matScreen = GetScreenTransform();
+        const Matrix4 matFinal = matWorld * matView * matProj * matScreen;
         for (auto& v : vertexBuffer)
-            v.pos = matFinal.TransformCoord(v.pos.Convert());
+            v.pos = matFinal.TransformCoord(v.pos);
     }
     
     switch (mTopology)

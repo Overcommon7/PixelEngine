@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Commands.h"
 #include "Utilities.h"
+#include "Camera.h"
 
 class SETFOV : public Commands
 {

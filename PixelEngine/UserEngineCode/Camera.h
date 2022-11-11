@@ -19,8 +19,8 @@ public:
     static Matrix4 GetProjectionMatrix();
 
 private:
-    inline static Math::Vector3 position = Math::Vector3(); // default: 0, 0, 0
-    inline static Math::Vector3 direction = {0, 0, 1}; // default: 0, 0, 1
+    inline static Math::Vector3 position = { 0 ,0, 0 }; // default: 0, 0, 0
+    inline static Math::Vector3 direction = { 0, 0, 1 }; // default: 0, 0, 1
     inline static float nearPlane = 0.01f; // default: 0.01
     inline static float farPlane = 100.f; // default: 100
     inline static float FOV = 1.57f; // default: 1.57

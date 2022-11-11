@@ -28,10 +28,19 @@ void ScriptParser::LoadFloat(const string& line, unordered_map<string, PixelFloa
 	variables.insert({ params[1], params.back()});
 }
 
+void ScriptParser::Print(const Command& command)
+{
+	++printStatemets;
+	cout << "Print Statement #" << printStatemets << ":\n";
+	short i = 0;
+	for (; i < command.params.size() - 1; i++)
+		cout << command.params[i] << ", ";
+	cout << command.params[i] << "\n\n";
+}
+
 void ScriptParser::LoadCommand(string line, unordered_map<string, PixelFloat>& variables)
 {
-	Command command;
-	line.erase(remove(line.begin(), line.end(), ' '), line.end());
+	Command command;	
 	const size_t firstBrakcet = line.find_first_of('(');
 	const size_t lastBrakcet = line.find_last_of(')');
 	if (firstBrakcet == string::npos || lastBrakcet == string::npos)
@@ -47,20 +56,30 @@ void ScriptParser::LoadCommand(string line, unordered_map<string, PixelFloat>& v
 		{
 			string substr;
 			getline(ss, substr, ',');
-			if (variables.contains(substr))
-				command.params.push_back(variables.at(substr).GetStringValue());
-			else command.params.push_back(substr);
+
+			auto it = substr.begin();
+			while (it != substr.end() && *it == ' ')
+				it = substr.erase(it);
+			if (substr.empty()) continue;
+
+			if (substr.find_first_of("/*-+", 1) != string::npos)
+			{
+				float total = GetTotal("", variables, GetParams(substr), true, true);
+				if (total != NAN)
+					command.params.push_back(to_string(total));
+			}
+			else
+			{
+				substr.erase(remove(substr.begin(), substr.end(), ' '), substr.end());
+				if (variables.contains(substr))
+					command.params.push_back(variables.at(substr).GetStringValue());
+				else command.params.push_back(substr);
+			}
 		}
 	}
-
 	if (command.funcitonName == "Print")
 	{
-		++printStatemets;
-		cout << "Print Statement #" << printStatemets << ":\n";
-		short i = 0;
-		for (; i < command.params.size() - 1; i++)
-			cout << command.params[i] << ", ";
-		cout << command.params[i] << "\n\n";
+		Print(command);
 		return;
 	}
 	if (command.funcitonName.empty()) return;
@@ -83,7 +102,7 @@ void ScriptParser::InternalFloatCommand(const string& line, unordered_map<string
 	else if (type == OperationType::PlusEquals) variables.at(params.front()).DivideTo(total);
 }
 
-float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloat>& variables, const vector<string>& params, const bool& skipCheck)
+float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloat>& variables, const vector<string>& params, const bool& skipCheck, const bool& skipCheck2)
 {
 
 	if (!skipCheck && params.size() < 5)
@@ -92,20 +111,22 @@ float ScriptParser::GetTotal(const string& line, unordered_map<string, PixelFloa
 		return NAN;
 	}
 
-	if (!variables.contains(params.front()))
+	if (!skipCheck2 && !variables.contains(params.front()))
 	{
 		cout << "Variable does not exists on line: " << lineNumber << '\n';
 		return NAN;
 	}
 	float total = 0;
-	if (variables.contains(params[2])) total = variables.at(params[2]).GetValue();
-	else if (Utils::IsFloat(params[2])) total = stof(params[2]);
+	short start = 2;
+	if (skipCheck2) start -= 2;
+	if (variables.contains(params[start])) total = variables.at(params[start]).GetValue();
+	else if (Utils::IsFloat(params[start])) total = stof(params[start]);
 	else
 	{
 		cout << "Syntax Error on line: " << lineNumber << '\n';
 		return NAN;
 	}
-	for (short i = 4; i < params.size(); i += 2)
+	for (short i = start + 2; i < params.size(); i += 2)
 	{
 		bool isValid = true;
 		if (variables.contains(params[i])) isValid = Arithmetic(params[i - 1].front(), total, variables.at(params[i]).GetValue());
@@ -145,6 +166,8 @@ bool ScriptParser::Arithmetic(const char& c, float& total, const float& value)
 	return true;
 
 }
+
+
 
 void ScriptParser::ArithmeticFloatCommand(const string& line, unordered_map<string, PixelFloat>& variables)
 {

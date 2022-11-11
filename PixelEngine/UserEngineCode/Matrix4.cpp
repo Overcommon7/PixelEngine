@@ -319,82 +319,55 @@ Matrix4 Matrix4::Scaling(float sx, float sy, float sz)
 
 Matrix4 Matrix4::Translation(Vector3 d)
 {
-    return Matrix4({ 1.0f, 0.0f, 0.0f, d.x,
-                        0.0f, 1.0f, 0.0f, d.y,
-                        0.0f, 0.0f, 1.0f, d.z,
-                        0.0f, 0.0f, 0.0f, 1.0f });
+    return Matrix4({ 1.0f, 0.0f, 0.0f, 0.f,
+                0.0f, 1.0f, 0.0f, 0.f,
+                0.0f, 0.0f, 1.0f, 0.f,
+                d.x, d.y, d.z, 1.0f });
 
 }
 
 Matrix4 Matrix4::Translation(float dx, float dy, float dz)
 {
-    return Matrix4({ 1.0f, 0.0f, 0.0f, dx,
-                0.0f, 1.0f, 0.0f, dy,
-                0.0f, 0.0f, 1.0f, dz,
-                0.0f, 0.0f, 0.0f, 1.0f });
+    return Matrix4({ 1.0f, 0.0f, 0.0f, 0.f,
+                0.0f, 1.0f, 0.0f, 0.f,
+                0.0f, 0.0f, 1.0f, 0.f,
+                dx, dy, dz, 1.0f });
 
 }
 
-Vector3 Matrix4::TransformCoord(Vector3 v)
+Vector3 Matrix4::TransformCoord(Vector3 v) const
 {
-    const float w = (v.x * this->_14) + (v.y * this->_24) + (v.z * this->_34) + (1.f * this->_44);
-    const float invW = (w == 0.f) ? 1.f : 1.f / w;
+    const float w = ((v.x * this->_14) + (v.y * this->_24) + (v.z * this->_34) + (1.0f * this->_44));
+    const float invW = (w == 0.0f) ? 1.0f : 1 / w;
 
-    Vector3 result;
-    this->_11 *= v.x;
-    this->_21 *= v.y;
-    this->_31 *= v.z;
-    result.x = (this->_11 + this->_12 + this->_13) * invW;
-    this->_12 *= v.x;
-    this->_22 *= v.y;
-    this->_32 *= v.z;
-    result.y = (this->_12 + this->_22 + this->_32) * invW;
-    this->_13 *= v.x;
-    this->_23 *= v.y;
-    this->_33 *= v.z;
-    result.z = (this->_13 + this->_23 + this->_33) * invW;
-    return result;
+    return {
+        ((v.x * this->_11) + (v.y * this->_21) + (v.z * this->_31) + (1.0f * this->_41)) * invW,
+        ((v.x * this->_12) + (v.y * this->_22) + (v.z * this->_32) + (1.0f * this->_42)) * invW,
+        ((v.x * this->_13) + (v.y * this->_23) + (v.z * this->_33) + (1.0f * this->_43)) * invW
+    };
 }
 
-Vector3 Matrix4::TransformNormal(Vector3 v)
+Vector3 Matrix4::TransformNormal(Vector3 v) const
 {
-    Vector3 result;
-    this->_11 *= v.x;
-    this->_21 *= v.y;
-    this->_31 *= v.z;
-    result.x = this->_11 + this->_12 + this->_13;
-    this->_12 *= v.x;
-    this->_22 *= v.y;
-    this->_32 *= v.z;
-    result.y = this->_12 + this->_22 + this->_32;
-    this->_13 *= v.x;
-    this->_23 *= v.y;
-    this->_33 *= v.z;
-    result.z = this->_13 + this->_23 + this->_33;
-    return result;
+    return {
+        (v.x * this->_11) + (v.y * this->_21) + (v.z * this->_31),
+        (v.x * this->_12) + (v.y * this->_22) + (v.z * this->_32),
+        (v.x * this->_13) + (v.y * this->_23) + (v.z * this->_33)
+    };
 
 }
 
-float Matrix4::Determinant()
+float Matrix4::Determinant() const
 {
-    float result = 0.0f;
-
-    float a00 = this->_11, a01 = this->_12, a02 = this->_13, a03 = this->_14;
-    float a10 = this->_21, a11 = this->_22, a12 = this->_23, a13 = this->_24;
-    float a20 = this->_31, a21 = this->_32, a22 = this->_33, a23 = this->_34;
-    float a30 = this->_41, a31 = this->_42, a32 = this->_43, a33 = this->_44;
-
-    result = a30 * a21 * a12 * a03 - a20 * a31 * a12 * a03 - a30 * a11 * a22 * a03 + a10 * a31 * a22 * a03 +
-        a20 * a11 * a32 * a03 - a10 * a21 * a32 * a03 - a30 * a21 * a02 * a13 + a20 * a31 * a02 * a13 +
-        a30 * a01 * a22 * a13 - a00 * a31 * a22 * a13 - a20 * a01 * a32 * a13 + a00 * a21 * a32 * a13 +
-        a30 * a11 * a02 * a23 - a10 * a31 * a02 * a23 - a30 * a01 * a12 * a23 + a00 * a31 * a12 * a23 +
-        a10 * a01 * a32 * a23 - a00 * a11 * a32 * a23 - a20 * a11 * a02 * a33 + a10 * a21 * a02 * a33 +
-        a20 * a01 * a12 * a33 - a00 * a21 * a12 * a33 - a10 * a01 * a22 * a33 + a00 * a11 * a22 * a33;
-
-    return result;
+    float det = 0.0f;
+    det += (this->_11 * (this->_22 * (this->_33 * this->_44 - (this->_43 * this->_34)) - this->_23 * (this->_32 * this->_44 - (this->_42 * this->_34)) + this->_24 * (this->_32 * this->_43 - (this->_42 * this->_33))));
+    det -= (this->_12 * (this->_21 * (this->_33 * this->_44 - (this->_43 * this->_34)) - this->_23 * (this->_31 * this->_44 - (this->_41 * this->_34)) + this->_24 * (this->_31 * this->_43 - (this->_41 * this->_33))));
+    det += (this->_13 * (this->_21 * (this->_32 * this->_44 - (this->_42 * this->_34)) - this->_22 * (this->_31 * this->_44 - (this->_41 * this->_34)) + this->_24 * (this->_31 * this->_42 - (this->_41 * this->_32))));
+    det -= (this->_14 * (this->_21 * (this->_32 * this->_43 - (this->_42 * this->_33)) - this->_22 * (this->_31 * this->_43 - (this->_41 * this->_33)) + this->_23 * (this->_31 * this->_42 - (this->_41 * this->_32))));
+    return det;
 }
 
-Matrix4 Matrix4::Adjoint()
+Matrix4 Matrix4::Adjoint() const
 {
     return Matrix4({
         +(this->_22 * ((this->_33 * this->_44) - (this->_43 * this->_34)) - this->_23 * ((this->_32 * this->_44) - (this->_42 * this->_34)) + this->_24 * ((this->_32 * this->_43) - (this->_42 * this->_33))),
@@ -419,7 +392,7 @@ Matrix4 Matrix4::Adjoint()
         });
 }
 
-Matrix4 Matrix4::Transpose()
+Matrix4 Matrix4::Transpose() const
 {
     Matrix4 result;
 
@@ -443,48 +416,9 @@ Matrix4 Matrix4::Transpose()
     return result;
 }
 
-Matrix4 Matrix4::Inverse()
+Matrix4 Matrix4::Inverse() const
 {
-    Matrix4 result;
-
-    float a00 = this->_11, a01 = this->_12, a02 = this->_13, a03 = this->_14;
-    float a10 = this->_21, a11 = this->_22, a12 = this->_23, a13 = this->_24;
-    float a20 = this->_31, a21 = this->_32, a22 = this->_33, a23 = this->_34;
-    float a30 = this->_41, a31 = this->_42, a32 = this->_43, a33 = this->_44;
-
-    float b00 = a00 * a11 - a01 * a10;
-    float b01 = a00 * a12 - a02 * a10;
-    float b02 = a00 * a13 - a03 * a10;
-    float b03 = a01 * a12 - a02 * a11;
-    float b04 = a01 * a13 - a03 * a11;
-    float b05 = a02 * a13 - a03 * a12;
-    float b06 = a20 * a31 - a21 * a30;
-    float b07 = a20 * a32 - a22 * a30;
-    float b08 = a20 * a33 - a23 * a30;
-    float b09 = a21 * a32 - a22 * a31;
-    float b10 = a21 * a33 - a23 * a31;
-    float b11 = a22 * a33 - a23 * a32;
-
-    float invDet = 1.0f / (b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06);
-
-    result._11 = (a11 * b11 - a12 * b10 + a13 * b09) * invDet;
-    result._12 = (-a01 * b11 + a02 * b10 - a03 * b09) * invDet;
-    result._13 = (a31 * b05 - a32 * b04 + a33 * b03) * invDet;
-    result._14 = (-a21 * b05 + a22 * b04 - a23 * b03) * invDet;
-    result._21 = (-a10 * b11 + a12 * b08 - a13 * b07) * invDet;
-    result._22 = (a00 * b11 - a02 * b08 + a03 * b07) * invDet;
-    result._23 = (-a30 * b05 + a32 * b02 - a33 * b01) * invDet;
-    result._24 = (a20 * b05 - a22 * b02 + a23 * b01) * invDet;
-    result._31 = (a10 * b10 - a11 * b08 + a13 * b06) * invDet;
-    result._32 = (-a00 * b10 + a01 * b08 - a03 * b06) * invDet;
-    result._33 = (a30 * b04 - a31 * b02 + a33 * b00) * invDet;
-    result._34 = (-a20 * b04 + a21 * b02 - a23 * b00) * invDet;
-    result._41 = (-a10 * b09 + a11 * b07 - a12 * b06) * invDet;
-    result._42 = (a00 * b09 - a01 * b07 + a02 * b06) * invDet;
-    result._43 = (-a30 * b03 + a31 * b01 - a32 * b00) * invDet;
-    result._44 = (a20 * b03 - a21 * b01 + a22 * b00) * invDet;
-
-    return result;
+    return Adjoint() * (1.0f / Determinant());
 }
 vector<float*> Matrix4::GetVector()
 {

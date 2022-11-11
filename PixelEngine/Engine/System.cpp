@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Mouse.h"
 #include "User.h"
+#include "Defines.h"
 
 void System::Initialize()
 {
@@ -68,6 +69,7 @@ void System::OnResize()
 {
     screenHeight = GetScreenHeight();
     screenWidth = GetScreenWidth();
+    if (!reCenterWindow) return;
     int x = monitorWidth * 0.5;
     int y = monitorHeight * 0.5;
     x -= screenWidth * 0.5;

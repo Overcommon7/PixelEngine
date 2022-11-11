@@ -1,12 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TextEditorBackEnd
-{   
+{
+    public class Enums
+    {
+        public Dictionary<string, List<string>> enums = new Dictionary<string, List<string>>();
+
+        public void Load(string filepath)
+        {
+            string key = string.Empty;
+            using (var fs = new FileStream(filepath, FileMode.OpenOrCreate))
+            {
+                using (var sr = new StreamReader(fs))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        key = sr.ReadLine();
+                        enums.Add(key, new List<string>());
+                        string value = sr.ReadLine();
+                        while (value != "SEndLine")
+                        {
+                            enums[key].Add(value);
+                            value = sr.ReadLine();
+                        }
+                    }
+                }
+            }
+        }
+    }
     public struct Error
     {
         int errorLine;
@@ -26,7 +55,16 @@ namespace TextEditorBackEnd
 
         public override int GetHashCode()
         {
-            return errorLine;
+            return errorLine + errorMessage.GetHashCode();
+        }
+
+        public static explicit operator Error(string str)
+        {
+            var temp = str.Replace("Error on Line: ", string.Empty);
+            int line = int.Parse(temp.Substring(0, temp.IndexOf(' ')));
+            var error = temp.Replace("\n", string.Empty);
+            error = error.Replace(line.ToString() + ' ', string.Empty);
+            return new Error(ref line, ref error);
         }
     }
 
@@ -37,6 +75,7 @@ namespace TextEditorBackEnd
         static HashSet<Error> flaggedLines = new HashSet<Error>();
         static List<string> errorlessContents = new List<string>();
         static HashSet<string> variables = new HashSet<string>();
+        static Enums enums = new Enums();
         readonly static HashSet<string> colors = new HashSet<string> { "LIGHTGRAY",
                                                                     "GRAY",
                                                                     "DARKGRAY",
@@ -70,14 +109,25 @@ namespace TextEditorBackEnd
         static int lineNumber = 0;
         public static void LoadCommands(string filepath)
         {
+            
             var temp = FileManager.LoadFile(filepath).ToHashSet();            
             foreach (var str in temp)
             {
                 int bracketIndex = str.LastIndexOf('(');
-                var name = str.Remove(bracketIndex);               
-                if (!commands.ContainsKey(name)) commands.Add(name, new List<List<string>>());
-                commands[name].Add(new List<string>(str.Substring(bracketIndex + 1, str.Length - bracketIndex - 2).Split(',', StringSplitOptions.TrimEntries)));
+                string name = str;
+                if (bracketIndex != -1)
+                    name = str.Remove(bracketIndex);
+
+                if (!commands.ContainsKey(name)) 
+                    commands.Add(name, new List<List<string>>());
+                if (bracketIndex == -1) commands[name].Add(new List<string>());
+                else commands[name].Add(new List<string>(str.Substring(bracketIndex + 1, str.Length - bracketIndex - 2).Split(',', StringSplitOptions.TrimEntries)));
             }
+        }
+
+        public static void LoadEnums(string filepath)
+        {
+            enums.Load(filepath);
         }
 
         public static bool CheckForErrors(ref string contents)
@@ -92,6 +142,7 @@ namespace TextEditorBackEnd
             variables.Clear();
             lineNumber = 0;
             bool init = false, toggle = false;
+            char[] operators = new char[] { '*', '+', '/', '-' };
             if (array.Count == 0) return true;
             if (!array[0].StartsWith("Init"))
             {
@@ -102,28 +153,43 @@ namespace TextEditorBackEnd
             {
                 ++lineNumber;
                 string line = arg.Replace("\r", string.Empty);
-                if (string.IsNullOrWhiteSpace(line)) continue;
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    errorlessContents.Add("\n");
+                    continue;
+                }
+                if (line.StartsWith("//"))
+                {
+                    errorlessContents.Add(line);
+                    continue;
+                }
                 int bracketIndex = line.LastIndexOf('(');
-                if (line.StartsWith("//")) continue;
+                
                 if (bracketIndex == -1)
                 {
                     var parameters = GetParams(line, ' ');
                     if (line.StartsWith("float")) CheckFloat(ref line, ref parameters);
                     else if (line.StartsWith("int")) CheckInt(ref line, ref parameters);
-                    else if (line.Contains('='))
-                        CheckArithemticErrors(ref line);
+                    else if (line.Contains('=') && CheckArithemticErrors(ref line)) errorlessContents.Add(line);
                     else AddError("Invalid Line Argument - No Variable Declaration Or Valid Command Found");
                 }
                 else
                 {
                     var commandName = line.Remove(bracketIndex);
+                    int errorCount = flaggedLines.Count;
                     if (commands.ContainsKey(commandName))
                     {
                         int index = line.LastIndexOf(')');
-                        if (index == -1) AddError("Invalid Command Declaration: Missing Ending Parantheses");                    
+                        if (index == -1) AddError("Invalid Command Declaration: Missing Ending Parantheses");
                         if (line.Remove(0, commandName.Length)[0] != '(') AddError("Invalid Command Declaration: Parentheses must follow Immediately After Command Name");
                         if (line.Length <= index + 1 && !string.IsNullOrWhiteSpace(line.Substring(index + 1))) AddError("Invalid Command Declaration: Closing Paranthese Must Be That Last Character");
-                        var parameters = GetParams(line.Substring(bracketIndex + 1).Replace(")", String.Empty), ',');
+                        var parameters = GetParams(line.Substring(bracketIndex + 1).Replace(")", string.Empty), ',');
+                        for (int j = 0; j < parameters.Length; j++)
+                        {
+                            if (parameters[j].Length >= 2 && parameters[j].IndexOfAny(operators, 1) == -1)
+                                parameters[j] = parameters[j].Replace(" ", string.Empty);
+                        }
+
                         switch (commandName)
                         {
                             case "Init":
@@ -134,6 +200,10 @@ namespace TextEditorBackEnd
                                 if (toggle) AddError("Only One Toggle Grid Command Allowed");
                                 else toggle = true;
                                 break;
+                            case "Print":
+                                continue;
+                            default:
+                                break;
                         }
 
                         bool validAmount = false;
@@ -142,60 +212,67 @@ namespace TextEditorBackEnd
                         {
                             if (commands[commandName][idx] == null) continue;
                             if (commands[commandName][idx].Count == parameters.Length) validAmount = true;
-                            if (validAmount) break;
+                            if (validAmount) 
+                                break;
                         }
                         if (!validAmount)
                         {
                             AddError($"Command {commandName} Does Not Take {parameters.Length} Overloads");
                             continue;
                         }
-                        for(int i = 0; i < parameters.Length; i++)
+
+                        for (int i = 0; i < parameters.Length; i++)
                         {
+                            int k = -1;
+                            if (parameters[i].Length >= 2)
+                                k = parameters[i].IndexOfAny(operators, 1);
+                            if (k != -1)
+                            {
+                                int temp = flaggedLines.Count;
+                                var before = parameters[i];
+                                parameters[i] = parameters[i].Insert(k + 1, "=");
+                                CheckArithemticErrors(ref parameters[i]);
+                                if (temp == flaggedLines.Count)
+                                {
+                                    line = line.Replace(before, parameters[i].Replace("=", string.Empty));
+                                    parameters[i] = "1";   
+                                }
+                            }
+
+
                             float rF;
                             int rI;
                             switch (commands[commandName][idx][i])
-                            {   
+                            {
                                 case "int":
+                                    if (variables.Contains(parameters[i])) break;
                                     if (!int.TryParse(parameters[i], out rI)) AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Int");
                                     break;
                                 case "float":
-                                    if (float.TryParse(parameters[i], out rF)) AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Float");
+                                    if (variables.Contains(parameters[i])) break;
+                                    if (!float.TryParse(parameters[i], out rF)) AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Float");
                                     break;
                                 case "bool":
-                                    if (parameters[i] != "true" && parameters[i] != "false") AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Bool");
+                                    if (parameters[i].ToLower() != "true" && parameters[i].ToLower() != "false") AddError($"Parameter {i + 1} of command {commandName} takes in tpye: Bool");
                                     break;
                                 case "color":
-                                    if (!float.TryParse(parameters[i], out rF) && !variables.Contains(parameters[i]))
-                                    {
-                                        if (!colors.Contains(parameters[i])) AddError($"Parameter {i + 1} of command {commandName} takes in type: Color");
-                                    }
-                                    else if (parameters.Length <= i + 2) AddError($"Parameters {i + 1} - {i + 3} of command {commandName} must make up a valid RGB Color");
-                                    else
-                                    {
-                                        ++i;
-                                        if (!float.TryParse(parameters[i], out rF) && !variables.Contains(parameters[i])) 
-                                            AddError($"Parameters {i} - {i + 2} of command {commandName} must make up a valid RGB Color");
-                                        ++i;
-                                        if (!float.TryParse(parameters[i], out rF) && !variables.Contains(parameters[i]))
-                                            AddError($"Parameters {i - 1} - {i + 1} of command {commandName} must make up a valid RGB Color");
-                                    }
+                                    if (!colors.Contains(parameters[i].ToUpper())) AddError($"Parameter {i + 1} of command {commandName} takes in type: Color");
                                     break;
-                                case "vector3":
-                                    if (parameters.Length <= i + 2) AddError($"Parameters {i + 1} - {i + 3} of command {commandName} must make up a valid Vector3");
-                                    for (int j = i; i < j + 2; i++)
-                                        if (!float.TryParse(parameters[i], out rF))
-                                            AddError($"Parameters {i + 1} - {i + 3} of command {commandName} must make up a valid Vector3");
-                                    break;
-                                case "vector2":
-                                    if (parameters.Length <= i + 1) AddError($"Parameters {i + 1} & {i + 2} of command {commandName} must make up a valid Vector2");
-                                    if (!float.TryParse(parameters[i], out rF)) AddError($"Parameters {i + 1} & {i + 2} of command {commandName} must make up a valid Vector2");
-                                    ++i;
-                                    if (!float.TryParse(parameters[i], out rF)) AddError($"Parameters {i} & {i + 1} of command {commandName} must make up a valid Vector2");
+                                default:
+                                    if (enums.enums.ContainsKey(commands[commandName][idx][i]))
+                                    {
+                                        if (!enums.enums[commands[commandName][idx][i]].Contains(parameters[i].ToLower()))
+                                            AddError($"Paramer {i + 1} of command {commandName} takes in type Enum: {commands[commandName][idx][i]}");
+                                    }
+                                    else AddError($"Unknown Parameter Type - Name: {parameters[i]}");
                                     break;
                             }
                         }
+                        if (errorCount == flaggedLines.Count)
+                            errorlessContents.Add(line);
                     }
-                    else if (line.Contains('=')) CheckArithemticErrors(ref line);
+                    else if (line.Contains('=') && CheckArithemticErrors(ref line)) errorlessContents.Add(line);
+                    else AddError("Command Does Not Exist!");
                 }
             }
             return flaggedLines.Count == 0;
@@ -244,11 +321,33 @@ namespace TextEditorBackEnd
             else errorlessContents.Add(line);
         }
 
-        
-
-       
-        static void CheckArithemticErrors(ref string line) 
+        static void AddSpace(ref string line)
         {
+            List<int> indexes = new List<int>();
+            for (int i = 0; i < line.Length; i++)
+            {
+                string temp = string.Empty + line[i];
+                if (string.IsNullOrWhiteSpace(temp)) continue;
+                if (temp.Contains('=') && i + 1 < line.Length && isOperator(string.Empty + line[i + 1]))
+                {
+                    ++i;
+                    indexes.Add(i + 1);   
+                }
+                else if (temp.Contains('=') || isOperator(temp)) indexes.Add(i + 1);
+                else if (char.IsLetter(temp[0]))
+                {
+                    while (i < line.Length && !isOperator(string.Empty + line[i]) && line[i] != '=')
+                        ++i;
+                    indexes.Add(i);
+                }
+            }           
+            for (int i = 0; i < indexes.Count; i++)
+                line = line.Insert(indexes[i] + i, " ");
+            line = line.Replace("  ", " ");
+        }
+        static bool CheckArithemticErrors(ref string line) 
+        {
+            AddSpace(ref line);
             var parameters = GetParams(line, ' ');
             if (parameters.Length < 3) AddError("Invalid Mathematical Equation: Ex. Variblename operator value/mathematical expression -> x = 5 + 2/ x += 5");
             else if (!variables.Contains(parameters[0])) AddError("Invalid Mathematical Expression: Left Value must be a declared variable");
@@ -265,13 +364,13 @@ namespace TextEditorBackEnd
                         if (Operator)
                         {
                             AddError("Invalid Mathematical Statement: Operators Must Follow A Number Or Variable");
-                            return;
+                            return false;
                         }
                         Operator = true;
                         if (equals > 1)
                         {
                             AddError("Invalid Mathematical Statement: Only One Assignment Operator Allowed Per Statement");
-                            return;
+                            return false;
                         }
                     }
                     else if (isOperator(p))
@@ -279,7 +378,7 @@ namespace TextEditorBackEnd
                         if (Operator)
                         {
                             AddError("Invalid Mathematical Statement: Operators Must Follow A Number Or Variable");
-                            return;
+                            return false;
                         }
                         Operator = true;
                     }
@@ -288,17 +387,19 @@ namespace TextEditorBackEnd
                         if (!Operator)
                         {
                             AddError("Invalid Mathematical Statement: Numbers/Variables Must Follow An Operator");
-                            return;
+                            return false;
                         }
                         Operator = false;
                     }
                     else
                     {
                         AddError("Invalid Mathematical Statement: Expressions Must Only Contain Operators, Numbers or Variables");
-                        return;
+                        return false;
                     }
                 }
+                return true;
             }
+            return false;
         }
 
         static bool isOperator(string str)
@@ -316,7 +417,12 @@ namespace TextEditorBackEnd
 
         static string[] GetParams(string line, char delemeter)
         {
-            return line.Split(delemeter, StringSplitOptions.RemoveEmptyEntries);
+            var entries = line.Split(delemeter, StringSplitOptions.TrimEntries);
+            List<string> result = new List<string>();
+            foreach (var entry in entries)
+                if (!string.IsNullOrEmpty(entry) && !string.IsNullOrWhiteSpace(entry))
+                    result.Add(entry);
+            return result.ToArray(); 
         }
     }
 }

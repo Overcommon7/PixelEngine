@@ -16,6 +16,6 @@ public:
         if (params.empty()) return;
         float result = 0;
         if (!Utils::TryParse(params.front(), result)) return;
-        MatrixStack::PushRotationX(result);
+        MatrixStack::PushRotationX(result * DEG2RAD);
     }
 };

@@ -57,6 +57,7 @@ using std::async;
 using std::set;
 
 typedef Vector3 rVector3;
+typedef Vector2 rVector2;
 
 #define fs std::filesystem
 

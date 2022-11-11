@@ -31,7 +31,9 @@ namespace Math
 		}
 		Vector2(const Vector2& vec) = default;
 		Vector2& operator=(const Vector2 & vec) = default;
-		
+		Vector2& operator=(const rVector2& vec) { x = vec.x; y = vec.y; return *this; }
+		Vector2(const rVector2& vec) { x = vec.x; y = vec.y; }
+		operator rVector2() const { return rVector2(x, y); }
 		bool operator==(const Vector2& vec) const { return vec.x == this->x && vec.y == this->y; }
 		bool operator!=(const Vector2& vec) const { return vec.x != this->x || vec.y != this->y; }
 		Vector2 operator+(const Vector2& vec) const { return Vector2(this->x + vec.x, this->y + vec.y); }

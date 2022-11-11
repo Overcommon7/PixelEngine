@@ -30,30 +30,36 @@ void PixelCamera::SetFOV(const float& fov)
 
 Matrix4 PixelCamera::GetViewMatrix()
 {
-	Math::Vector3 up = { 0, 1, 0 };
-	Math::Vector3 right = { 1, 0, 0 };
-	Math::Vector3 look = { 0, 0, 1 };
+	Math::Vector3 look = direction;
+	Math::Vector3 right = Math::Vector3(0, 1, 0).CrossProduct(look).Normalize();
+	Math::Vector3 up = look.CrossProduct(right);
+	
 
 	return Matrix4{
 		right.x, up.x, look.x, 0,
 		right.y, up.y, look.y, 0,
 		right.z, up.z, look.z, 0,
-		-right.DotProduct(direction), -up.DotProduct(direction), -look.DotProduct(direction), 1
+		-right.DotProduct(position), -up.DotProduct(position), -look.DotProduct(position), 1
 	};	
 }
 
 Matrix4 PixelCamera::GetProjectionMatrix()
 {
-	float
-		a = screenWidth / screenHeight,
-		d = 1 / tanf(FOV / 2),
-		q = farPlane / (farPlane - nearPlane);
+	const float
+		aspect = screenWidth / screenHeight,
+		h = 1 / tanf(FOV * 0.5f),
+		w = h / aspect,
+		zf = farPlane,
+		zn = nearPlane,
+		d = zf / (zf - zn);
+
+
 
 	return Matrix4{
-		d / a, 0, 0, 0,
-		0, d, 0, 0,
-		0, 0, q, 1,
-		0, 0, -nearPlane * q, 0
+		w, 0, 0, 0,
+		0, h, 0, 0,
+		0, 0, d, 1,
+		0, 0, -zn * d, 0
 	};
 	
 }

@@ -3,12 +3,13 @@ SetViewport(1, 8, 14, 20)
 ShowViewport(true, blue)
 SetClipping(false)
 SetClipping(true)
-SetFillMode(Wireframe)
+SetFillMode(wireframe)
 SetFillMode(solid)
 float x = 5
 float y = 15
+float z = 5
 BeginDraw(Triangle)
 AddVertex(x,y,green)
-AddVertex(x,y,blue)
-AddVertex(x,y,red)
+AddVertex(x + 20,y,red)
+AddVertex(x + 10,y + 10,blue)
 EndDraw()
