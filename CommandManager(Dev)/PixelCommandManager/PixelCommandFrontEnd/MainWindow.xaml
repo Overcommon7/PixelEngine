@@ -1,0 +1,27 @@
+﻿<Window x:Class="PixelCommandFrontEnd.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PixelCommandFrontEnd"
+        mc:Ignorable="d"
+        Title="Pixel Command Manager" Height="750" Width="615">
+    <Grid>
+        <ListBox x:Name="wpf_CommandList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,101,320,317" FontSize="12" SelectionChanged="wpf_CommandList_SelectionChanged"/>
+        <TextBox x:Name="wpf_SearchCommand" HorizontalAlignment="Left" Margin="10,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" TextChanged="wpf_SearchCommand_TextChanged"/>
+        <Button x:Name="wpf_AddCommand" Content="Add" HorizontalAlignment="Left" Margin="18,30,0,0" VerticalAlignment="Top" Width="76" Click="wpf_AddCommand_Click"/>
+        <Button x:Name="wpf_EditCommand" Content="Edit" HorizontalAlignment="Left" Margin="115,30,0,0" VerticalAlignment="Top" Width="75" Click="wpf_EditCommand_Click"/>
+        <ListBox x:Name="wpf_EnumList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="313,101,10,317" FontSize="12" SelectionChanged="wpf_EnumList_SelectionChanged"/>
+        <TextBox x:Name="wpf_SearchEnum" HorizontalAlignment="Left" Margin="313,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292" TextChanged="wpf_SearchEnum_TextChanged"/>
+        <Button x:Name="wpf_AddEnum" Content="Add" HorizontalAlignment="Left" Margin="321,30,0,0" VerticalAlignment="Top" Width="74" Click="wpf_AddEnum_Click" />
+        <Button x:Name="wpf_EditEnum" Content="Edit" HorizontalAlignment="Left" Margin="425,30,0,0" VerticalAlignment="Top" Width="67" Click="wpf_EditEnum_Click"/>
+        <ListBox x:Name="wpf_CommandViwer" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="10,443,320,32" SelectionChanged="wpf_CommandViwer_SelectionChanged"/>
+        <ListBox x:Name="wpf_EnumViewer" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="313,443,10,32" SelectionChanged="wpf_EnumViewer_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Command Overlo"/><Run Language="en-ca" Text="a"/><Run Text="ds "/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="313,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.127,0.462"><Run Language="en-ca" Text="Enum Types"/></TextBlock>
+        <Button x:Name="wpf_DeleteCommand" Content="Delete" HorizontalAlignment="Left" Margin="213,30,0,0" VerticalAlignment="Top" Width="71" />
+        <Button x:Name="wpf_DeleteEnum" Content="Delete" HorizontalAlignment="Left" Margin="515,30,0,0" VerticalAlignment="Top" Width="72" Click="wpf_DeleteEnum_Click" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,60,0,0" TextWrapping="Wrap" Text="Search Command" VerticalAlignment="Top" RenderTransformOrigin="0.518,0.542" FontSize="8"/>
+        <TextBlock HorizontalAlignment="Left" Margin="313,57,0,0" TextWrapping="Wrap" Text="Search Enum" VerticalAlignment="Top" RenderTransformOrigin="0.518,0.542" FontSize="8"/>
+    </Grid>
+</Window>
