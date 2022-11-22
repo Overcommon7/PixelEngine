@@ -14,6 +14,7 @@ public:
     ScriptManager& operator=(const ScriptManager& s) = delete;
 
     static void LoadScript(const string& script);
-    static void Update(bool reload);
+    static void Update(bool reload, bool refresh);
     static void RunScripts();
+    static unordered_map<string, PixelFloat>& Variables() { return variables; }
 };

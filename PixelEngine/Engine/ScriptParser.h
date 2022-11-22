@@ -33,11 +33,13 @@ class ScriptParser
     static inline int lineNumber = 0;
     static inline int printStatemets = 0;
     static inline stringstream ss = {};
+    static inline bool isRefresh = false;
 public:
     ScriptParser() = delete;
     ScriptParser(const ScriptParser& s) = delete;
     ScriptParser& operator=(const ScriptParser& s) = delete;
 
     static vector<Command> ParseText(const vector<string>& instructions, unordered_map<string, PixelFloat>& variables);
+    static void SetRefresh(const bool& r) { isRefresh = r; }
 };
 

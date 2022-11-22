@@ -10,7 +10,7 @@ void ScriptParser::LoadFloat(const string& line, unordered_map<string, PixelFloa
 		cout << "Syntax Error on line: " << lineNumber << '\n';
 		return;
 	}
-	if (variables.contains(params[1]))
+	if (!isRefresh && variables.contains(params[1]))
 	{
 		cout << "Variable Already Defined - Sytax Error On line: " << lineNumber << '\n';
 		return;
@@ -215,7 +215,7 @@ vector<string> ScriptParser::GetParams(const string& line)
 vector<Command> ScriptParser::ParseText(const vector<string>& instructions, unordered_map<string, PixelFloat>& variables)
 {
 	commands.clear();
-	variables.clear();
+	//variables.clear();
 	lineNumber = 0;
 	printStatemets = 0;
 	for (const auto& line : instructions)

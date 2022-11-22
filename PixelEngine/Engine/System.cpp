@@ -11,6 +11,7 @@ void System::Initialize()
     SetExitKey(KEY_NULL);
     targetFPS = GetMonitorRefreshRate(GetCurrentMonitor());
     SetTargetFPS(targetFPS);
+    
     Application::Initalize();
     Mouse::Initialize();
 }
@@ -57,8 +58,9 @@ int System::Shutdown()
 
 void System::SystemLogic()
 {
+    DT = GetFrameTime();
     if (windowResized || IsWindowResized()) OnResize();
-    SetWindowTitle((to_string(GetFPS()) + "FPS").c_str());
+    SetWindowTitle((to_string(GetFPS()) + "FPS").c_str());   
     Mouse::Update();
     User::Update();
     Draw::ChangePixelColor(WHITE);
@@ -79,8 +81,9 @@ void System::OnResize()
 
 void System::SystemDraw()
 {
-    if (state == ApplicationState::Scripting)
-        Draw::Drawing();
+    if (state != ApplicationState::Scripting) return;
+    Draw::Drawing();
+    
 }
 
 int System::Run()

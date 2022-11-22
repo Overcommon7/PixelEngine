@@ -25,6 +25,7 @@ public:
 	void operator-=(const Matrix4& m);
 	void operator*=(const Matrix4& right);
 	void operator*=(const float& f);
+	bool operator==(const Matrix4& m);
 
 	static Matrix4 Identity();
 	static Matrix4 RotationX(float rad);

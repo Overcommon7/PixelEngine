@@ -9,9 +9,11 @@ class Draw
     static inline Color color = WHITE;
     static inline Color bgColor = WHITE;
     static inline bool showGrid = false;
+    static inline Rectangle fakeWindow = {};
+    static inline bool drawFakeWindow = false;
    
 public:
-    static void Initalize(int pixelSize, int width, int height);
+    static void Initalize(int pixelDimension, int width, int height);
     static void DrawScaledPixel(int x, int y);
     static int GetPixelSize() { return (int)pixel.width; }
     static void ChangePixelColor(const Color& c);

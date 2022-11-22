@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Matrix4.h"
+#include "Utilities.h"
 
 Matrix4::Matrix4(const vector<float>& f)
 {
@@ -240,6 +241,15 @@ void Matrix4::operator*=(const float& f)
 {
     for (auto& v : GetVector())
         *v *= f;
+}
+
+bool Matrix4::operator==(const Matrix4& m)
+{
+    return
+        fabs(_11 - m._11) < 0.001f && fabs(_12 - m._12) < 0.001f && fabs(_13 - m._13) < 0.001f && fabs(_14 - m._14) < 0.001f &&
+        fabs(_21 - m._21) < 0.001f && fabs(_22 - m._22) < 0.001f && fabs(_23 - m._23) < 0.001f && fabs(_24 - m._24) < 0.001f &&
+        fabs(_31 - m._31) < 0.001f && fabs(_32 - m._32) < 0.001f && fabs(_33 - m._33) < 0.001f && fabs(_34 - m._34) < 0.001f &&
+        fabs(_41 - m._41) < 0.001f && fabs(_42 - m._42) < 0.001f && fabs(_43 - m._43) < 0.001f && fabs(_44 - m._44) < 0.001f;
 }
 
 Matrix4 Matrix4::Identity()

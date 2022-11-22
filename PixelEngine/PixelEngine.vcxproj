@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -181,12 +181,14 @@
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -202,12 +204,14 @@
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -362,19 +366,22 @@
     <ClCompile Include="Engine\PixelFloat.cpp" />
     <ClCompile Include="Engine\ScriptManager.cpp" />
     <ClCompile Include="Engine\ScriptParser.cpp" />
+    <ClCompile Include="Engine\Slider.cpp" />
     <ClCompile Include="Engine\SymbolDefines.cpp" />
     <ClCompile Include="Engine\System.cpp" />
     <ClCompile Include="Engine\User.cpp" />
+    <ClCompile Include="Engine\VariableEditor.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ScriptMap.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UserEngineCode\Camera.cpp" />
     <ClCompile Include="UserEngineCode\Clipper.cpp" />
+    <ClCompile Include="UserEngineCode\DepthBuffer.cpp" />
+    <ClCompile Include="UserEngineCode\Events.cpp" />
     <ClCompile Include="UserEngineCode\Matrix4.cpp" />
     <ClCompile Include="UserEngineCode\MatrixStack.cpp" />
     <ClCompile Include="UserEngineCode\PrimitiveManager.cpp" />
     <ClCompile Include="UserEngineCode\Rasterizer.cpp" />
-    <ClCompile Include="UserEngineCode\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -395,14 +402,21 @@
     <ClInclude Include="Engine\PixelFloat.h" />
     <ClInclude Include="Engine\ScriptManager.h" />
     <ClInclude Include="Engine\ScriptParser.h" />
+    <ClInclude Include="Engine\Slider.h" />
     <ClInclude Include="Engine\SymbolDefines.h" />
     <ClInclude Include="Engine\System.h" />
     <ClInclude Include="Engine\User.h" />
     <ClInclude Include="Engine\Utilities.h" />
+    <ClInclude Include="Engine\VariableEditor.h" />
+    <ClInclude Include="UserCommands\AddVertex.h" />
+    <ClInclude Include="UserCommands\EnableDepth.h" />
+    <ClInclude Include="UserCommands\SetCullMode.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
     <ClInclude Include="UserEngineCode\Camera.h" />
     <ClInclude Include="UserEngineCode\Clipper.h" />
+    <ClInclude Include="UserEngineCode\DepthBuffer.h" />
+    <ClInclude Include="UserEngineCode\Events.h" />
     <ClInclude Include="UserEngineCode\Matrix4.h" />
     <ClInclude Include="UserEngineCode\MatrixStack.h" />
     <ClInclude Include="UserEngineCode\PrimitiveManager.h" />
@@ -414,7 +428,6 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UserCommands\AddVertex.h" />
     <ClInclude Include="UserCommands\BeginDraw.h" />
     <ClInclude Include="UserCommands\ChangeColor.h" />
     <ClInclude Include="UserCommands\EndDraw.h" />
@@ -433,18 +446,14 @@
     <ClInclude Include="UserCommands\PushRotationZ.h" />
     <ClInclude Include="UserCommands\PushScaling.h" />
     <ClInclude Include="UserCommands\PopMatrix.h" />
-  <ClInclude Include="UserCommands\SetCameraPosition.h" />
-  <ClInclude Include="UserCommands\SetCameraDirection.h" />
-  <ClInclude Include="UserCommands\SetNearPlane.h" />
-  <ClInclude Include="UserCommands\SetFarPlane.h" />
-  <ClInclude Include="UserCommands\SetFOV.h" />
+    <ClInclude Include="UserCommands\SetCameraPosition.h" />
+    <ClInclude Include="UserCommands\SetCameraDirection.h" />
+    <ClInclude Include="UserCommands\SetNearPlane.h" />
+    <ClInclude Include="UserCommands\SetFarPlane.h" />
+    <ClInclude Include="UserCommands\SetFOV.h" />
     <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-
-
-

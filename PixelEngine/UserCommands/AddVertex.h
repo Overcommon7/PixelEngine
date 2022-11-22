@@ -1,3 +1,4 @@
+#pragma once
 #include "pch.h"
 #include "Commands.h"
 #include "Utilities.h"

@@ -17,6 +17,7 @@ namespace TextEditorBackEnd
         public void Load(string filepath)
         {
             string key = string.Empty;
+            enums.Clear();
             using (var fs = new FileStream(filepath, FileMode.OpenOrCreate))
             {
                 using (var sr = new StreamReader(fs))
@@ -109,7 +110,7 @@ namespace TextEditorBackEnd
         static int lineNumber = 0;
         public static void LoadCommands(string filepath)
         {
-            
+            commands = new Dictionary<string, List<List<string>>>();
             var temp = FileManager.LoadFile(filepath).ToHashSet();            
             foreach (var str in temp)
             {

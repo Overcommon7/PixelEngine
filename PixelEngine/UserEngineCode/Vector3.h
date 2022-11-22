@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include "Utilities.h"
 
 namespace Math
 {
@@ -36,7 +37,7 @@ namespace Math
 		Vector3& operator=(const Vector3& vec) = default;
 		Vector3& operator=(const rVector3& vec) { x = vec.x; y = vec.y;	z = vec.z; return *this; }
 		Vector3(const rVector3 vec) : x(vec.x), y(vec.y), z(vec.z) {}
-		bool operator==(const Vector3& vec) const { return vec.x == this->x && vec.y == this->y && vec.z == this->z; }
+		bool operator==(const Vector3& vec) const { return Utils::Equals(x, vec.x) && Utils::Equals(y, vec.y) && Utils::Equals(z, vec.z); }
 		bool operator!=(const Vector3& vec) const { return vec.x != this->x || vec.y != this->y && vec.z != this->z; }
 		Vector3 operator+(const Vector3& vec) const { return Vector3(this->x + vec.x, this->y + vec.y, this->z + vec.z); }
 		Vector3 operator-(const Vector3& vec) const { return Vector3(this->x - vec.x, this->y - vec.y, this->z - vec.z); }

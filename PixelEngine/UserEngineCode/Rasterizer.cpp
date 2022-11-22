@@ -3,6 +3,7 @@
 #include "Defines.h"
 #include "Draw.h"
 #include "Utilities.h"
+#include "DepthBuffer.h"
 
 void Rasterizer::PlotLineHigh(const Vertex& start, const Vertex& end)
 {
@@ -21,7 +22,9 @@ void Rasterizer::PlotLineHigh(const Vertex& start, const Vertex& end)
 
     for (float y = start.pos.y; y <= end.pos.y; y++)
     {
-        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, 0), Utils::LerpColor(start.color, end.color, (y - start.pos.y) / (end.pos.y - start.pos.y))));
+        float t = (y - start.pos.y) / (end.pos.y - start.pos.y);
+        float z = std::lerp(start.pos.y, end.pos.y, t);
+        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, z), Utils::LerpColor(start.color, end.color, t)));
         if (D > 0)
         {
             x = x + xi;
@@ -36,7 +39,6 @@ void Rasterizer::PlotLineLow(const Vertex& start, const Vertex& end)
     float dx = end.pos.x - start.pos.x;
     float dy = end.pos.y - start.pos.y;
     float yi = 1;
-    const float numOfpoints = std::max(abs(dx), abs(dy)) + 1;
 
     if (dy < 0)
     {
@@ -49,7 +51,9 @@ void Rasterizer::PlotLineLow(const Vertex& start, const Vertex& end)
 
     for (float x = start.pos.x; x <= end.pos.x; x++)
     {
-        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, 0), Utils::LerpColor(start.color, end.color, (x - start.pos.x) / (end.pos.x - start.pos.x))));
+        float t = (x - start.pos.x) / (end.pos.x - start.pos.x);
+        float z = std::lerp(start.pos.x, end.pos.x, t);
+        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, z), Utils::LerpColor(start.color, end.color, t)));        
         if (D > 0)
         {
             y = y + yi;
@@ -78,9 +82,13 @@ vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector2& X, const float y,
             auto c1 = v1.GetColorAsVector3() * w1;
             auto c2 = v2.GetColorAsVector3() * w2;
             auto c3 = v3.GetColorAsVector3() * w3;
+            float z1 = v1.pos.z * w1;
+            float z2 = v2.pos.z * w2;
+            float z3 = v3.pos.z * w3;
+            float z = z1 + z2 + z3;
             auto color = c1 + c2 + c3;
             Color c = { (unsigned char)std::min(color.x, 255.f), (unsigned char)std::min(color.y, 255.f), (unsigned char)std::min(color.z, 255.f), 255 };
-            verticies.push_back(Vertex({ x, y }, c));
+            verticies.push_back(Vertex({ x, y, z }, c));
         }
     }
     return verticies;
@@ -90,6 +98,7 @@ void Rasterizer::DrawScaledPixel(const Vertex& v)
 {
     if (v.pos.x < 0 || v.pos.x > screenWidth / Draw::GetPixelSize()) return;
     if (v.pos.y < 0 || v.pos.y > screenHeight / Draw::GetPixelSize()) return;
+    if (!DepthBuffer::CheckDepthBuffer(v.pos.x, v.pos.y, v.pos.z)) return;
     Color temp = Draw::GetPixelColor();
     Draw::ChangePixelColor(v.color);
     Draw::DrawScaledPixel(v.pos.x, v.pos.y);

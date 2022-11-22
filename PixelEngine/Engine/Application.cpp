@@ -2,10 +2,9 @@
 #include "Application.h"
 #include "ScriptManager.h"
 #include "ScriptMap.h"
+#include "VariableEditor.h"
 #include "Defines.h"
-#include "Clipper.h"
-#include "MatrixStack.h"
-#include "PrimitiveManager.h"
+#include "Events.h"
 
 
 void Application::SaveNewScreenShot()
@@ -66,6 +65,8 @@ void Application::MenuLogic(ApplicationState& state)
 	Draw::Initalize(20, 10, 10);
 	Draw::SetBGColor(BLACK);
 	ScriptManager::LoadScript(scriptFile);
+	VariableEditor::OnScriptLoaded();
+	Events::OnScriptLoaded();
 	state = ApplicationState::Scripting;
 }
 
@@ -76,13 +77,16 @@ void Application::MenuDraw()
 
 void Application::Logic(ApplicationState& state)
 {
-	bool scriptReloaded = User::GetKey() == KEY_F5;
-	MatrixStack::Update();
-	ScriptManager::Update(scriptReloaded);
+	bool refresh = VariableEditor::Update();
+	bool scriptReloaded = refresh || User::GetKey() == KEY_F5;
+	ScriptManager::Update(scriptReloaded, refresh);
+	Events::OnNewFrame();
 	if (User::GetKey() == KEY_F10) SaveNewScreenShot();
+	if (User::GetKey() == KEY_F4 && !ScriptManager::Variables().empty()) VariableEditor::ToggleActive();
 	if (User::GetKey() != KEY_ESCAPE) return;
 	system("cls");
 	scriptFile.clear();
+	ScriptManager::Variables().clear();
 	Draw::SetBGColor(WHITE);
 	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	windowResized = true;
@@ -94,6 +98,7 @@ void Application::Draw()
 {
 	ScriptManager::RunScripts();
 	Clipper::Draw();
+	VariableEditor::Draw();
 }
 
 void Application::ShutDown()

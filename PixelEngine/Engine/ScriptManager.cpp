@@ -15,14 +15,16 @@ void ScriptManager::LoadScript(const string& script)
 	while (!inFile.eof())
 	{
 		std::getline(inFile, line);
+		if (line.empty()) continue;
 		lines.push_back(line);
 	}
 	inFile.close();
 	commands = ScriptParser::ParseText(lines, variables);
 }
 
-void ScriptManager::Update(bool reload)
+void ScriptManager::Update(bool reload, bool refresh)
 {
+	ScriptParser::SetRefresh(refresh);
 	if (reload)	LoadScript(scriptName);
 	for (auto& var : variables)
 		var.second.ResetCurrentValue();

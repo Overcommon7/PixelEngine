@@ -38,8 +38,8 @@ namespace PixelCommandsBackEnd
         public static string UserCommandDirectory { get => CommandDirectory; }
         static string GetDefaultCommandContents(string commandName)
         {
-            string contents = "#include \"pch.h\"\n#include \"Commands.h\"\n#include \"Utilities.h\"\n\n";
-            contents += "class " + commandName.ToUpper() + " : public Commands\n";
+            
+            string contents = "class " + commandName.ToUpper() + " : public Commands\n";
             contents += "{\npublic:\n";
             contents += "    " + commandName.ToUpper() + "() {}\n";
             contents += "    //Returns The Name Of The Function\n";
@@ -51,7 +51,8 @@ namespace PixelCommandsBackEnd
 
         static void CreateCommandTemplate(string commandName, string commandPath)
         {
-            var contents = GetDefaultCommandContents(commandName) + "    {\n\n    }\n};";
+            string contents = "#include \"pch.h\"\n#include \"Commands.h\"\n#include \"Utilities.h\"\n\n";
+            contents += GetDefaultCommandContents(commandName) + "    {\n\n    }\n};";
 
             using (var fs = File.Create(commandPath))
             {
@@ -64,9 +65,14 @@ namespace PixelCommandsBackEnd
 
         static void CreateNewCommand(string commandPath, string commandName, string oldPath)
         {
-            var contents = GetDefaultCommandContents(commandName);
+            string contents = String.Empty;
             var file = File.ReadAllLines(oldPath);
             bool commence = false;
+            for (int i = 0; file[i].StartsWith("#include"); i++)
+                contents += file[i] + '\n';
+            contents += '\n';
+
+            contents += GetDefaultCommandContents(commandName);
             for (int i = 0; i < file.Length; i++)
             {
                 if (commence) contents += file[i] + "\n";

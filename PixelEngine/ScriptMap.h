@@ -1,4 +1,8 @@
 #pragma once
+#include "UserCommands/AddVertex.h"
+#include "UserCommands/SetCullMode.h"
+#include "UserCommands/EnableDepth.h"
+#include "UserCommands/AddVertex.h"
 #include "UserCommands/SetFOV.h"
 #include "UserCommands/SetFarPlane.h"
 #include "UserCommands/SetNearPlane.h"
@@ -14,7 +18,6 @@
 #include "UserCommands/ShowViewport.h"
 #include "UserCommands/SetViewport.h"
 #include "UserCommands/SetFillMode.h"
-#include "UserCommands/AddVertex.h"
 #include "UserCommands/EndDraw.h"
 #include "UserCommands/BeginDraw.h"
 #include "UserCommands/ChangeColor.h"
@@ -26,6 +29,9 @@
 class ScriptMap
 {
 private:
+    inline static const SETCULLMODE setcullmode = {};
+    inline static const ENABLEDEPTH enabledepth = {};
+    inline static const ADDVERTEX addvertex = {};
     inline static const SETFOV setfov = {};
     inline static const SETFARPLANE setfarplane = {};
     inline static const SETNEARPLANE setnearplane = {};
@@ -41,24 +47,23 @@ private:
     inline static const SHOWVIEWPORT showviewport = {};
     inline static const SETVIEWPORT setviewport = {};
     inline static const SETFILLMODE setfillmode = {};
-    inline static const ADDVERTEX addvertex = {};
     inline static const ENDDRAW enddraw = {};
     inline static const BEGINDRAW begindraw = {};
     inline static const CHANGECOLOR changecolor = {};
     inline static const DRAWPIXEL drawpixel = {};
     inline static const ToggleGrid togglegrid = {};
     inline static const Init init = {};
-    inline static const string file = "TextEditorCommands.txt";
-    inline static bool textEditorOpened = false;
+
+    //inline static const string file = "TextEditorCommands.txt";
 	inline const static unordered_map<string, const Commands*> scripts =
 	{
+        { addvertex.GetName(), &addvertex},
         { init.GetName(), &init},
         { togglegrid.GetName(), &togglegrid },
         { drawpixel.GetName(), &drawpixel },
         { changecolor.GetName(), &changecolor },
         { begindraw.GetName(), &begindraw },
         { enddraw.GetName(), &enddraw },
-        { addvertex.GetName(), &addvertex },
         { setfillmode.GetName(), &setfillmode },
         { setviewport.GetName(), &setviewport },
         { showviewport.GetName(), &showviewport },
@@ -74,22 +79,14 @@ private:
         { setnearplane.GetName(), &setnearplane },
         { setfarplane.GetName(), &setfarplane },
         { setfov.GetName(), &setfov },
+        { enabledepth.GetName(), &enabledepth },
+        { setcullmode.GetName(), &setcullmode },
 	};
 public:
 	static void InvokeScript(const string& s, const vector<string>& params);
     static void Initialize();
     static void ShutDown();
 };
-
-
-
-
-
-
-
-
-
-
 
 
 

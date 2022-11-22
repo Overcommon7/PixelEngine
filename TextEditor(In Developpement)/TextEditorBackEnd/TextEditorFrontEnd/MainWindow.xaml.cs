@@ -86,6 +86,7 @@ namespace TextEditorFrontEnd
 
         private void MainWindow_LostFocus(object? sender, EventArgs e)
         {
+            if (saved) return;
             Compilie_Click(null, null);
             ScriptParser.SaveValidScript(filepath, TextField.Text);
         }
@@ -142,6 +143,8 @@ namespace TextEditorFrontEnd
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            ScriptParser.LoadCommands(commandFilePath);
+            ScriptParser.LoadEnums(enumsFilePath);
             Compilie_Click(sender, e);
             switch (SaveWithErrors())
             {

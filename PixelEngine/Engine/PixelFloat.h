@@ -11,6 +11,7 @@ public:
 
 	void ResetCurrentValue() { currentValue = resetValue; currentValueAsString = to_string(resetValue); }
 	void SetCurrentValue(const float& f);
+	void ChangeResetValue(const float& f) { resetValue = f; }
 	
 	void AddTo(const float& f);
 	void AddTo(const PixelFloat& p);

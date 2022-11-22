@@ -86,14 +86,19 @@ namespace Utils
 		DrawRectangleLines(rec.x, rec.y, rec.width, rec.height, c);
 	}
 
+    static bool Equals(const float& a, const float& b)
+    {
+        return abs(a - b) < 0.001f;
+    }
+
     static bool Equals(const Vector2& v1, const Vector2& v2)
     {
-        return v1.x == v2.x && v1.y == v2.y;
+        return Equals(v1.x, v2.x) && Equals(v1.y, v2.y);
     }
 
     static bool Equals(const Vector3& v1, const Vector3& v2)
     {
-        return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
+        return  Equals(v1.x, v2.x) && Equals(v1.y, v2.y) && Equals(v1.z, v2.z);
     }
 
     static bool Equals(const Color& v1, const Color& v2)

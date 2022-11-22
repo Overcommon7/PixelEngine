@@ -1,4 +1,5 @@
 #pragma once
+#include "UserCommands/Vertex.h"
 #include "UserCommands/SetFOV.h"
 #include "UserCommands/SetFarPlane.h"
 #include "UserCommands/SetNearPlane.h"
@@ -14,7 +15,6 @@
 #include "UserCommands/ShowViewport.h"
 #include "UserCommands/SetViewport.h"
 #include "UserCommands/SetFillMode.h"
-#include "UserCommands/AddVertex.h"
 #include "UserCommands/EndDraw.h"
 #include "UserCommands/BeginDraw.h"
 #include "UserCommands/ChangeColor.h"
@@ -26,6 +26,7 @@
 class ScriptMap
 {
 private:
+    inline static const VERTEX vertex = {};
     inline static const SETFOV setfov = {};
     inline static const SETFARPLANE setfarplane = {};
     inline static const SETNEARPLANE setnearplane = {};
@@ -41,7 +42,6 @@ private:
     inline static const SHOWVIEWPORT showviewport = {};
     inline static const SETVIEWPORT setviewport = {};
     inline static const SETFILLMODE setfillmode = {};
-    inline static const ADDVERTEX addvertex = {};
     inline static const ENDDRAW enddraw = {};
     inline static const BEGINDRAW begindraw = {};
     inline static const CHANGECOLOR changecolor = {};
@@ -58,7 +58,6 @@ private:
         { changecolor.GetName(), &changecolor },
         { begindraw.GetName(), &begindraw },
         { enddraw.GetName(), &enddraw },
-        { addvertex.GetName(), &addvertex },
         { setfillmode.GetName(), &setfillmode },
         { setviewport.GetName(), &setviewport },
         { showviewport.GetName(), &showviewport },
@@ -74,18 +73,13 @@ private:
         { setnearplane.GetName(), &setnearplane },
         { setfarplane.GetName(), &setfarplane },
         { setfov.GetName(), &setfov },
+        { vertex.GetName(), &vertex },
 	};
 public:
 	static void InvokeScript(const string& s, const vector<string>& params);
     static void Initialize();
     static void ShutDown();
 };
-
-
-
-
-
-
 
 
 

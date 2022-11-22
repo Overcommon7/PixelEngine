@@ -16,6 +16,7 @@
 #include <filesystem>
 #include <future>
 #include <mutex>
+#include <memory>
 #include <set>
 #include "raylib.h"
 
@@ -55,6 +56,10 @@ using std::future;
 using std::mutex;
 using std::async;
 using std::set;
+using std::unique_ptr;
+using std::make_unique;
+using std::shared_ptr;
+using std::make_shared;
 
 typedef Vector3 rVector3;
 typedef Vector2 rVector2;

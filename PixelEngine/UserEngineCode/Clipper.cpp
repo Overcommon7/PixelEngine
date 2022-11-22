@@ -2,28 +2,6 @@
 #include "Clipper.h"
 #include "Utilities.h"
 
-#define round(x) (float)((int)(x + 0.5))
-
-
-
-Vertex Clipper::ComputeIntersection(int x1, int y1, int x2, int y2,
-    int x3, int y3, int x4, int y4)
-{
-    int den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-
-
-    int num = (x1 * y2 - y1 * x2) * (x3 - x4) -
-        (x1 - x2) * (x3 * y4 - y3 * x4);
-    int x = num / den;
-
-
-    num = (x1 * y2 - y1 * x2) * (y3 - y4) -
-        (y1 - y2) * (x3 * y4 - y3 * x4);
-    int y = num / den;
-
-    return Vertex({ (float)x, (float)y } /*Utils::LerpColor(prev.color, current.color, (y - prev.pos.y) / (current.pos.y - prev.pos.y))*/);
-}
-
 Vertex Clipper::ComputeIntersection(const Vertex& v1, const Vertex& v2, ClipEdge edge)
 {
     Vertex retVal;
@@ -90,6 +68,13 @@ void Clipper::Draw()
     vp.width *= Draw::GetPixelSize();
     vp.height *= Draw::GetPixelSize();
     Utils::DrawRectangleLines(vp, color);
+}
+
+void Clipper::OnScriptInit()
+{
+    viewport = {};
+    color = RED;
+    displayViewport = false;
 }
 
 bool Clipper::ClipPoint(const Vertex& v)

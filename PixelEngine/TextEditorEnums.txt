@@ -7,3 +7,8 @@ point
 line
 triangle
 SEndLine
+Cullmode
+none
+front
+back
+SEndLine

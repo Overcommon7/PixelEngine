@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Commands.h"
-#include "Draw.h"
+#include "Defines.h"
 
 class Init : public Commands
 {
@@ -13,7 +13,6 @@ public:
     void Invoke(const vector<string>& params) const override
     {
         if (params.size() < 3) return;
-
         Draw::Initalize(stoi(params[0]), stoi(params[1]), stoi(params[2]));
     }
 };

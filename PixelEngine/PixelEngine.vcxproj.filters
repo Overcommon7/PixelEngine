@@ -99,9 +99,6 @@
     <ClCompile Include="Engine\PixelFloat.cpp">
       <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
-    <ClCompile Include="UserEngineCode\Vertex.cpp">
-      <Filter>UserSourceCode\CPPs</Filter>
-    </ClCompile>
     <ClCompile Include="UserEngineCode\Rasterizer.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
@@ -118,6 +115,18 @@
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
     <ClCompile Include="UserEngineCode\Camera.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\VariableEditor.cpp">
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Slider.cpp">
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\DepthBuffer.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Events.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -178,9 +187,6 @@
     </ClInclude>
     <ClInclude Include="Engine\PixelFloat.h">
       <Filter>Source Files\ApplicationClasses\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="UserCommands\AddVertex.h">
-      <Filter>UserCommands</Filter>
     </ClInclude>
     <ClInclude Include="UserCommands\BeginDraw.h">
       <Filter>UserCommands</Filter>
@@ -262,6 +268,27 @@
     </ClInclude>
     <ClInclude Include="UserCommands\SetNearPlane.h">
       <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddVertex.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\VariableEditor.h">
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Slider.h">
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\EnableDepth.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetCullMode.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\DepthBuffer.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Events.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
