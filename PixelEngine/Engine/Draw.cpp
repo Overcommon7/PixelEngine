@@ -54,6 +54,8 @@ void Draw::SetPixelResolution(int x, int y)
 	{
 		drawFakeWindow = true;
 		fakeWindow = { 0, 0, (float)width, (float)height };
+		width = SCREEN_WIDTH;
+		height = SCREEN_HEIGHT;
 	}
 	else
 	{
