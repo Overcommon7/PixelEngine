@@ -13,11 +13,13 @@ namespace TextEditorBackEnd
     public class Enums
     {
         public Dictionary<string, List<string>> enums = new Dictionary<string, List<string>>();
+        public Dictionary<string, bool> bools = new Dictionary<string, bool>();
 
         public void Load(string filepath)
         {
             string key = string.Empty;
             enums.Clear();
+            bools.Clear();
             using (var fs = new FileStream(filepath, FileMode.OpenOrCreate))
             {
                 using (var sr = new StreamReader(fs))
@@ -26,6 +28,7 @@ namespace TextEditorBackEnd
                     {
                         key = sr.ReadLine();
                         enums.Add(key, new List<string>());
+                        bools.Add(key, false);
                         string value = sr.ReadLine();
                         while (value != "SEndLine")
                         {
@@ -35,6 +38,12 @@ namespace TextEditorBackEnd
                     }
                 }
             }
+        }
+
+        public void ResetBools()
+        {
+            foreach (var element in bools)
+                bools[element.Key] = false;
         }
     }
     public struct Error
@@ -71,7 +80,6 @@ namespace TextEditorBackEnd
 
     public static class ScriptParser
     {
-        //Impletement Base Script Syntax Detection
         static Dictionary<string, List<List<string>>> commands = new Dictionary<string, List<List<string>>>();
         static HashSet<Error> flaggedLines = new HashSet<Error>();
         static List<string> errorlessContents = new List<string>();
@@ -425,5 +433,76 @@ namespace TextEditorBackEnd
                     result.Add(entry);
             return result.ToArray(); 
         }
+
+
+        public static List<string> GetVariables(List<string> text)
+        {
+            List<string> result = new List<string>();
+            foreach (var line in text)
+            {
+                if (string.IsNullOrEmpty(line)) continue;
+                int idx = line.IndexOf(' ');
+                if (idx == -1) continue;
+                var p = line.Substring(0, idx).ToLower();
+                if (p != "float" && p != "int") continue;
+                var par = GetParams(line, ' ');
+                if (par.Length < 4) continue;
+                result.Add(par[1]);
+            }
+            return result;
+        }
+
+        public static List<string> GetSuggestions(string line, ref List<string> vars)
+        {
+            List<string> suggestions = new List<string>();
+            line = line.Replace("\r\n", "");
+            line = line.Replace("\n", "");
+            if (!line.Contains("("))
+            {              
+                foreach (var command in commands)
+                {
+                    if (string.IsNullOrEmpty(line) || command.Key.Contains(line))
+                        suggestions.Add(command.Key);
+                }
+            }
+            else
+            {
+                bool variablesAdded = false;
+                bool boolAdded = false;
+                var name = line.Substring(0, line.IndexOf('('));
+                enums.ResetBools();
+                if (!commands.ContainsKey(name)) return suggestions;
+                int j = 0;
+                for (int i = 0; i < name.Length; i++)
+                    if (name[i] == ',') j++;
+                foreach (var paramList in commands[name])
+                {
+                    if (j >= paramList.Count) continue;
+                    var listItem = paramList[j].ToLower();
+                    if (listItem == "int" || listItem == "float")
+                    {
+                        if (variablesAdded) continue;
+                        foreach (var v in vars)
+                            suggestions.Add(v);
+                        variablesAdded = true;
+                    }
+                    else if (listItem == "bool")
+                    {
+                        if (boolAdded) continue;
+                        suggestions.Add("true");
+                        suggestions.Add("false");
+                    }
+                    else
+                    {
+                        if (enums.bools[paramList[j]]) continue;
+                        foreach (var type in enums.enums[paramList[j]])
+                            suggestions.Add(type); 
+                    }        
+                }
+            }
+            return suggestions;
+        }
     }
+
+    
 }
