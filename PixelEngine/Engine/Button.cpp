@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "Mouse.h"
 #include "Utilities.h"
+#include "Defines.h"
 
 void Button::Update()
 {
@@ -17,7 +18,7 @@ void Button::Draw() const
 	Utils::DrawRectangle(collider, color);
 	if (isHovering)	Utils::DrawRectangle(collider, { 120, 120, 120, 120 });
 	Utils::DrawRectangleLines(collider, BLACK);
-	DrawText(text.c_str(), collider.x + 5, collider.y + 5, 15, BLACK);
+	DrawTextEx(engineFont, text.c_str(), { collider.x + 5, collider.y + 5 }, 15, 1, BLACK);
 }
 
 void Button::UpdatePosition(const Vector2& vec)

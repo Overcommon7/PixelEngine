@@ -80,6 +80,9 @@ namespace PixelCommandFrontEnd
                 MessageBox.Show("Enum Name Can't Be Empty", "Command Manager", MessageBoxButton.OK);
                 return;
             }
+            var temp = wpf_EnumName.Text.ToCharArray();
+            temp[0] = char.ToUpper(temp[0]);
+            wpf_EnumName.Text = new string(temp);
             if (edit) Enums.RemoveEnum(oldName);
             List<string> list = new List<string>();
             foreach (var item in wpf_Enumerations.Items)

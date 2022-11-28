@@ -18,6 +18,9 @@ public:
     static Matrix4 GetViewMatrix();
     static Matrix4 GetProjectionMatrix();
 
+    static const Math::Vector3& GetDirection() { return direction; }
+    static const Math::Vector3& GetPosition() { return position; }
+
 private:
     inline static Math::Vector3 position = { 0 ,0, 0 }; // default: 0, 0, 0
     inline static Math::Vector3 direction = { 0, 0, 1 }; // default: 0, 0, 1

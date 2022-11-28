@@ -1,4 +1,9 @@
 #pragma once
+#include "UserCommands/AddPointLight.h"
+#include "UserCommands/AddDirectionalLight.h"
+#include "UserCommands/SetLightSpecular.h"
+#include "UserCommands/SetLightAmbient.h"
+#include "UserCommands/SetLightDiffuse.h"
 #include "UserCommands/AddVertex.h"
 #include "UserCommands/SetCullMode.h"
 #include "UserCommands/EnableDepth.h"
@@ -29,6 +34,11 @@
 class ScriptMap
 {
 private:
+    inline static const ADDPOINTLIGHT addpointlight = {};
+    inline static const ADDDIRECTIONALLIGHT adddirectionallight = {};
+    inline static const SETLIGHTSPECULAR setlightspecular = {};
+    inline static const SETLIGHTAMBIENT setlightambient = {};
+    inline static const SETLIGHTDIFFUSE setlightdiffuse = {};
     inline static const SETCULLMODE setcullmode = {};
     inline static const ENABLEDEPTH enabledepth = {};
     inline static const ADDVERTEX addvertex = {};
@@ -81,74 +91,14 @@ private:
         { setfov.GetName(), &setfov },
         { enabledepth.GetName(), &enabledepth },
         { setcullmode.GetName(), &setcullmode },
+        { setlightdiffuse.GetName(), &setlightdiffuse },
+        { setlightambient.GetName(), &setlightambient },
+        { setlightspecular.GetName(), &setlightspecular },
+        { adddirectionallight.GetName(), &adddirectionallight },
+        { addpointlight.GetName(), &addpointlight },
 	};
 public:
 	static void InvokeScript(const string& s, const vector<string>& params);
     static void Initialize();
     static void ShutDown();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

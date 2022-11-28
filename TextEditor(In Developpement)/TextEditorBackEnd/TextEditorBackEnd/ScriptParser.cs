@@ -457,11 +457,12 @@ namespace TextEditorBackEnd
             List<string> suggestions = new List<string>();
             line = line.Replace("\r\n", "");
             line = line.Replace("\n", "");
+            line = line.Replace("\t", "");
             if (!line.Contains("("))
             {              
                 foreach (var command in commands)
                 {
-                    if (string.IsNullOrEmpty(line) || command.Key.Contains(line))
+                    if (string.IsNullOrWhiteSpace(line) || command.Key.Contains(line))
                         suggestions.Add(command.Key);
                 }
             }

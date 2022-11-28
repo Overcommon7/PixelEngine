@@ -12,7 +12,7 @@
           "PixelCommandsBackEnd": "1.0.0",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x86": "5.0.17",
           "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x86": "5.0.17",
-          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.17763.25"
+          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.17763.26"
         },
         "runtime": {
           "PixelCommandFrontEnd.dll": {}
@@ -1076,15 +1076,15 @@
           }
         }
       },
-      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.25": {
+      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.26": {
         "runtime": {
           "Microsoft.Windows.SDK.NET.dll": {
             "assemblyVersion": "10.0.17763.24",
-            "fileVersion": "10.0.17763.25"
+            "fileVersion": "10.0.17763.26"
           },
           "WinRT.Runtime.dll": {
             "assemblyVersion": "1.6.0.0",
-            "fileVersion": "1.6.2.38681"
+            "fileVersion": "1.6.4.39141"
           }
         }
       },
@@ -1111,7 +1111,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.25": {
+    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.26": {
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""

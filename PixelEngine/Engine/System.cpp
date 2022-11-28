@@ -12,6 +12,7 @@ void System::Initialize()
     targetFPS = GetMonitorRefreshRate(GetCurrentMonitor());
     SetTargetFPS(targetFPS);
     
+    engineFont = LoadFont("Engine/CandaraBold.ttf");
     Application::Initalize();
     Mouse::Initialize();
 }

@@ -141,6 +141,7 @@ void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& 
         for (auto& fut : futures)
             for (const auto& f : fut.get())
                 DrawScaledPixel(f);
+
         futures.clear();
         futures.shrink_to_fit();
     }

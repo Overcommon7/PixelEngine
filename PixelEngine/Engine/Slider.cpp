@@ -8,9 +8,10 @@ void Slider::Draw() const
 {
 	Utils::DrawRectangle(dragArea, {120, 120, 120, 70});
 	string temp = ScriptManager::Variables().at(variableName).GetStringValue();
-	if (temp.find('.') != string::npos)
+	auto pos = temp.find('.');
+	if (pos != string::npos && pos + 3 < temp.length())
 		temp.erase(temp.begin() + temp.find('.') + 3, temp.end());
-	DrawText((displayName + " - " + temp).c_str(), dragArea.x + 10, dragArea.y + 5, 12, WHITE);
+	DrawTextEx(engineFont, (displayName + " - " + temp).c_str(), { dragArea.x + 10, dragArea.y + 10 }, 18.f, 1.f, WHITE);
 	Utils::DrawRectangleLines(dragArea, BLACK);
 }
 

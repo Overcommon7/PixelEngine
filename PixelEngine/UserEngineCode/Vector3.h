@@ -32,13 +32,24 @@ namespace Math
 				else return;
 			}
 		}
+		Vector3(const vector<float>& values)
+		{
+			if (values.size() < 3)
+			{
+				*this = Vector3();
+				return;
+			}
+			x = values[0];
+			y = values[1];
+			z = values[2];
+		}
 		operator rVector3() const { return rVector3(x, y, z); }
 		Vector3(const Vector3& vec) = default;
 		Vector3& operator=(const Vector3& vec) = default;
 		Vector3& operator=(const rVector3& vec) { x = vec.x; y = vec.y;	z = vec.z; return *this; }
-		Vector3(const rVector3 vec) : x(vec.x), y(vec.y), z(vec.z) {}
+		Vector3(const rVector3& vec) : x(vec.x), y(vec.y), z(vec.z) {}
 		bool operator==(const Vector3& vec) const { return Utils::Equals(x, vec.x) && Utils::Equals(y, vec.y) && Utils::Equals(z, vec.z); }
-		bool operator!=(const Vector3& vec) const { return vec.x != this->x || vec.y != this->y && vec.z != this->z; }
+		bool operator!=(const Vector3& vec) const { return !(Utils::Equals(x, vec.x) && Utils::Equals(y, vec.y) && Utils::Equals(z, vec.z)); }
 		Vector3 operator+(const Vector3& vec) const { return Vector3(this->x + vec.x, this->y + vec.y, this->z + vec.z); }
 		Vector3 operator-(const Vector3& vec) const { return Vector3(this->x - vec.x, this->y - vec.y, this->z - vec.z); }
 		Vector3 operator/(const float& f) const { if (f == 0) return *this; return Vector3(this->x / f, this->y / f, this->z / f); }

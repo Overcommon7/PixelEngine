@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,9 +42,19 @@ namespace TextEditorFrontEnd
         readonly string Int = "int";
         List<string> variables = new List<string>();
         public virtual int ItemHeight { get; set; }
+        public ref TextBox UserText { get => ref TextField; }
+        public static MainWindow Instance;
+        RenamePanel renamePanel = new RenamePanel();
         public MainWindow()
         {
             InitializeComponent();
+            if (Instance == null) Instance = this;
+            else
+            {
+                Close();
+                return;
+            }
+
             RoutedCommand save = new RoutedCommand();
             save.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
             CommandBindings.Add(new CommandBinding(save, Save_Click));
@@ -53,6 +64,9 @@ namespace TextEditorFrontEnd
             RoutedCommand compile = new RoutedCommand();
             compile.InputGestures.Add(new KeyGesture(Key.B, ModifierKeys.Control));
             CommandBindings.Add(new CommandBinding(compile, Compilie_Click));
+            RoutedCommand rename = new RoutedCommand();
+            rename.InputGestures.Add(new KeyGesture(Key.H, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(rename, Rename));
             TextField.AcceptsReturn = true;
             TextField.AcceptsTab = true;
             TextField.Focusable = false;
@@ -70,6 +84,12 @@ namespace TextEditorFrontEnd
             Deactivated += MainWindow_LostFocus;
             Closing += MainWindow_Closing;
             Closed += MainWindow_Closed;
+        }
+
+        private void Rename(object sender, RoutedEventArgs e)
+        {
+            if (renamePanel.IsActive) return;
+            renamePanel.Show();
         }
 
         private void SuggestionBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -157,6 +177,13 @@ namespace TextEditorFrontEnd
             ScriptParser.SaveValidScript(filepath, TextField.Text);
         }
 
+        void ChangeTitleName()
+        {
+            if (string.IsNullOrEmpty(Title) || Title.EndsWith('*')) return;
+            saved = false;
+            Title += "*";
+        }
+
         //void AddLine(object sender, RoutedEventArgs e)
         //{
         //    if (!TextField.IsFocused) return;
@@ -168,8 +195,8 @@ namespace TextEditorFrontEnd
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = (TextBox)sender;
-            bool tab = false;
-            int offset = 0, addedLength = 0;
+            bool tab = false, end = false;
+            int offset = 0, addedLength = 0;            
             using (tb.DeclareChangeBlock())
             {
                 foreach (var c in e.Changes)
@@ -177,14 +204,22 @@ namespace TextEditorFrontEnd
                     if (c.AddedLength == 0) continue;
                     offset = c.Offset;
                     addedLength = c.AddedLength;
+                    if (addedLength > 10) continue;
                     var text = tb.Text.Substring(offset, addedLength);
-                    tab = text.Contains('\t');
+                    tab = text.Contains('\t');                    
                     if (text.Contains('\n'))
                     {
                         variables = ScriptParser.GetVariables(GetFormattedString(TextField.Text));
                         break;
                     }
                     if (tab) break;
+                    if (text.EndsWith(')'))
+                    {
+                        ChangeTitleName();
+                        SuggestionBox.Items.Clear();
+                        SuggestionBox.SelectedItem = null;
+                        return;
+                    }
                 }
             }
             SuggestionBox.Items.Clear();
@@ -198,10 +233,8 @@ namespace TextEditorFrontEnd
                 SuggestionBox.SelectedItem = SuggestionBox.Items[0];
                 SuggestionBox_MouseDoubleClick(sender, null);
             }
-               
-            if (string.IsNullOrEmpty(Title) || Title.EndsWith('*')) return;
-            saved = false;
-            Title += "*";
+
+            ChangeTitleName();
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)

@@ -4,6 +4,9 @@
 #include "Clipper.h"
 #include "MatrixStack.h"
 #include "Camera.h"
+#include "DirectionalLight.h"
+#include "Utilities.h"
+#include "LightManager.h"
 
 Matrix4 PrimitiveManager::GetScreenTransform()
 {
@@ -43,7 +46,7 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
         const Matrix4 matView = PixelCamera::GetViewMatrix();
         const Matrix4 matProj = PixelCamera::GetProjectionMatrix();
         const Matrix4 matScreen = GetScreenTransform();
-        const Matrix4 ndcSpace = matWorld * matView * matProj;
+        const Matrix4 ndcSpace = matView * matProj;
         const Matrix4 matFinal = ndcSpace * matScreen;
 
         for (int i = 2; i < vertexBuffer.size(); i += 3)
@@ -53,11 +56,27 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
             {
                 if (cullmode != Cullmode::None)
                 {
+                    //world
+                    for (auto& t : triangle)
+                        t.pos = matWorld.TransformCoord(t.pos);
+
+                    //normal
+                    Math::Vector3 faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
+                    
+                    //color
+                    for (auto& t : triangle)
+                        t.color = Utils::MultiplyColor(t.color, LightManager::ComputeLightColor(t.pos, faceNorm));
+                    
+                    //move to NDC
                     for (auto& t : triangle)
                         t.pos = ndcSpace.TransformCoord(t.pos);
-                    Math::Vector3 faceNorm = Math::Vector3(triangle[1].pos - triangle[0].pos).CrossProduct(Math::Vector3(triangle[2].pos - triangle[0].pos));
+
+                    //get facing for CULL
+                    faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
+
                     if (cullmode == Cullmode::Back && faceNorm.z > 0.0f) continue;
                     if (cullmode == Cullmode::Front && faceNorm.z < 0.0f) continue;
+
                     for (auto& t : triangle)
                         t.pos = matScreen.TransformCoord(t.pos);
                 }

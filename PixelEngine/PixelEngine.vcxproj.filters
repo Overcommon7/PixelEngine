@@ -117,9 +117,6 @@
     <ClCompile Include="UserEngineCode\Camera.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\VariableEditor.cpp">
-      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Slider.cpp">
       <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
@@ -127,6 +124,24 @@
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
     <ClCompile Include="UserEngineCode\Events.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Light.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\DirectionalLight.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\MaterialManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\VariableEditor.cpp">
+      <Filter>Source Files\Managers\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\LightManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\PointLight.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -272,9 +287,6 @@
     <ClInclude Include="UserCommands\AddVertex.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\VariableEditor.h">
-      <Filter>Source Files\ApplicationClasses\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Slider.h">
       <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
@@ -289,6 +301,39 @@
     </ClInclude>
     <ClInclude Include="UserEngineCode\Events.h">
       <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Light.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\DirectionalLight.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\MaterialManager.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\VariableEditor.h">
+      <Filter>Source Files\Managers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\LightManager.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetLightAmbient.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetLightDiffuse.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetLightSpecular.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddDirectionalLight.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\PointLight.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddPointLight.h">
+      <Filter>UserCommands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

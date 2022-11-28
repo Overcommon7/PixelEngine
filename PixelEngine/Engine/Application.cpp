@@ -81,12 +81,14 @@ void Application::Logic(ApplicationState& state)
 	bool scriptReloaded = refresh || User::GetKey() == KEY_F5;
 	ScriptManager::Update(scriptReloaded, refresh);
 	Events::OnNewFrame();
+	if (User::GetKey() == KEY_F1) ScriptMap::Initialize();
 	if (User::GetKey() == KEY_F10) SaveNewScreenShot();
 	if (User::GetKey() == KEY_F4 && !ScriptManager::Variables().empty()) VariableEditor::ToggleActive();
 	if (User::GetKey() != KEY_ESCAPE) return;
 	system("cls");
 	scriptFile.clear();
 	ScriptManager::Variables().clear();
+	ScriptParser::SetRefresh(false);
 	Draw::SetBGColor(WHITE);
 	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	windowResized = true;

@@ -6,6 +6,7 @@ void DepthBuffer::Initialize()
 {
 	depthBuffer = std::make_unique<float[]>(pixelResolutionHeight * pixelResolutionWidth);
 	Update();
+	
 }
 
 void DepthBuffer::Update()

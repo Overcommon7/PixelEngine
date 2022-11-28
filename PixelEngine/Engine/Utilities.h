@@ -109,7 +109,7 @@ namespace Utils
     static Color StringToColor(const string& s)
     {
         string str = ToUpperString(s);
-        if (colors.find(str) != colors.end()) return colors.at(str);
+        if (colors.contains(str)) return colors.at(str);
         return WHITE;
     }
 
@@ -141,5 +141,49 @@ namespace Utils
             std::lerp(c1.b, c2.b, t),
             255
         );
+    }
+
+    static Color UnitTo8BitColor(float r, float g, float b, float a = 1)
+    {
+        return Color(
+            (unsigned char)std::min(r * 255.f, 255.f),
+            (unsigned char)std::min(g * 255.f, 255.f),
+            (unsigned char)std::min(b * 255.f, 255.f),
+            (unsigned char)std::min(a * 255.f, 255.f));
+    }
+
+    static Vector3 MultiplyRaylibVector3(const Vector3& v1, const Vector3& v2)
+    {
+        return Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+    }
+
+    static Color MultiplyColor(const Color& c1, const Color& c2)
+    {
+        Vector3 v1 = { (float)c1.r / 255.f, (float)c1.g / 255.f, (float)c1.b / 255.f };
+        Vector3 v2 = { (float)c2.r / 255.f, (float)c2.g / 255.f, (float)c2.b / 255.f };
+        Vector3 v3 = MultiplyRaylibVector3(v1, v2);
+        return UnitTo8BitColor(v3.x, v3.y, v3.z);
+    }
+
+    static Color MultiplyColor(const Color& c, const float& f)
+    {
+        return MultiplyColor(c, Color(f, f, f, 255));
+    }
+
+    static Color AddColor(const Color& c1, const Color& c2)
+    {
+        return Color(
+            (unsigned char)std::min(int(c1.r + c2.r), 255), 
+            (unsigned char)std::min(int(c1.g + c2.g), 255), 
+            (unsigned char)std::min(int(c1.b + c2.b), 255), 
+            (unsigned char)std::min(int(c1.a + c2.a), 255));
+    } 
+
+    static bool TryParse(const vector<string>& params, vector<float>& values)
+    {
+        values.resize(params.size(), 0);
+        for (short i = 0; i < params.size(); i++)
+            if (!TryParse(params[i], values[i])) return false;
+        return true;
     }
 }

@@ -134,6 +134,19 @@ namespace PixelCommandFrontEnd
             var name = wpf_CommandList.SelectedItem.ToString();
             foreach (var parameters in MainWindowBackEnd.commands[name])
                 wpf_CommandViwer.Items.Add(parameters);
+            switch (name)
+            {
+                case "Init":
+                case "ToggleGrid":
+                case "DrawPixel":
+                    wpf_EditCommand.IsEnabled = false;
+                    wpf_DeleteCommand.IsEnabled = false;
+                    break;
+                default:
+                    wpf_EditCommand.IsEnabled = true;
+                    wpf_DeleteCommand.IsEnabled = true;
+                    break;
+            }
         }
 
         private void wpf_EnumList_SelectionChanged(object sender, SelectionChangedEventArgs e)

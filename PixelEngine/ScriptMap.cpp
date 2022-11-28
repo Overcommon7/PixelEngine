@@ -24,5 +24,5 @@ void ScriptMap::Initialize()
 
 void ScriptMap::ShutDown()
 {
-    
+
 }
