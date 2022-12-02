@@ -4,6 +4,7 @@ class VariableEditor
 {
     inline static bool isActive = true;
     inline static vector<Slider> sliders = {};
+
 public:
     VariableEditor() = delete;
     VariableEditor(const VariableEditor& v) = delete;

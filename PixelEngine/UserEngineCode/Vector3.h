@@ -76,9 +76,9 @@ namespace Math
 		Vector3 CrossProduct(const Vector3& w) const
 		{
 			return Vector3(
-				(this->y * w.z) - (w.y * this->z),
-				(this->z * w.x) - (w.z * this->x),
-				(this->x * w.y) - (w.x * this->y));
+				(this->y * w.z) - (this->z * w.y),
+				(this->z * w.x) - (this->x * w.z),
+				(this->x * w.y) - (this->y * w.x));
 		}
 		Vector3 Lerp(const Vector3& vec, const float& t) const
 		{

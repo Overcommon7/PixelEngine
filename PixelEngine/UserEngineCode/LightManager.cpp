@@ -51,7 +51,7 @@ Color LightManager::ComputeLightColor(const Math::Vector3& position, const Math:
 
 	Color color = { 0, 0, 0, 255 };
 	for (auto& light : mLights)
-		color = Utils::AddColor(color, Utils::AddColor(color, light->ComputeLightColor(position, normal)));
+		color = Utils::AddColor(color, light->ComputeLightColor(position, normal));
 
 	return color;
 }

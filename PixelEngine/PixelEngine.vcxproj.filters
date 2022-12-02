@@ -355,5 +355,23 @@
     <Text Include="..\Scripts\ClippedTriangle.txt">
       <Filter>Scripts</Filter>
     </Text>
+    <Text Include="..\Scripts\3d_directional_light.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_lighting.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_point_light.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3DTest.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\NewPixelScript1.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\NewPixelScript2.txt">
+      <Filter>Scripts</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -63,6 +63,7 @@ using std::make_shared;
 
 typedef Vector3 rVector3;
 typedef Vector2 rVector2;
+typedef Color rColor;
 
 #define fs std::filesystem
 

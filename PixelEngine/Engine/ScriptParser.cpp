@@ -215,7 +215,7 @@ vector<string> ScriptParser::GetParams(const string& line)
 vector<Command> ScriptParser::ParseText(const vector<string>& instructions, unordered_map<string, PixelFloat>& variables)
 {
 	commands.clear();
-	//variables.clear();
+	if (!isRefresh) variables.clear();
 	lineNumber = 0;
 	printStatemets = 0;
 	for (const auto& line : instructions)

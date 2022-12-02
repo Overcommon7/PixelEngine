@@ -1,56 +1,64 @@
 #include "pch.h"
 #include "User.h"
 
-void User::GetChar()
+const char User::GetChar()
 {
 	static bool CapsLock = false;
-	if (keyPressed == KEY_BACKSPACE) return;
-	if (keyPressed < 32) return;
-	if (keyPressed > 126) return;
-	if (keyPressed == KEY_CAPS_LOCK)
+	char key = keyPressed;
+	if (key == KEY_BACKSPACE) return '\0';
+	if (key < 32) return '\0';
+	if (key >= KEY_KP_0 && key <= KEY_KP_9)
+	{
+		key -= 300;
+		return key;
+	}
+	if (key > 126) return '\0';
+	if (key == KEY_CAPS_LOCK)
 	{
 		CapsLock = !CapsLock;
-		return;
+		return '\0';
 	}
-	if ((CapsLock || (IsKeyUp(KEY_LEFT_SHIFT) && IsKeyUp(KEY_RIGHT_SHIFT))) && isalpha(keyPressed))
-		keyPressed += ((int)'a' - (int)'A');
-	if ((IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT)) && isdigit(keyPressed))
-		switch (keyPressed)
+	if ((CapsLock || (IsKeyUp(KEY_LEFT_SHIFT) && IsKeyUp(KEY_RIGHT_SHIFT))) && isalpha(key))
+		key += ((int)'a' - (int)'A');
+	if ((IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT)) && isdigit(key))
+		switch (key)
 		{
 		case '0':
-			keyPressed = '(';
+			key = '(';
 			break;
 		case '1':
-			keyPressed = ')';
+			key = ')';
 			break;
 		case '2':
-			keyPressed = '@';
+			key = '@';
 			break;
 		case '3':
-			keyPressed = '#';
+			key = '#';
 			break;
 		case '4':
-			keyPressed = '$';
+			key = '$';
 			break;
 		case '5':
-			keyPressed = '%';
+			key = '%';
 			break;
 		case '6':
-			keyPressed = '^';
+			key = '^';
 			break;
 		case '7':
-			keyPressed = '&';
+			key = '&';
 			break;
 		case '9':
-			keyPressed = '(';
+			key = '(';
 			break;
 		default:
-			return;
+			return '\0';
 			break;
 		}
+	return key;
 }
 
 void User::Update()
 {
-    keyPressed = GetKeyPressed();	
+    keyPressed = GetKeyPressed();
+	
 }

@@ -16,8 +16,8 @@ Color DirectionalLight::ComputeLightColor(const Math::Vector3& pos, const Math::
 	auto half = (dirToLight + dirToEye).Normalize();
 	float falloff = pow(half.DotProduct(normal), MaterialManager::GetMaterialShininess());
 	Color colorSpecular = Utils::MultiplyColor(Utils::MultiplyColor(specular, MaterialManager::GetMaterialSpecular()), std::max(falloff, 0.0f));
-
-	return Utils::AddColor(Utils::AddColor(colorAmbient, colorDiffuse), colorSpecular);
+	Color value = Utils::AddColor(Utils::AddColor(colorAmbient, colorDiffuse), colorSpecular);
+	return value;
 }
 
 void DirectionalLight::SetDirection(const Vector3& dir)

@@ -57,15 +57,27 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
                 if (cullmode != Cullmode::None)
                 {
                     //world
+                    if (i == 8)
+                        int h = 0;
                     for (auto& t : triangle)
-                        t.pos = matWorld.TransformCoord(t.pos);
+                    {
+                        auto pos = matWorld.TransformCoord(t.pos);
+                        t.pos = pos;
+                    }
+                        
 
                     //normal
                     Math::Vector3 faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
                     
                     //color
+                  
                     for (auto& t : triangle)
-                        t.color = Utils::MultiplyColor(t.color, LightManager::ComputeLightColor(t.pos, faceNorm));
+                    {
+                        auto temp = LightManager::ComputeLightColor(t.pos, faceNorm);
+                        auto color = Utils::MultiplyColor(t.color, temp);
+                        t.color = color;
+                    }
+                        
                     
                     //move to NDC
                     for (auto& t : triangle)

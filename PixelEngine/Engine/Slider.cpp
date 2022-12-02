@@ -16,12 +16,20 @@ void Slider::Draw() const
 }
 
 bool Slider::Update()
-{
+{	
 	if (!Mouse::LeftDown())	return false;
 	if (!CheckCollisionPointRec(Mouse::GetPosition(), dragArea)) return false;
 
-	float amount = GetMouseDelta().x * DT * 7.5;
+	float amount = GetMouseDelta().x * DT * increment;
 	ScriptManager::Variables().at(variableName).AddTo(amount);
 	ScriptManager::Variables().at(variableName).ChangeResetValue(ScriptManager::Variables().at(variableName).GetValue());
 	return true;
+}
+
+const string Slider::GetIncrement()
+{
+	string value = to_string(increment);
+	auto pos = value.find('.');
+	if (pos == string::npos) return value;
+	return value.substr(0, pos + 2);
 }

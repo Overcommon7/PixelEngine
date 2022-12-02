@@ -181,12 +181,12 @@
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
@@ -204,12 +204,12 @@
       <PreprocessorDefinitions>DEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
@@ -266,7 +266,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -290,7 +290,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -314,7 +314,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -338,7 +338,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PLATFORM_DESKTOP;GRAPHICS_API_OPENGL_33;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\raylib\src;..\raygui\src;$(ProjectDir)Engine;$(ProjectDir);$(ProjectDir)UserEngineCode;$(ProjectDir)BaseScripts;$(ProjectDir)UserCommands</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -420,7 +420,7 @@
     <ClInclude Include="UserCommands\SetLightAmbient.h" />
     <ClInclude Include="UserCommands\SetLightSpecular.h" />
     <ClInclude Include="UserCommands\AddDirectionalLight.h" />
-     <ClInclude Include="UserCommands\AddPointLight.h" />
+    <ClInclude Include="UserCommands\AddPointLight.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
     <ClInclude Include="UserEngineCode\Camera.h" />
@@ -450,8 +450,14 @@
     <ClInclude Include="UserCommands\SetFillMode.h" />
     <ClInclude Include="UserCommands\SetViewport.h" />
     <ClInclude Include="UserCommands\ShowViewport.h" />
+    <Text Include="..\Scripts\3DTest.txt" />
+    <Text Include="..\Scripts\3d_directional_light.txt" />
+    <Text Include="..\Scripts\3d_lighting.txt" />
+    <Text Include="..\Scripts\3d_point_light.txt" />
     <Text Include="..\Scripts\ClippedTriangle.txt" />
     <Text Include="..\Scripts\Line.txt" />
+    <Text Include="..\Scripts\NewPixelScript1.txt" />
+    <Text Include="..\Scripts\NewPixelScript2.txt" />
     <Text Include="..\Scripts\TestTriangle.txt" />
     <Text Include="..\Scripts\HighResTriangle.txt" />
     <Text Include="..\Scripts\Triangle.txt" />
