@@ -1,10 +1,12 @@
 #pragma once
+#include "Color.h"
+
 class MaterialManager
 {
 
-	inline static Color mAmbient =  WHITE;
-	inline static Color mDiffuse =  WHITE;
-	inline static Color mSpecular = WHITE;
+	inline static Math::Color mAmbient =  WHITE;
+	inline static Math::Color mDiffuse =  WHITE;
+	inline static Math::Color mSpecular = WHITE;
 	inline static float mShininess = 1.0f;
 
 public:
@@ -15,14 +17,14 @@ public:
 
 	static void OnNewFrame();
 
-	static void SetMaterialAmbient(Color ambient);
-	static void SetMaterialDiffuse(Color diffuse);
-	static void SetMaterialSpecular(Color specular);
+	static void SetMaterialAmbient(Math::Color ambient);
+	static void SetMaterialDiffuse(Math::Color diffuse);
+	static void SetMaterialSpecular(Math::Color specular);
 	static void SetMaterialShininess(float shininess);
 
-	static Color GetMaterialAmbient();
-	static Color GetMaterialDiffuse();
-	static Color GetMaterialSpecular();
+	static Math::Color GetMaterialAmbient();
+	static Math::Color GetMaterialDiffuse();
+	static Math::Color GetMaterialSpecular();
 	static float GetMaterialShininess();
 };
 

@@ -6,7 +6,7 @@ class PointLight :
     public Light
 {
 public:
-    virtual Color ComputeLightColor(const Math::Vector3& position, const Math::Vector3& normal) const override;
+    virtual Math::Color ComputeLightColor(const Math::Vector3& position, const Math::Vector3& normal) const override;
 
     void SetPosition(const Vector3& position);
     void SetAttenuation(float constant, float linear, float quadratic);

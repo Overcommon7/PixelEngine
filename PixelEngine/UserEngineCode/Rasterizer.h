@@ -1,5 +1,7 @@
 #pragma once
 #include "Vertex.h"
+#include "Color.h"
+
 enum class FillMode
 {
     Solid,
@@ -20,10 +22,10 @@ public:
     static void DrawLine(const Vertex& v1, const Vertex& v2);
     static void DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& v3);
     static float AreaOfTriangle(const float& a, const float& b, const float& c);
-    static void SetPixelColor(int r, int g, int b, int a = 255);
-    static void SetPixelColor(const Color& c);
+    static void SetPixelColor(const float& r, const float& g, const float& b, const float& a = 1);
+    static void SetPixelColor(const Math::Color& c);
     static void SetFillMode(const FillMode& m) { mode = m; }
-    static Color& GetPixelColor();
+    static Math::Color& GetPixelColor();
     static const FillMode& GetFillMode() { return mode; }
 };
 

@@ -14,17 +14,17 @@ public:
     static void AddDirectionalLight(const Math::Vector3& direction);
     static void AddPointLight(const Math::Vector3& position, const Math::Vector3 attenuation = { 1.f, 0.f, 0.f });
 
-    static void SetLightingAmbient(const Color& ambient);
-    static void SetLightingDiffuse(const Color& diffuse);
-    static void SetLightingSpecular(const Color& specular);
+    static void SetLightingAmbient(const Math::Color& ambient);
+    static void SetLightingDiffuse(const Math::Color& diffuse);
+    static void SetLightingSpecular(const Math::Color& specular);
 
-    static Color ComputeLightColor(const Math::Vector3& position, const Math::Vector3& normal);
+    static Math::Color ComputeLightColor(const Math::Vector3& position, const Math::Vector3& normal);
 
 private:
 
     inline static vector<unique_ptr<Light>> mLights = {};
-    inline static Color mAmbient = WHITE;
-    inline static Color mDiffuse = WHITE;
-    inline static Color mSpecular = WHITE;
+    inline static Math::Color mAmbient = WHITE;
+    inline static Math::Color mDiffuse = WHITE;
+    inline static Math::Color mSpecular = WHITE;
 };
 

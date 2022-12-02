@@ -28,9 +28,6 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{1ee763c1-83ce-42e9-939f-8a47facb9e33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\BaseScripts">
-      <UniqueIdentifier>{a41af273-2022-459e-99a5-d0e5818747de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UserSourceCode">
       <UniqueIdentifier>{13fe11a7-2ec0-4aa6-ac4a-8ccba4a190b5}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,9 @@
     </Filter>
     <Filter Include="Source Files\ApplicationClasses\Headers">
       <UniqueIdentifier>{7f7d462f-f073-4ac8-a44e-078bb28e7399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseCommands">
+      <UniqueIdentifier>{a41af273-2022-459e-99a5-d0e5818747de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +144,7 @@
     <ClCompile Include="UserEngineCode\PointLight.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
+    <ClCompile Include="Color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -192,13 +193,13 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseScripts\Init.h">
-      <Filter>Source Files\BaseScripts</Filter>
+      <Filter>Source Files\BaseCommands</Filter>
     </ClInclude>
     <ClInclude Include="BaseScripts\DrawPixel.h">
-      <Filter>Source Files\BaseScripts</Filter>
+      <Filter>Source Files\BaseCommands</Filter>
     </ClInclude>
     <ClInclude Include="BaseScripts\ToggleGrid.h">
-      <Filter>Source Files\BaseScripts</Filter>
+      <Filter>Source Files\BaseCommands</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PixelFloat.h">
       <Filter>Source Files\ApplicationClasses\Headers</Filter>
@@ -243,7 +244,7 @@
       <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
     <ClInclude Include="UserCommands\ChangeColor.h">
-      <Filter>Source Files\BaseScripts</Filter>
+      <Filter>Source Files\BaseCommands</Filter>
     </ClInclude>
     <ClInclude Include="UserEngineCode\MatrixStack.h">
       <Filter>UserSourceCode\Headers</Filter>
@@ -335,10 +336,11 @@
     <ClInclude Include="UserCommands\AddPointLight.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
+    <ClInclude Include="Color.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="BaseScripts\BaseScriptsSyntax.txt">
-      <Filter>Source Files\BaseScripts</Filter>
+      <Filter>Source Files\BaseCommands</Filter>
     </Text>
     <Text Include="..\Scripts\TestTriangle.txt">
       <Filter>Scripts</Filter>

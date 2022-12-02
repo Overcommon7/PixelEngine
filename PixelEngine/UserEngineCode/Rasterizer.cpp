@@ -79,16 +79,15 @@ vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector2& X, const float y,
 
         if (w1 >= 0 && w2 >= 0 && w3 >= 0)
         {
-            auto c1 = v1.GetColorAsVector3() * w1;
-            auto c2 = v2.GetColorAsVector3() * w2;
-            auto c3 = v3.GetColorAsVector3() * w3;
+            auto c1 = v1.color * w1;
+            auto c2 = v2.color * w2;
+            auto c3 = v3.color * w3;
             float z1 = v1.pos.z * w1;
             float z2 = v2.pos.z * w2;
             float z3 = v3.pos.z * w3;
             float z = z1 + z2 + z3;
             auto color = c1 + c2 + c3;
-            Color c = { (unsigned char)std::min(color.x, 255.f), (unsigned char)std::min(color.y, 255.f), (unsigned char)std::min(color.z, 255.f), 255 };
-            verticies.push_back(Vertex({ x, y, z }, c));
+            verticies.push_back(Vertex({ x, y, z }, color));
         }
     }
     return verticies;
@@ -99,7 +98,7 @@ void Rasterizer::DrawScaledPixel(const Vertex& v)
     if (v.pos.x < 0 || v.pos.x > screenWidth / Draw::GetPixelSize()) return;
     if (v.pos.y < 0 || v.pos.y > screenHeight / Draw::GetPixelSize()) return;
     if (!DepthBuffer::CheckDepthBuffer(v.pos.x, v.pos.y, v.pos.z)) return;
-    Color temp = Draw::GetPixelColor();
+    Math::Color temp = Draw::GetPixelColor();
     Draw::ChangePixelColor(v.color);
     Draw::DrawScaledPixel(v.pos.x, v.pos.y);
     Draw::ChangePixelColor(temp);
@@ -158,18 +157,18 @@ float Rasterizer::AreaOfTriangle(const float& a, const float& b, const float& c)
     return sqrtf(s * ((s - a) * (s - b) * (s - c)));
 }
 
-void Rasterizer::SetPixelColor(int r, int g, int b, int a)
+void Rasterizer::SetPixelColor(const float& r, const float& g, const float& b, const float& a)
 {
-    Color c = { (unsigned char)r, (unsigned char)g, (unsigned char)b, (unsigned char)a };
+    Math::Color c = Math::Color( r, g, b, a );
     Draw::ChangePixelColor(c);
 }
 
-void Rasterizer::SetPixelColor(const Color& c)
+void Rasterizer::SetPixelColor(const Math::Color& c)
 {
     Draw::ChangePixelColor(c);
 }
 
-Color& Rasterizer::GetPixelColor()
+Math::Color& Rasterizer::GetPixelColor()
 {
     return Draw::GetPixelColor();
 }

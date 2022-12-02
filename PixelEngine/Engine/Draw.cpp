@@ -33,7 +33,7 @@ void Draw::DrawScaledPixel(int x, int y)
 	Utils::DrawRectangle(pixel, color);
 }
 
-void Draw::ChangePixelColor(const Color& c)
+void Draw::ChangePixelColor(const Math::Color& c)
 {
 	color = c;
 }

@@ -1,21 +1,22 @@
 #pragma once
 #include "Vector3.h"
+#include "Color.h"
 
 class Light
 {
 public:
 	virtual ~Light() = default;
 
-	virtual Color ComputeLightColor(const Math::Vector3& pos, const Math::Vector3& normal) const = 0;
+	virtual Math::Color ComputeLightColor(const Math::Vector3& pos, const Math::Vector3& normal) const = 0;
 
-	void SetAmbient(const Color& ambient);
-	void SetDiffuse(const Color& diffuse);
-	void SetSpecular(const Color& specular);
+	void SetAmbient(const Math::Color& ambient);
+	void SetDiffuse(const Math::Color& diffuse);
+	void SetSpecular(const Math::Color& specular);
 
 protected:
 
-	Color ambient = WHITE;
-	Color diffuse = WHITE;
-	Color specular = WHITE;
+	Math::Color ambient = WHITE;
+	Math::Color diffuse = WHITE;
+	Math::Color specular = WHITE;
 };
 

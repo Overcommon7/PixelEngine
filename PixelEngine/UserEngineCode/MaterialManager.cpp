@@ -9,17 +9,17 @@ void MaterialManager::OnNewFrame()
 	mShininess = 1.0f;
 }
 
-void MaterialManager::SetMaterialAmbient(Color ambient)
+void MaterialManager::SetMaterialAmbient(Math::Color ambient)
 {
 	mAmbient = ambient;
 }
 
-void MaterialManager::SetMaterialDiffuse(Color diffuse)
+void MaterialManager::SetMaterialDiffuse(Math::Color diffuse)
 {
 	mDiffuse = diffuse;
 }
 
-void MaterialManager::SetMaterialSpecular(Color specular)
+void MaterialManager::SetMaterialSpecular(Math::Color specular)
 {
 	mSpecular = specular;
 }
@@ -29,17 +29,17 @@ void MaterialManager::SetMaterialShininess(float shininess)
 	mShininess = shininess;
 }
 
-Color MaterialManager::GetMaterialAmbient()
+Math::Color MaterialManager::GetMaterialAmbient()
 {
 	return mAmbient;
 }
 
-Color MaterialManager::GetMaterialDiffuse()
+Math::Color MaterialManager::GetMaterialDiffuse()
 {
 	return mDiffuse;
 }
 
-Color MaterialManager::GetMaterialSpecular()
+Math::Color MaterialManager::GetMaterialSpecular()
 {
 	return mSpecular;
 }

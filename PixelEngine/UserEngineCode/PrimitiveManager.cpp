@@ -74,8 +74,7 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
                     for (auto& t : triangle)
                     {
                         auto temp = LightManager::ComputeLightColor(t.pos, faceNorm);
-                        auto color = Utils::MultiplyColor(t.color, temp);
-                        t.color = color;
+                        t.color *= temp;
                     }
                         
                     

@@ -20,7 +20,7 @@ class Clipper
     static inline bool mClipping = true;
     static inline bool displayViewport = false;
     static inline Rectangle viewport = { 0, 0, 0, 0 };
-    static inline Color color = RED;
+    static inline Math::Color color = RED;
 
     static Vertex ComputeIntersection(const Vertex& v1, const Vertex& v2, ClipEdge edge);
     static bool IsInFront(const Vertex& v, ClipEdge edge);
@@ -39,7 +39,7 @@ public:
     static void SetClipping(bool clip) { mClipping = clip; }
     static void SetViewport(const Rectangle& vp) { viewport = vp; }
     static void ShowViewport(bool show) { displayViewport = show; }
-    static void SetViewportColor(const Color& c) { color = c; }
+    static void SetViewportColor(const Math::Color& c) { color = c; }
     //static const Rectangle& GetViewport() { return viewport; }
 };
 

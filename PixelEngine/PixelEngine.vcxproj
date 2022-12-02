@@ -357,6 +357,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Engine\Application.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\ButtonManager.cpp" />
@@ -397,6 +398,7 @@
     <ClInclude Include="BaseScripts\Init.h" />
     <ClInclude Include="BaseScripts\DrawPixel.h" />
     <ClInclude Include="BaseScripts\ToggleGrid.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Engine\Application.h" />
     <ClInclude Include="Engine\Button.h" />
     <ClInclude Include="Engine\ButtonManager.h" />

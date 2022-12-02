@@ -1,16 +1,17 @@
 #pragma once
 #include "Vector3.h"
 #include "Vector2.h"
+#include "Light.h"
 
 class Vertex
 {
 public:
 	Math::Vector3 pos;
-	Color color;
+	Math::Color color;
 
 	Vertex() : pos({}), color(WHITE) {}
-	Vertex(const Math::Vector3& Pos, const Color& c = WHITE) : pos(Pos), color(c) {}
-	Vertex(const Math::Vector2& Pos, const Color& c = WHITE) : pos({ Pos.x, Pos.y, 0 }), color(c) {}
+	Vertex(const Math::Vector3& Pos, const Math::Color& c = WHITE) : pos(Pos), color(c) {}
+	Vertex(const Math::Vector2& Pos, const Math::Color& c = WHITE) : pos({ Pos.x, Pos.y, 0 }), color(c) {}
 
 	Vertex(const Vertex& v) = default;
 	Vertex& operator=(const Vertex& v) = default;

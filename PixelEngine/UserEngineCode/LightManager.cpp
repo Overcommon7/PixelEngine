@@ -30,28 +30,28 @@ void LightManager::AddPointLight(const Math::Vector3& position, const Math::Vect
 	mLights.emplace_back(std::move(light));
 }
 
-void LightManager::SetLightingAmbient(const Color& ambient)
+void LightManager::SetLightingAmbient(const Math::Color& ambient)
 {
 	mAmbient = ambient;
 }
 
-void LightManager::SetLightingDiffuse(const Color& diffuse)
+void LightManager::SetLightingDiffuse(const Math::Color& diffuse)
 {
 	mDiffuse = diffuse;
 }
 
-void LightManager::SetLightingSpecular(const Color& specular)
+void LightManager::SetLightingSpecular(const Math::Color& specular)
 {
 	mSpecular = specular;
 }
 
-Color LightManager::ComputeLightColor(const Math::Vector3& position, const Math::Vector3& normal)
+Math::Color LightManager::ComputeLightColor(const Math::Vector3& position, const Math::Vector3& normal)
 {
 	if (mLights.empty()) return WHITE;
 
-	Color color = { 0, 0, 0, 255 };
+	Math::Color color = { 0, 0, 0, 255 };
 	for (auto& light : mLights)
-		color = Utils::AddColor(color, light->ComputeLightColor(position, normal));
+		color += light->ComputeLightColor(position, normal);
 
 	return color;
 }
