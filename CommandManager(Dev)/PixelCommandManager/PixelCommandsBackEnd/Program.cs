@@ -54,7 +54,7 @@ namespace PixelCommandsBackEnd
                         key = sr.ReadLine();
                         enums.Add(key, new List<string>());
                         string value = sr.ReadLine();
-                        while (value != "SEndLine")
+                        while (value != "SEndLine" && !sr.EndOfStream)
                         {
                             enums[key].Add(value);
                             value = sr.ReadLine();

@@ -78,10 +78,18 @@ void Application::MenuDraw()
 void Application::Logic(ApplicationState& state)
 {
 	bool refresh = VariableEditor::Update();
-	bool scriptReloaded = refresh || User::GetKey() == KEY_F5;
+	bool reload = User::GetKey() == KEY_F5;
+	bool scriptReloaded = refresh || reload;
 	ScriptManager::Update(scriptReloaded, refresh);
+	if (reload) VariableEditor::OnScriptLoaded();
+
 	Events::OnNewFrame();
-	if (User::GetKey() == KEY_F1) ScriptMap::Initialize();
+	if (User::GetKey() == KEY_F1)
+	{
+		launchTextEditor = true;
+		ScriptMap::Initialize();
+		launchTextEditor = false;
+	}
 	if (User::GetKey() == KEY_F10) SaveNewScreenShot();
 	if (User::GetKey() == KEY_F4 && !ScriptManager::Variables().empty()) VariableEditor::ToggleActive();
 	if (User::GetKey() != KEY_ESCAPE) return;
@@ -99,7 +107,7 @@ void Application::Logic(ApplicationState& state)
 void Application::Draw()
 {
 	ScriptManager::RunScripts();
-	Clipper::Draw();
+	Events::OnDrawFrame();
 	VariableEditor::Draw();
 }
 

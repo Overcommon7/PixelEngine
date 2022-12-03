@@ -1,9 +1,1 @@
-Fillmode
-wireframe
-solid
-SEndLine
-Topology
-point
-line
-triangle
-SEndLine
+

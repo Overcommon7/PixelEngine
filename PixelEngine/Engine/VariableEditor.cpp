@@ -8,12 +8,14 @@ void VariableEditor::Draw()
 	if (!isActive) return;
 	for (const auto& slider : sliders)
 		slider.Draw();
-	DrawTextEx(engineFont, ("Scroll Speed: " + Slider::GetIncrement()).c_str(), { screenWidth - 100.f, 10 }, 12.f, 1.f, WHITE);
+	DrawTextEx(engineFont, ("Scroll Speed: " + Slider::GetIncrement()).c_str(), { screenWidth - 110.f, 10.f }, 12.f, 1.f, WHITE);
 }
 
 bool VariableEditor::Update()
-{
+{	
 	if (!isActive) return false;
+	isActive = !sliders.empty();
+
 	bool noScroll = false;
 	if (IsKeyDown(KEY_LEFT_SHIFT) && abs(Mouse::GetMouseWheel()) > 0)
 	{

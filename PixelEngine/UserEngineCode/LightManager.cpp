@@ -49,7 +49,7 @@ Math::Color LightManager::ComputeLightColor(const Math::Vector3& position, const
 {
 	if (mLights.empty()) return WHITE;
 
-	Math::Color color = { 0, 0, 0, 255 };
+	Math::Color color = { 0, 0, 0, 1 };
 	for (auto& light : mLights)
 		color += light->ComputeLightColor(position, normal);
 

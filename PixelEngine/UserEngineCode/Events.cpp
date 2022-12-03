@@ -23,3 +23,8 @@ void Events::OnNewFrame()
 	DepthBuffer::Update();
 	LightManager::OnNewFrame();
 }
+
+void Events::OnDrawFrame()
+{
+	Clipper::Draw();
+}

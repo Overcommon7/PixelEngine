@@ -19,7 +19,7 @@
         <ListBox x:Name="wpf_EnumViewer" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="313,443,10,32" SelectionChanged="wpf_EnumViewer_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Command Overlo"/><Run Language="en-ca" Text="a"/><Run Text="ds "/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="313,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.127,0.462"><Run Language="en-ca" Text="Enum Types"/></TextBlock>
-        <Button x:Name="wpf_DeleteCommand" Content="Delete" HorizontalAlignment="Left" Margin="213,30,0,0" VerticalAlignment="Top" Width="71" />
+        <Button x:Name="wpf_DeleteCommand" Content="Delete" HorizontalAlignment="Left" Margin="213,30,0,0" VerticalAlignment="Top" Width="71" Click="wpf_DeleteCommand_Click" />
         <Button x:Name="wpf_DeleteEnum" Content="Delete" HorizontalAlignment="Left" Margin="515,30,0,0" VerticalAlignment="Top" Width="72" Click="wpf_DeleteEnum_Click" />
         <TextBlock HorizontalAlignment="Left" Margin="10,60,0,0" TextWrapping="Wrap" Text="Search Command" VerticalAlignment="Top" RenderTransformOrigin="0.518,0.542" FontSize="8"/>
         <TextBlock HorizontalAlignment="Left" Margin="313,57,0,0" TextWrapping="Wrap" Text="Search Enum" VerticalAlignment="Top" RenderTransformOrigin="0.518,0.542" FontSize="8"/>

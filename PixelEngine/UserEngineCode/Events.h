@@ -9,5 +9,6 @@ public:
     static void OnScriptLoaded();
     static void OnScriptInit();
     static void OnNewFrame();
+    static void OnDrawFrame();
 };
 

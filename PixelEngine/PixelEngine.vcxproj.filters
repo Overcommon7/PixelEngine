@@ -144,7 +144,9 @@
     <ClCompile Include="UserEngineCode\PointLight.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
-    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\ApplicationClasses\CPPS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -336,7 +338,9 @@
     <ClInclude Include="UserCommands\AddPointLight.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h" />
+    <ClInclude Include="Color.h">
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BaseScripts\BaseScriptsSyntax.txt">

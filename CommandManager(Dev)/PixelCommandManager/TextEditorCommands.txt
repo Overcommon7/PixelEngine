@@ -1,4 +1,3 @@
-BeginDraw(Topology)
 ChangeColor(color)
 ChangeColor(float, float, float)
 DrawPixel(float, float)

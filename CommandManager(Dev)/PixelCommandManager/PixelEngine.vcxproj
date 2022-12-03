@@ -415,7 +415,6 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UserCommands\BeginDraw.h" />
     <ClInclude Include="UserCommands\ChangeColor.h" />
     <ClInclude Include="UserCommands\EndDraw.h" />
     <ClInclude Include="UserCommands\SetClipping.h" />

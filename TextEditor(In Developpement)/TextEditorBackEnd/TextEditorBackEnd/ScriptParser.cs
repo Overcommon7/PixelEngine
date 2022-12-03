@@ -30,7 +30,7 @@ namespace TextEditorBackEnd
                         enums.Add(key, new List<string>());
                         bools.Add(key, false);
                         string value = sr.ReadLine();
-                        while (value != "SEndLine")
+                        while (value != "SEndLine" && !sr.EndOfStream)
                         {
                             enums[key].Add(value);
                             value = sr.ReadLine();

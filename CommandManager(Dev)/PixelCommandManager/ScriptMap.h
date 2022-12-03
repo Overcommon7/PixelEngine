@@ -16,7 +16,6 @@
 #include "UserCommands/SetViewport.h"
 #include "UserCommands/SetFillMode.h"
 #include "UserCommands/EndDraw.h"
-#include "UserCommands/BeginDraw.h"
 #include "UserCommands/ChangeColor.h"
 #include "DrawPixel.h"
 #include "ToggleGrid.h"
@@ -43,7 +42,6 @@ private:
     inline static const SETVIEWPORT setviewport = {};
     inline static const SETFILLMODE setfillmode = {};
     inline static const ENDDRAW enddraw = {};
-    inline static const BEGINDRAW begindraw = {};
     inline static const CHANGECOLOR changecolor = {};
     inline static const DRAWPIXEL drawpixel = {};
     inline static const ToggleGrid togglegrid = {};
@@ -56,7 +54,6 @@ private:
         { togglegrid.GetName(), &togglegrid },
         { drawpixel.GetName(), &drawpixel },
         { changecolor.GetName(), &changecolor },
-        { begindraw.GetName(), &begindraw },
         { enddraw.GetName(), &enddraw },
         { setfillmode.GetName(), &setfillmode },
         { setviewport.GetName(), &setviewport },
@@ -80,7 +77,6 @@ public:
     static void Initialize();
     static void ShutDown();
 };
-
 
 
 
