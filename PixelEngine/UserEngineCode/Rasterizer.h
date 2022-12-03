@@ -8,6 +8,13 @@ enum class FillMode
     Wireframe
 };
 
+enum class ShadeMode
+{
+    Flat,
+    Gouraud,
+    Phong
+};
+
 class Rasterizer
 {
     Rasterizer() = delete;
@@ -16,6 +23,8 @@ class Rasterizer
     static void PlotLineHigh(const Vertex& start, const Vertex& end);
     static void PlotLineLow(const Vertex& start, const Vertex& end);
     static vector<Vertex> FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3);
+
+    static inline ShadeMode shadeMode = ShadeMode::Gouraud;
     static inline FillMode mode = FillMode::Solid;
 public:
     static void DrawScaledPixel(const Vertex& v);
@@ -27,5 +36,7 @@ public:
     static void SetFillMode(const FillMode& m) { mode = m; }
     static Math::Color& GetPixelColor();
     static const FillMode& GetFillMode() { return mode; }
+    static void SetShadeMode(const ShadeMode& m) { shadeMode = m; }
+    static const ShadeMode& GetShadeMode() { return shadeMode; }
 };
 

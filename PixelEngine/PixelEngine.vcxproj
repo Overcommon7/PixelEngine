@@ -372,6 +372,7 @@
     <ClCompile Include="Engine\System.cpp" />
     <ClCompile Include="Engine\User.cpp" />
     <ClCompile Include="Engine\VariableEditor.cpp" />
+    <ClCompile Include="ModelCache.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ScriptMap.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -385,6 +386,7 @@
     <ClCompile Include="UserEngineCode\MaterialManager.cpp" />
     <ClCompile Include="UserEngineCode\Matrix4.cpp" />
     <ClCompile Include="UserEngineCode\MatrixStack.cpp" />
+    <ClCompile Include="UserEngineCode\Model.cpp" />
     <ClCompile Include="UserEngineCode\PointLight.cpp" />
     <ClCompile Include="UserEngineCode\PrimitiveManager.cpp" />
     <ClCompile Include="UserEngineCode\Rasterizer.cpp" />
@@ -415,6 +417,7 @@
     <ClInclude Include="Engine\User.h" />
     <ClInclude Include="Engine\Utilities.h" />
     <ClInclude Include="Engine\VariableEditor.h" />
+    <ClInclude Include="ModelCache.h" />
     <ClInclude Include="UserCommands\AddVertex.h" />
     <ClInclude Include="UserCommands\EnableDepth.h" />
     <ClInclude Include="UserCommands\SetCullMode.h" />
@@ -423,6 +426,7 @@
     <ClInclude Include="UserCommands\SetLightSpecular.h" />
     <ClInclude Include="UserCommands\AddDirectionalLight.h" />
     <ClInclude Include="UserCommands\AddPointLight.h" />
+    <ClInclude Include="UserCommands\AddModel.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
     <ClInclude Include="UserEngineCode\Camera.h" />
@@ -435,6 +439,7 @@
     <ClInclude Include="UserEngineCode\MaterialManager.h" />
     <ClInclude Include="UserEngineCode\Matrix4.h" />
     <ClInclude Include="UserEngineCode\MatrixStack.h" />
+    <ClInclude Include="UserEngineCode\Model.h" />
     <ClInclude Include="UserEngineCode\PointLight.h" />
     <ClInclude Include="UserEngineCode\PrimitiveManager.h" />
     <ClInclude Include="UserEngineCode\Rasterizer.h" />
@@ -456,6 +461,7 @@
     <Text Include="..\Scripts\3d_directional_light.txt" />
     <Text Include="..\Scripts\3d_lighting.txt" />
     <Text Include="..\Scripts\3d_point_light.txt" />
+    <Text Include="..\Scripts\3d_shading.txt" />
     <Text Include="..\Scripts\ClippedTriangle.txt" />
     <Text Include="..\Scripts\Line.txt" />
     <Text Include="..\Scripts\NewPixelScript1.txt" />

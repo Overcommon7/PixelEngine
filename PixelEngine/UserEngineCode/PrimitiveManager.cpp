@@ -63,6 +63,9 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
                     {
                         auto pos = matWorld.TransformCoord(t.pos);
                         t.pos = pos;
+                        t.normal = matWorld.TransformCoord(t.normal);
+                        t.worldNormal = t.normal;
+                        t.worldPos = t.pos;
                     }
                         
 
@@ -70,7 +73,6 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
                     Math::Vector3 faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
                     
                     //color
-                  
                     for (auto& t : triangle)
                     {
                         auto temp = LightManager::ComputeLightColor(t.pos, faceNorm);

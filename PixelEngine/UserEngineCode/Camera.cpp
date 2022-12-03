@@ -30,7 +30,7 @@ void PixelCamera::SetFOV(const float& fov)
 
 Matrix4 PixelCamera::GetViewMatrix()
 {
-	Math::Vector3 look = direction;
+	Math::Vector3 look = direction.Normalize();
 	Math::Vector3 right = Math::Vector3(0, 1, 0).CrossProduct(look).Normalize();
 	Math::Vector3 up = look.CrossProduct(right);
 	

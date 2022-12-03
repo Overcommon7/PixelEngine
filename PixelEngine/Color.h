@@ -38,6 +38,9 @@ namespace Math
 		void operator*=(const float& c);
 		void operator-=(const float& c);
 		void operator+=(const float& c);
+
+		Color Lerp(const Color& c, const float& t) const;
+
 	};
 }
 

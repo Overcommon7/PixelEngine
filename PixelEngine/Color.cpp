@@ -187,4 +187,12 @@ namespace Math
 		if (c < 1.01f) *this += Color(c, c, c);
 		else *this += Color(c * 255.f, c * 255.f, c * 255.f);
 	}
+	Color Color::Lerp(const Color& c, const float& t) const
+	{
+		return Color(
+			std::lerp(r, c.r, t),
+			std::lerp(g, c.g, t),
+			std::lerp(b, c.b, t)
+		);
+	}
 }

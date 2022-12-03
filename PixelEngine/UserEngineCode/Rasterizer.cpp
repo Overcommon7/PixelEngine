@@ -53,7 +53,7 @@ void Rasterizer::PlotLineLow(const Vertex& start, const Vertex& end)
     {
         float t = (x - start.pos.x) / (end.pos.x - start.pos.x);
         float z = std::lerp(start.pos.x, end.pos.x, t);
-        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, z), Utils::LerpColor(start.color, end.color, t)));        
+        Rasterizer::DrawScaledPixel(Vertex(Math::Vector3(x, y, z), Utils::LerpColor(start.color, end.color, t)));
         if (D > 0)
         {
             y = y + yi;

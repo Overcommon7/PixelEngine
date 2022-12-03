@@ -147,6 +147,12 @@
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
+    <ClCompile Include="UserEngineCode\Model.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelCache.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -341,6 +347,15 @@
     <ClInclude Include="Color.h">
       <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="UserEngineCode\Model.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddModel.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelCache.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BaseScripts\BaseScriptsSyntax.txt">
@@ -377,6 +392,9 @@
       <Filter>Scripts</Filter>
     </Text>
     <Text Include="..\Scripts\NewPixelScript2.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_shading.txt">
       <Filter>Scripts</Filter>
     </Text>
   </ItemGroup>

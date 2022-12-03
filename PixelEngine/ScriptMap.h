@@ -26,6 +26,7 @@
 #include "UserCommands/EndDraw.h"
 #include "UserCommands/BeginDraw.h"
 #include "UserCommands/ChangeColor.h"
+#include "UserCommands/AddModel.h"
 #include "DrawPixel.h"
 #include "ToggleGrid.h"
 #include "Init.h"
@@ -34,6 +35,7 @@
 class ScriptMap
 {
 private:
+    inline static const ADDMODEL addmodel = {};
     inline static const ADDPOINTLIGHT addpointlight = {};
     inline static const ADDDIRECTIONALLIGHT adddirectionallight = {};
     inline static const SETLIGHTSPECULAR setlightspecular = {};
@@ -65,8 +67,9 @@ private:
     inline static const Init init = {};
 
     //inline static const string file = "TextEditorCommands.txt";
-	inline const static unordered_map<string, const Commands*> scripts =
-	{
+    inline const static unordered_map<string, const Commands*> scripts =
+    {
+
         { addvertex.GetName(), &addvertex},
         { init.GetName(), &init},
         { togglegrid.GetName(), &togglegrid },
@@ -96,6 +99,7 @@ private:
         { setlightspecular.GetName(), &setlightspecular },
         { adddirectionallight.GetName(), &adddirectionallight },
         { addpointlight.GetName(), &addpointlight },
+        { addmodel.GetName(), &addmodel },
 	};
 public:
 	static void InvokeScript(const string& s, const vector<string>& params);

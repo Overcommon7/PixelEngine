@@ -62,7 +62,7 @@ void ScriptParser::LoadCommand(string line, unordered_map<string, PixelFloat>& v
 				it = substr.erase(it);
 			if (substr.empty()) continue;
 
-			if (substr.find_first_of("/*-+", 1) != string::npos)
+			if (substr.find_first_of("/*-+", 1) != string::npos && substr.find(".obj") == string::npos)
 			{
 				float total = GetTotal("", variables, GetParams(substr), true, true);
 				if (total != NAN)
