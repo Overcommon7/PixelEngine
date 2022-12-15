@@ -390,6 +390,8 @@
     <ClCompile Include="UserEngineCode\PointLight.cpp" />
     <ClCompile Include="UserEngineCode\PrimitiveManager.cpp" />
     <ClCompile Include="UserEngineCode\Rasterizer.cpp" />
+    <ClCompile Include="UserEngineCode\Texture.cpp" />
+    <ClCompile Include="UserEngineCode\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -443,6 +445,8 @@
     <ClInclude Include="UserEngineCode\PointLight.h" />
     <ClInclude Include="UserEngineCode\PrimitiveManager.h" />
     <ClInclude Include="UserEngineCode\Rasterizer.h" />
+    <ClInclude Include="UserEngineCode\Texture.h" />
+    <ClInclude Include="UserEngineCode\TextureCache.h" />
     <ClInclude Include="UserEngineCode\Vector2.h" />
     <ClInclude Include="UserEngineCode\Vector3.h" />
     <ClInclude Include="UserEngineCode\Vertex.h" />

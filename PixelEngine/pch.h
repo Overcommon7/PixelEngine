@@ -18,6 +18,9 @@
 #include <mutex>
 #include <memory>
 #include <set>
+#include <execution>
+#include <numeric>
+#include <mutex>
 #include "raylib.h"
 
 #pragma endregion SDL
@@ -68,3 +71,4 @@ typedef Color rColor;
 #define fs std::filesystem
 
 enum class ApplicationState {TitleScreen, Scripting};
+#include "Color.h"

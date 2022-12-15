@@ -4,6 +4,7 @@
 #include "Draw.h"
 #include "Utilities.h"
 #include "DepthBuffer.h"
+#include "TextureCache.h"
 
 void Rasterizer::PlotLineHigh(const Vertex& start, const Vertex& end)
 {
@@ -63,10 +64,8 @@ void Rasterizer::PlotLineLow(const Vertex& start, const Vertex& end)
     }
 }
 
-vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3)
+void Rasterizer::FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3)
 {
-    vector<Vertex> verticies;
-    verticies.reserve(X.y);
     for (float x = X.x; x < X.x + X.y; x++)
     {
         float wd = ((v2.pos.y - v3.pos.y) * (v1.pos.x - v3.pos.x)) + ((v3.pos.x - v2.pos.x) * (v1.pos.y - v3.pos.y));
@@ -87,10 +86,11 @@ vector<Vertex> Rasterizer::FillBetweenVerticies(const Vector2& X, const float y,
             float z3 = v3.pos.z * w3;
             float z = z1 + z2 + z3;
             auto color = c1 + c2 + c3;
-            verticies.push_back(Vertex({ x, y, z }, color));
+            m.lock();
+            pixels.push_back(Vertex({ x, y, z }, color));
+            m.unlock();
         }
     }
-    return verticies;
 }
 
 void Rasterizer::DrawScaledPixel(const Vertex& v)
@@ -129,20 +129,17 @@ void Rasterizer::DrawTriangle(const Vertex& v1, const Vertex& v2, const Vertex& 
 
     if (mode == FillMode::Solid)
     {
-        vector<future<vector<Vertex>>> futures;
-        futures.reserve(rec.height);
-        for (float y = rec.y; y < rec.y + rec.height; y++)
-            futures.push_back(async(FillBetweenVerticies, Vector2(rec.x, rec.width), y, v1, v2, v3));
+        vector<float> Ys(rec.height);
+        pixels.clear();
+        if (pixels.capacity() < rec.width * rec.height * 0.5f);
+        pixels.reserve(rec.width * rec.height * 0.5f);
 
-        for (const auto& f : futures)
-            if (f.valid()) f.wait();
-
-        for (auto& fut : futures)
-            for (const auto& f : fut.get())
-                DrawScaledPixel(f);
-
-        futures.clear();
-        futures.shrink_to_fit();
+        std::iota(Ys.begin(), Ys.end(), rec.y);
+        std::for_each(std::execution::par, Ys.begin(), Ys.end(), [&v1, &v2, &v3, &rec](const float& y) {
+            FillBetweenVerticies(Vector2(rec.x, rec.width), y, v1, v2, v3);
+            });
+        for (const auto& pix : pixels)
+            DrawScaledPixel(pix);
     }
 
     DrawLine(v1, v2);

@@ -46,46 +46,56 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
         const Matrix4 matView = PixelCamera::GetViewMatrix();
         const Matrix4 matProj = PixelCamera::GetProjectionMatrix();
         const Matrix4 matScreen = GetScreenTransform();
-        const Matrix4 ndcSpace = matView * matProj;
-        const Matrix4 matFinal = ndcSpace * matScreen;
+        const Matrix4 matFinal = matProj * matScreen;
 
         for (int i = 2; i < vertexBuffer.size(); i += 3)
         {
             vector<Vertex> triangle = { vertexBuffer[i - 2], vertexBuffer[i - 1], vertexBuffer[i] };
             if (applyTransform)
             {
+                if (triangle.front().normal.MagnitudeSquared() < 0.5f)
+                {
+                    Math::Vector3 faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
+                    for (auto& t : triangle)
+                        t.normal = faceNorm;
+                }
+
+                //world
+                for (auto& t : triangle)
+                {
+                    t.pos = matWorld.TransformCoord(t.pos);
+                    t.normal = matWorld.TransformNormal(t.normal);
+                    t.worldNormal = t.normal;
+                    t.worldPos = t.pos;
+                }
+
+                //color
+                for (auto& t : triangle)
+                {
+                     t.color *= LightManager::ComputeLightColor(t.pos, t.normal);
+                }
+
+                if (mCorrectUV && triangle.front().color.b < 0.0f)
+                    for (auto& v : triangle)
+                    {
+                        v.color.r /= v.pos.z;
+                        v.color.g /= v.pos.z;
+                        v.color.a = 1.0f / v.pos.z;
+                    }
+
                 if (cullmode != Cullmode::None)
                 {
-                    //world
-                    if (i == 8)
-                        int h = 0;
-                    for (auto& t : triangle)
-                    {
-                        auto pos = matWorld.TransformCoord(t.pos);
-                        t.pos = pos;
-                        t.normal = matWorld.TransformCoord(t.normal);
-                        t.worldNormal = t.normal;
-                        t.worldPos = t.pos;
-                    }
-                        
 
-                    //normal
-                    Math::Vector3 faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
-                    
-                    //color
-                    for (auto& t : triangle)
-                    {
-                        auto temp = LightManager::ComputeLightColor(t.pos, faceNorm);
-                        t.color *= temp;
-                    }
-                        
-                    
                     //move to NDC
                     for (auto& t : triangle)
-                        t.pos = ndcSpace.TransformCoord(t.pos);
+                    {
+                        t.pos = matProj.TransformCoord(t.pos);
+                        t.normal = matProj.TransformNormal(t.normal);
+                    }
+                       
 
                     //get facing for CULL
-                    faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
+                    auto faceNorm = (triangle[1].pos - triangle[0].pos).CrossProduct(triangle[2].pos - triangle[0].pos);
 
                     if (cullmode == Cullmode::Back && faceNorm.z > 0.0f) continue;
                     if (cullmode == Cullmode::Front && faceNorm.z < 0.0f) continue;
@@ -114,6 +124,12 @@ bool PrimitiveManager::EndDraw(bool applyTransform)
     mApplyTransform = false;
     vertexBuffer.clear();
     return true;
+}
+
+void PrimitiveManager::OnNewFrame()
+{
+    mCorrectUV = true;
+    cullmode = Cullmode::Back;
 }
 
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector3.h"
-#include "Color.h"
+
 
 class Light
 {

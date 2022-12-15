@@ -25,6 +25,7 @@ class PrimitiveManager
     static inline Topolgy mTopology = Topolgy::Triangle;
     static inline bool mBeginDraw = false;
     inline static bool mApplyTransform = false;
+    inline static bool mCorrectUV = false;
     inline static Cullmode cullmode = Cullmode::None;
     static Matrix4 GetScreenTransform();
 
@@ -41,5 +42,6 @@ public:
     }
     static void SetCullmode(const Cullmode& cm) { cullmode = cm; }
     static bool EndDraw(bool applyTransform = false);
+    static void OnNewFrame();
 };
 

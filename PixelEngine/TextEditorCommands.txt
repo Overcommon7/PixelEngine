@@ -1,5 +1,5 @@
 AddDirectionalLight(float, float, float)
-AddModel
+AddModel(string)
 AddPointLight(float, float, float, float, float, float)
 AddPointLight(float, float, float)
 AddVertex(float, float, color)

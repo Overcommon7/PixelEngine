@@ -400,6 +400,10 @@
     <ClInclude Include="Engine\Utilities.h" />
      <ClInclude Include="UserCommands\Vertex.h" />
      <ClInclude Include="UserCommands\Vertex.h" />
+     <ClInclude Include="UserCommands\PopMatrix.h" />
+     <ClInclude Include="UserCommands\ChangePixelColor.h" />
+     <ClInclude Include="UserCommands\AddModel.h" />
+     <ClInclude Include="UserCommands\TestCmd.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
     <ClInclude Include="UserEngineCode\Camera.h" />
@@ -415,7 +419,6 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UserCommands\ChangeColor.h" />
     <ClInclude Include="UserCommands\EndDraw.h" />
     <ClInclude Include="UserCommands\SetClipping.h" />
     <ClInclude Include="UserCommands\SetFillMode.h" />
@@ -427,11 +430,9 @@
     <Text Include="..\Scripts\HighResTriangle.txt" />
     <Text Include="..\Scripts\Triangle.txt" />
     <ClInclude Include="UserCommands\PushTranslation.h" />
-    <ClInclude Include="UserCommands\PushRotationX.h" />
     <ClInclude Include="UserCommands\PushRotationY.h" />
     <ClInclude Include="UserCommands\PushRotationZ.h" />
     <ClInclude Include="UserCommands\PushScaling.h" />
-    <ClInclude Include="UserCommands\PopMatrix.h" />
   <ClInclude Include="UserCommands\SetCameraPosition.h" />
   <ClInclude Include="UserCommands\SetCameraDirection.h" />
   <ClInclude Include="UserCommands\SetNearPlane.h" />

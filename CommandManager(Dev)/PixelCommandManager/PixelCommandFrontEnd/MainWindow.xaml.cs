@@ -139,6 +139,7 @@ namespace PixelCommandFrontEnd
                 case "Init":
                 case "ToggleGrid":
                 case "DrawPixel":
+                case "Print":
                     wpf_EditCommand.IsEnabled = false;
                     wpf_DeleteCommand.IsEnabled = false;
                     break;

@@ -5,6 +5,7 @@
 #include "MatrixStack.h"
 #include "Clipper.h"
 #include "LightManager.h"
+#include "PrimitiveManager.h"
 
 
 void Events::OnScriptLoaded()
@@ -22,6 +23,7 @@ void Events::OnNewFrame()
 	MatrixStack::Update();
 	DepthBuffer::Update();
 	LightManager::OnNewFrame();
+	PrimitiveManager::OnNewFrame();
 }
 
 void Events::OnDrawFrame()

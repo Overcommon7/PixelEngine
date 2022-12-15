@@ -22,6 +22,7 @@ namespace PixelCommandFrontEnd
             Load(ref param);
             wpf_CommandName.Text = name;            
             oldName = name;
+            add = false;
         }
 
         public EditCommandWindow()
@@ -53,9 +54,11 @@ namespace PixelCommandFrontEnd
             wpf_ParamterType.Items.Add("Int");
             wpf_ParamterType.Items.Add("Bool");
             wpf_ParamterType.Items.Add("Color");
+            wpf_ParamterType.Items.Add("String");
             foreach (var e in Enums.enums)
             {
                 var name = e.Key;
+                if (string.IsNullOrEmpty(name)) continue;
                 var c = char.ToUpper(name[0]);
                 if (name.Length > 1) name = c + name.Substring(1);
                 wpf_ParamterType.Items.Add(name); ;
@@ -106,7 +109,7 @@ namespace PixelCommandFrontEnd
         {
             var contents = FileManager.LoadFile(MainWindow.CommandFilePath);
             var upper = oldName.ToUpper();
-            if (!add)
+            if (!add && upper != wpf_CommandName.Text.ToUpper())
             {
                 for (int i = 0; i < contents.Count;)
                 {
@@ -147,7 +150,7 @@ namespace PixelCommandFrontEnd
                 EditWindowBackEnd.EditCommand(oldName, wpf_CommandName.Text);
                 contents = new List<string>(hs);
                 FileManager.SaveFile(ref contents, MainWindow.CommandFilePath);
-                MainWindow.RemoveCommand(oldName, sender, e);
+                if (upper != wpf_CommandName.Text.ToUpper()) MainWindow.RemoveCommand(oldName, sender, e);
             }
             Close();
             return;

@@ -86,6 +86,12 @@ namespace TextEditorFrontEnd
             Closed += MainWindow_Closed;
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            System.Windows.Application.Current.Shutdown();   
+        }
+
         private void Rename(object sender, RoutedEventArgs e)
         {
             if (renamePanel.IsActive) return;
@@ -105,9 +111,9 @@ namespace TextEditorFrontEnd
             var bracketIdx = line.IndexOf('(');
             if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
             {
-                int idx = TextField.Text.IndexOf(line);
-                TextField.Text = TextField.Text.Insert(idx + 1, "\n" + value);
-                TextField.SelectionStart = idx + value.Length + 1;
+                int idx = TextField.GetCharacterIndexFromLineIndex(lineIdx);
+                TextField.Text = TextField.Text.Insert(idx, value);
+                TextField.SelectionStart = idx + value.Length;
             }
             else if (bracketIdx != -1)
             {
@@ -121,9 +127,10 @@ namespace TextEditorFrontEnd
             else
             {
                 int idx = TextField.GetCharacterIndexFromLineIndex(lineIdx);
-                TextField.Text = TextField.Text.Remove(idx, line.Length - 1);
-                TextField.Text = TextField.Text.Insert(idx, value);
+                TextField.Select(idx, line.Length);
+                TextField.SelectedText = value + "\r\n";
                 TextField.SelectionStart = idx + value.Length;
+                TextField.SelectionLength = 0;
             }
         }
 
@@ -150,6 +157,7 @@ namespace TextEditorFrontEnd
             Closing -= MainWindow_Closing;
             Closed -= MainWindow_Closed;
             TextField.LostFocus -= TextField_LostFocus;
+            
 
             if (!saveFullFile && !saveOnExit) return;
 
@@ -207,7 +215,7 @@ namespace TextEditorFrontEnd
                     if (addedLength > 10) continue;
                     var text = tb.Text.Substring(offset, addedLength);
                     tab = text.Contains('\t');                    
-                    if (text.Contains('\n'))
+                    if (text.Contains('('))
                     {
                         variables = ScriptParser.GetVariables(GetFormattedString(TextField.Text));
                         break;
@@ -376,7 +384,7 @@ namespace TextEditorFrontEnd
             ErrorList.UnselectAll();
             ErrorList.ReleaseMouseCapture();
             TextField.Focus();
-            TextField.Select(TextField.Text.IndexOf(text), text.Length - 2);    
+            TextField.Select(TextField.GetCharacterIndexFromLineIndex(err.ErrorLine - 1), text.Length - 2);    
         }
     }
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include "Vertex.h"
-#include "Color.h"
+
 
 enum class FillMode
 {
@@ -22,10 +22,12 @@ class Rasterizer
     Rasterizer& operator=(const Rasterizer& p) = delete;
     static void PlotLineHigh(const Vertex& start, const Vertex& end);
     static void PlotLineLow(const Vertex& start, const Vertex& end);
-    static vector<Vertex> FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3);
+    static void FillBetweenVerticies(const Vector2& X, const float y, const Vertex& v1, const Vertex& v2, const Vertex& v3);
 
     static inline ShadeMode shadeMode = ShadeMode::Gouraud;
     static inline FillMode mode = FillMode::Solid;
+    static inline mutex m = {};
+    static inline vector<Vertex> pixels = {};
 public:
     static void DrawScaledPixel(const Vertex& v);
     static void DrawLine(const Vertex& v1, const Vertex& v2);

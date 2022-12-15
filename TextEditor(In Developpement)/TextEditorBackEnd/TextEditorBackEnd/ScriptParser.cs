@@ -27,6 +27,7 @@ namespace TextEditorBackEnd
                     while (!sr.EndOfStream)
                     {
                         key = sr.ReadLine();
+                        if (string.IsNullOrEmpty(key)) continue;
                         enums.Add(key, new List<string>());
                         bools.Add(key, false);
                         string value = sr.ReadLine();
@@ -81,6 +82,7 @@ namespace TextEditorBackEnd
     public static class ScriptParser
     {
         static Dictionary<string, List<List<string>>> commands = new Dictionary<string, List<List<string>>>();
+        static Dictionary<string, List<List<string>>> lowerCommands = new Dictionary<string, List<List<string>>>();
         static HashSet<Error> flaggedLines = new HashSet<Error>();
         static List<string> errorlessContents = new List<string>();
         static HashSet<string> variables = new HashSet<string>();
@@ -119,6 +121,7 @@ namespace TextEditorBackEnd
         public static void LoadCommands(string filepath)
         {
             commands = new Dictionary<string, List<List<string>>>();
+            lowerCommands = new Dictionary<string, List<List<string>>>();
             var temp = FileManager.LoadFile(filepath).ToHashSet();            
             foreach (var str in temp)
             {
@@ -132,6 +135,10 @@ namespace TextEditorBackEnd
                 if (bracketIndex == -1) commands[name].Add(new List<string>());
                 else commands[name].Add(new List<string>(str.Substring(bracketIndex + 1, str.Length - bracketIndex - 2).Split(',', StringSplitOptions.TrimEntries)));
             }
+
+            foreach (var command in commands)
+                lowerCommands.Add(command.Key.ToLower(), command.Value);
+
         }
 
         public static void LoadEnums(string filepath)
@@ -230,8 +237,10 @@ namespace TextEditorBackEnd
                             continue;
                         }
 
+                        
                         for (int i = 0; i < parameters.Length; i++)
                         {
+                            if (commands[commandName][idx][i] == "string") continue;
                             int k = -1;
                             if (parameters[i].Length >= 2)
                                 k = parameters[i].IndexOfAny(operators, 1);
@@ -266,6 +275,8 @@ namespace TextEditorBackEnd
                                     break;
                                 case "color":
                                     if (!colors.Contains(parameters[i].ToUpper())) AddError($"Parameter {i + 1} of command {commandName} takes in type: Color");
+                                    break;
+                                case "string":
                                     break;
                                 default:
                                     if (enums.enums.ContainsKey(commands[commandName][idx][i]))
@@ -452,6 +463,27 @@ namespace TextEditorBackEnd
             return result;
         }
 
+        struct Suggestion
+        {
+            public int weight;
+            public string text;
+
+            public Suggestion(int weight, string text)
+            {
+                this.weight = weight;
+                this.text = text;
+            }
+
+            public static int Comapre(Suggestion left, Suggestion right)
+            {
+                if (left.weight == right.weight)
+                    return left.text.CompareTo(right.text);
+                return right.weight.CompareTo(left.weight);
+            }
+        }
+
+      
+
         public static List<string> GetSuggestions(string line, ref List<string> vars)
         {
             List<string> suggestions = new List<string>();
@@ -459,24 +491,37 @@ namespace TextEditorBackEnd
             line = line.Replace("\n", "");
             line = line.Replace("\t", "");
             if (!line.Contains("("))
-            {              
+            {
+                var lowerLine = line.ToLower();
+                HashSet<int> indexes = new HashSet<int>();
+                int i = 0;
+                foreach (var command in lowerCommands)
+                {
+
+                    if (string.IsNullOrWhiteSpace(line) || command.Key.Contains(lowerLine))
+                        indexes.Add(i);
+                    i++;
+                }
+                i = 0;
                 foreach (var command in commands)
                 {
-                    if (string.IsNullOrWhiteSpace(line) || command.Key.Contains(line))
+                    if (indexes.Contains(i))
                         suggestions.Add(command.Key);
+                    i++;
                 }
             }
             else
             {
                 bool variablesAdded = false;
                 bool boolAdded = false;
-                var name = line.Substring(0, line.IndexOf('('));
+                var name = line.Substring(0, line.IndexOf('(')).ToLower();
                 enums.ResetBools();
-                if (!commands.ContainsKey(name)) return suggestions;
+                if (!lowerCommands.ContainsKey(name)) return suggestions;
                 int j = 0;
-                for (int i = 0; i < name.Length; i++)
-                    if (name[i] == ',') j++;
-                foreach (var paramList in commands[name])
+                for (int i = 0; i < line.Length; i++)
+                    if (line[i] == ',') j++;
+
+                foreach (var paramList in lowerCommands[name])
                 {
                     if (j >= paramList.Count) continue;
                     var listItem = paramList[j].ToLower();
@@ -500,6 +545,28 @@ namespace TextEditorBackEnd
                             suggestions.Add(type); 
                     }        
                 }
+            }
+
+            if (!string.IsNullOrEmpty(line))
+            {
+                List<Suggestion> temp = new List<Suggestion>();
+                foreach (var s in suggestions)
+                {
+                    int i = 0;
+                    string com = string.Empty + line[i];
+
+                    while (s.StartsWith(com) && i < line.Length)
+                    {
+                        com += line[i];
+                        i++;
+                    }
+                    temp.Add(new Suggestion(i, s));
+                }
+
+                temp.Sort(Suggestion.Comapre);
+                suggestions.Clear();
+                foreach (var s in temp)
+                    suggestions.Add(s.text);
             }
             return suggestions;
         }

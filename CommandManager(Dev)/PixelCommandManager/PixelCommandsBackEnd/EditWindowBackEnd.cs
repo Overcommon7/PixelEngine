@@ -186,7 +186,7 @@ namespace PixelCommandsBackEnd
 
             CreateNewCommand(commandPath, newName, oldPath);
             AppendToScriptMap(newName);
-            AppendToVCXProjFile(newName);
+            AppendToVCXProjFile(newName, oldname);
         }
 
         

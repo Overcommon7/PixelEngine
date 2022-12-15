@@ -35,7 +35,7 @@ SetCameraDirection(camDirX, camDirY, camDirZ)
 SetLightAmbient(0.2, 0.2, 0.2)
 SetLightDiffuse(0.9, 0.0, 0.9)
 SetLightSpecular(0.3, 0.3, 0.3)
-AddPointLight(lPosX, lPosY, lPosZ, lDirX, lDirY, lDirZ, 1, 0.1, 0, lAngle ,lDecay)
+AddPointLight(lPosX, lPosY, lPosZ, lDirX, lDirY, lDirZ)
 
 //SetShadeMode(flat)
 
