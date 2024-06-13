@@ -357,11 +357,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Engine\Application.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\ButtonManager.cpp" />
+    <ClCompile Include="Engine\Color.cpp" />
     <ClCompile Include="Engine\Commands.cpp" />
+    <ClCompile Include="Engine\Events.cpp" />
     <ClCompile Include="Engine\Mouse.cpp" />
     <ClCompile Include="Engine\Draw.cpp" />
     <ClCompile Include="Engine\PixelFloat.cpp" />
@@ -372,26 +373,9 @@
     <ClCompile Include="Engine\System.cpp" />
     <ClCompile Include="Engine\User.cpp" />
     <ClCompile Include="Engine\VariableEditor.cpp" />
-    <ClCompile Include="ModelCache.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ScriptMap.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="UserEngineCode\Camera.cpp" />
-    <ClCompile Include="UserEngineCode\Clipper.cpp" />
-    <ClCompile Include="UserEngineCode\DepthBuffer.cpp" />
-    <ClCompile Include="UserEngineCode\DirectionalLight.cpp" />
-    <ClCompile Include="UserEngineCode\Events.cpp" />
-    <ClCompile Include="UserEngineCode\Light.cpp" />
-    <ClCompile Include="UserEngineCode\LightManager.cpp" />
-    <ClCompile Include="UserEngineCode\MaterialManager.cpp" />
-    <ClCompile Include="UserEngineCode\Matrix4.cpp" />
-    <ClCompile Include="UserEngineCode\MatrixStack.cpp" />
-    <ClCompile Include="UserEngineCode\Model.cpp" />
-    <ClCompile Include="UserEngineCode\PointLight.cpp" />
-    <ClCompile Include="UserEngineCode\PrimitiveManager.cpp" />
-    <ClCompile Include="UserEngineCode\Rasterizer.cpp" />
-    <ClCompile Include="UserEngineCode\Texture.cpp" />
-    <ClCompile Include="UserEngineCode\TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -402,11 +386,12 @@
     <ClInclude Include="BaseScripts\Init.h" />
     <ClInclude Include="BaseScripts\DrawPixel.h" />
     <ClInclude Include="BaseScripts\ToggleGrid.h" />
-    <ClInclude Include="Color.h" />
     <ClInclude Include="Engine\Application.h" />
     <ClInclude Include="Engine\Button.h" />
     <ClInclude Include="Engine\ButtonManager.h" />
+    <ClInclude Include="Engine\Color.h" />
     <ClInclude Include="Engine\Commands.h" />
+    <ClInclude Include="Engine\Events.h" />
     <ClInclude Include="Engine\Mouse.h" />
     <ClInclude Include="Engine\Defines.h" />
     <ClInclude Include="Engine\Draw.h" />
@@ -419,72 +404,12 @@
     <ClInclude Include="Engine\User.h" />
     <ClInclude Include="Engine\Utilities.h" />
     <ClInclude Include="Engine\VariableEditor.h" />
-    <ClInclude Include="ModelCache.h" />
-    <ClInclude Include="UserCommands\AddVertex.h" />
-    <ClInclude Include="UserCommands\EnableDepth.h" />
-    <ClInclude Include="UserCommands\SetCullMode.h" />
-    <ClInclude Include="UserCommands\SetLightDiffuse.h" />
-    <ClInclude Include="UserCommands\SetLightAmbient.h" />
-    <ClInclude Include="UserCommands\SetLightSpecular.h" />
-    <ClInclude Include="UserCommands\AddDirectionalLight.h" />
-    <ClInclude Include="UserCommands\AddPointLight.h" />
-    <ClInclude Include="UserCommands\AddModel.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ScriptMap.h" />
-    <ClInclude Include="UserEngineCode\Camera.h" />
-    <ClInclude Include="UserEngineCode\Clipper.h" />
-    <ClInclude Include="UserEngineCode\DepthBuffer.h" />
-    <ClInclude Include="UserEngineCode\DirectionalLight.h" />
-    <ClInclude Include="UserEngineCode\Events.h" />
-    <ClInclude Include="UserEngineCode\Light.h" />
-    <ClInclude Include="UserEngineCode\LightManager.h" />
-    <ClInclude Include="UserEngineCode\MaterialManager.h" />
-    <ClInclude Include="UserEngineCode\Matrix4.h" />
-    <ClInclude Include="UserEngineCode\MatrixStack.h" />
-    <ClInclude Include="UserEngineCode\Model.h" />
-    <ClInclude Include="UserEngineCode\PointLight.h" />
-    <ClInclude Include="UserEngineCode\PrimitiveManager.h" />
-    <ClInclude Include="UserEngineCode\Rasterizer.h" />
-    <ClInclude Include="UserEngineCode\Texture.h" />
-    <ClInclude Include="UserEngineCode\TextureCache.h" />
-    <ClInclude Include="UserEngineCode\Vector2.h" />
-    <ClInclude Include="UserEngineCode\Vector3.h" />
-    <ClInclude Include="UserEngineCode\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="UserCommands\BeginDraw.h" />
-    <ClInclude Include="UserCommands\ChangeColor.h" />
-    <ClInclude Include="UserCommands\EndDraw.h" />
-    <ClInclude Include="UserCommands\SetClipping.h" />
-    <ClInclude Include="UserCommands\SetFillMode.h" />
-    <ClInclude Include="UserCommands\SetViewport.h" />
-    <ClInclude Include="UserCommands\ShowViewport.h" />
-    <Text Include="..\Scripts\3DTest.txt" />
-    <Text Include="..\Scripts\3d_directional_light.txt" />
-    <Text Include="..\Scripts\3d_lighting.txt" />
-    <Text Include="..\Scripts\3d_point_light.txt" />
-    <Text Include="..\Scripts\3d_shading.txt" />
-    <Text Include="..\Scripts\ClippedTriangle.txt" />
-    <Text Include="..\Scripts\Line.txt" />
-    <Text Include="..\Scripts\NewPixelScript1.txt" />
+    <Text Include="..\PixelEngineBasics.txt" />
     <Text Include="..\Scripts\NewPixelScript2.txt" />
-    <Text Include="..\Scripts\TestTriangle.txt" />
-    <Text Include="..\Scripts\HighResTriangle.txt" />
-    <Text Include="..\Scripts\Triangle.txt" />
-    <ClInclude Include="UserCommands\PushTranslation.h" />
-    <ClInclude Include="UserCommands\PushRotationX.h" />
-    <ClInclude Include="UserCommands\PushRotationY.h" />
-    <ClInclude Include="UserCommands\PushRotationZ.h" />
-    <ClInclude Include="UserCommands\PushScaling.h" />
-    <ClInclude Include="UserCommands\PopMatrix.h" />
-    <ClInclude Include="UserCommands\SetCameraPosition.h" />
-    <ClInclude Include="UserCommands\SetCameraDirection.h" />
-    <ClInclude Include="UserCommands\SetNearPlane.h" />
-    <ClInclude Include="UserCommands\SetFarPlane.h" />
-    <ClInclude Include="UserCommands\SetFOV.h" />
-    <Text Include="BaseScripts\BaseScriptsSyntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

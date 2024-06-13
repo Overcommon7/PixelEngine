@@ -18,9 +18,6 @@
 #include <mutex>
 #include <memory>
 #include <set>
-#include <execution>
-#include <numeric>
-#include <mutex>
 #include "raylib.h"
 
 #pragma endregion SDL

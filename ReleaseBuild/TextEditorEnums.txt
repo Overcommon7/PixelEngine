@@ -1,14 +1,5 @@
-Fillmode
-wireframe
-solid
-SEndLine
-Topology
-point
-line
-triangle
-SEndLine
 Cullmode
-none
-front
-back
+Back
+Front
+None
 SEndLine

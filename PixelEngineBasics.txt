@@ -1,0 +1,25 @@
+-Init(int customPixelSize, int windowWidthInCustomPixels, int windowHeightInCustomPixels)
+
+-DrawPixel(int xPosition, int yPosition)
+
+-ToggleGrid(bool state) - where true menas on and false means off
+
+-Print(variableName, variableName, etc..) - Will print the variables' values, seperated by commas, to the console
+Ex.
+float x = 4
+float y = 2
+Print(x, y) -> prints [4, 2] to the console
+
+
+
+The script compilier does not do BEDMAS nor use brackets while computing mathematical equations
+
+
+Controls:
+F5 - Recompiles a script
+F4 - Shows Variable Sliders
+		- LSHIFT + Scroll -> Changes Speed In Which Sliders Are Changed
+		- Scroll -> Scroll through all Variable Sliders
+F10 - Takes A Screenshot
+F1 - Opens the Script Editor
+ESC - Brings You Back To Script Slection Screen

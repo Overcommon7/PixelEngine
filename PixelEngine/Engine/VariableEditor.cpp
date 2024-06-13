@@ -12,10 +12,10 @@ void VariableEditor::Draw()
 }
 
 bool VariableEditor::Update()
-{	
-	if (!isActive) return false;
+{
 	isActive = !sliders.empty();
-
+	if (!isActive) return false;
+	
 	bool noScroll = false;
 	if (IsKeyDown(KEY_LEFT_SHIFT) && abs(Mouse::GetMouseWheel()) > 0)
 	{
