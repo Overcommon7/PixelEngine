@@ -1,0 +1,12 @@
+Init(25, 30, 30)
+float x = 1
+x += x 
+ChangeColor(red)
+DrawPixel(x, 1)
+x += x 
+ChangeColor(green)
+DrawPixel(x, 1)
+x += x 
+ChangeColor(blue)
+DrawPixel(x, 1)
+

@@ -1,0 +1,18 @@
+Init(int customPixelSize, int windowWidthInCustomPixels, int windowHeightInCustomPixels)
+
+PlacePixel(int xPosition, int yPosition)
+
+ToggleGrid(bool state) - where true menas on and false means off
+
+Print(variableName, variableName, etc..) - Will print the variables' values, seperated by commas, to the console
+Ex.
+float x = 4
+float y = 2
+Print(x, y) -> prints 4, 2 to the console
+
+
+You cannot do arethmatic operations during variable declartion
+variables must be declared with a value
+the script compilier does not do BEDMAS nor use brackets while computing mathematical equations
+syntax errros are reported to the console
+

@@ -99,16 +99,64 @@
     <ClCompile Include="Engine\PixelFloat.cpp">
       <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
+    <ClCompile Include="UserEngineCode\Rasterizer.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\PrimitiveManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Clipper.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Matrix4.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\MatrixStack.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Camera.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Slider.cpp">
       <Filter>Source Files\ApplicationClasses\CPPS</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\DepthBuffer.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Events.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Light.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\DirectionalLight.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\MaterialManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
     <ClCompile Include="Engine\VariableEditor.cpp">
       <Filter>Source Files\Managers\CPPs</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Color.cpp">
+    <ClCompile Include="UserEngineCode\LightManager.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\PointLight.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
       <Filter>Source Files\ApplicationClasses\CPPS</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Events.cpp">
+    <ClCompile Include="UserEngineCode\Model.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelCache.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\Texture.cpp">
+      <Filter>UserSourceCode\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="UserEngineCode\TextureCache.cpp">
       <Filter>UserSourceCode\CPPs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,25 +218,195 @@
     <ClInclude Include="Engine\PixelFloat.h">
       <Filter>Source Files\ApplicationClasses\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="UserCommands\BeginDraw.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\EndDraw.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetClipping.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetFillMode.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetViewport.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\ShowViewport.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Clipper.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\PrimitiveManager.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Rasterizer.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Vector2.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Vector3.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Vertex.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Matrix4.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\ChangeColor.h">
+      <Filter>Source Files\BaseCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\MatrixStack.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PopMatrix.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushRotationX.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushRotationY.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushRotationZ.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushScaling.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\PushTranslation.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Camera.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetCameraDirection.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetCameraPosition.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetFarPlane.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetFOV.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetNearPlane.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddVertex.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Slider.h">
       <Filter>Source Files\ApplicationClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\EnableDepth.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetCullMode.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\DepthBuffer.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Events.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Light.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\DirectionalLight.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\MaterialManager.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Engine\VariableEditor.h">
       <Filter>Source Files\Managers\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Color.h">
-      <Filter>Source Files\ApplicationClasses\Headers</Filter>
+    <ClInclude Include="UserEngineCode\LightManager.h">
+      <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UserCommands\ChangePixelColor.h">
+    <ClInclude Include="UserCommands\SetLightAmbient.h">
       <Filter>UserCommands</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Events.h">
+    <ClInclude Include="UserCommands\SetLightDiffuse.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\SetLightSpecular.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddDirectionalLight.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\PointLight.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddPointLight.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Source Files\ApplicationClasses\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Model.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCommands\AddModel.h">
+      <Filter>UserCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelCache.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\Texture.h">
+      <Filter>UserSourceCode\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserEngineCode\TextureCache.h">
       <Filter>UserSourceCode\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\PixelEngineBasics.txt" />
+    <Text Include="BaseScripts\BaseScriptsSyntax.txt">
+      <Filter>Source Files\BaseCommands</Filter>
+    </Text>
+    <Text Include="..\Scripts\TestTriangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\HighResTriangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\Line.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\Triangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\ClippedTriangle.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_directional_light.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_lighting.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_point_light.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3DTest.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\NewPixelScript1.txt">
+      <Filter>Scripts</Filter>
+    </Text>
     <Text Include="..\Scripts\NewPixelScript2.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="..\Scripts\3d_shading.txt">
       <Filter>Scripts</Filter>
     </Text>
   </ItemGroup>

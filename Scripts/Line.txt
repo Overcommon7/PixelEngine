@@ -1,0 +1,8 @@
+Init(25, 20)
+SetViewport(2, 2, 15, 10)
+ShowViewport(true, blue)
+SetClipping(false
+BeginDraw(Line)
+AddVertex(23, 50, yellow)
+AddVertex(2, -6, red)
+EndDraw()

@@ -1,0 +1,148 @@
+Init(1, 500, 500) 
+
+SetViewport(50, 50, 400, 400)
+SetClipping(true)
+SetCullMode(back)
+ShowViewport(true)
+EnableDepth(true)
+
+float camX = 0
+float camY = 0
+float camZ = -5
+
+float camDirX = 0
+float camDirY = 0
+float camDirZ = 1
+
+float lightDirX = 1
+float lightDirY = -1
+float lightDirZ = 1
+
+
+float rotX = 45
+float rotY = 45
+float rotZ = 45
+
+SetCameraPosition(camX, camY, camZ)
+SetCameraDirection(camDirX, camDirY, camDirZ)	
+
+SetLightAmbient(0.2, 0.2, 0.2)
+SetLightDiffuse(0.7, 0.7, 0.7)
+SetLightSpecular(0.3, 0.3, 0.3)
+AddDirectionalLight(lightDirX, lightDirY, lightDirZ)
+
+PushTranslation(0, 0, 0)
+PushRotationZ(rotZ)
+PushRotationY(rotY)
+PushRotationX(rotX)
+PushScaling(1, 1, 1)
+
+BeginDraw(triangle)
+
+// Front
+AddVertex(1, -1, 1, 0.5, 0, 0.5)
+AddVertex(1, 1, 1, 0.5, 0, 0.5)
+AddVertex(-1, 1, 1, 0.5, 0, 0.5)
+AddVertex(1, -1, 1, 0.5, 0, 0.5)
+AddVertex(-1, 1, 1, 0.5, 0, 0.5)
+AddVertex(-1, -1, 1, 0.5, 0, 0.5)
+
+// Back
+AddVertex(-1, -1, -1, 0.5, 0, 0.5)
+AddVertex(-1, 1, -1, 0.5, 0, 0.5)
+AddVertex(1, 1, -1, 0.5, 0, 0.5)
+AddVertex(-1, -1, -1, 0.5, 0, 0.5)
+AddVertex(1, 1, -1, 0.5, 0, 0.5)
+AddVertex(1, -1, -1, 0.5, 0, 0.5)
+
+// Right
+AddVertex(1, -1, -1, 0.5, 0, 0.5)
+AddVertex(1, 1, -1, 0.5, 0, 0.5)
+AddVertex(1, 1, 1, 0.5, 0, 0.5)
+AddVertex(1, -1, -1, 0.5, 0, 0.5)
+AddVertex(1, 1, 1, 0.5, 0, 0.5)
+AddVertex(1, -1, 1, 0.5, 0, 0.5)
+
+// Left
+AddVertex(-1, -1, 1, 0.5, 0, 0.5)
+AddVertex(-1, 1, 1, 0.5, 0, 0.5)
+AddVertex(-1, 1, -1, 0.5, 0, 0.5)
+AddVertex(-1, -1, 1, 0.5, 0, 0.5)
+AddVertex(-1, 1, -1, 0.5, 0, 0.5)
+AddVertex(-1, -1, -1, 0.5, 0, 0.5)
+
+// Top
+AddVertex(-1, 1, -1, 0.5, 0, 0.5)
+AddVertex(-1, 1, 1, 0.5, 0, 0.5)
+AddVertex(1, 1, 1, 0.5, 0, 0.5)
+AddVertex(-1, 1, -1, 0.5, 0, 0.5)
+AddVertex(1, 1, 1, 0.5, 0, 0.5)
+AddVertex(1, 1, -1, 0.5, 0, 0.5)
+
+// Bottom
+AddVertex(-1, -1, 1, 0.5, 0, 0.5)
+AddVertex(-1, -1, -1, 0.5, 0, 0.5)
+AddVertex(1, -1, -1, 0.5, 0, 0.5)
+AddVertex(-1, -1, 1, 0.5, 0, 0.5)
+AddVertex(1, -1, -1, 0.5, 0, 0.5)
+AddVertex(1, -1, 1, 0.5, 0, 0.5)
+
+EndDraw(true)
+
+PushTranslation(3, 0, 0)
+PushRotationZ(rotZ)
+PushRotationY(rotY)
+PushRotationX(rotX)
+PushScaling(0.5, 0.5, 0.5)
+
+BeginDraw(triangle)
+
+// Front
+AddVertex(1, -1, 1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(-1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(1, -1, 1, 0.0, 0.5, 0.5)
+AddVertex(-1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(-1, -1, 1, 0.0, 0.5, 0.5)
+
+// Back
+AddVertex(-1, -1, -1, 0.0, 0.5, 0.5)
+AddVertex(-1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(-1, -1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, -1, -1, 0.0, 0.5, 0.5)
+
+// Right
+AddVertex(1, -1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(1, -1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(1, -1, 1, 0.0, 0.5, 0.5)
+
+// Left
+AddVertex(-1, -1, 1, 0.0, 0.5, 0.5)
+AddVertex(-1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(-1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(-1, -1, 1, 0.0, 0.5, 0.5)
+AddVertex(-1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(-1, -1, -1, 0.0, 0.5, 0.5)
+
+// Top
+AddVertex(-1, 1, -1, 0, 0.5, 0.5)
+AddVertex(-1, 1, 1, 0, 0.5, 0.5)
+AddVertex(1, 1, 1, 0, 0.5, 0.5)
+AddVertex(-1, 1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, 1, 0.0, 0.5, 0.5)
+AddVertex(1, 1, -1, 0.0, 0.5, 0.5)
+
+// Bottom
+AddVertex(-1, -1, 1, 0, 0.5, 0.5)
+AddVertex(-1, -1, -1, 0, 0.5, 0.5)
+AddVertex(1, -1, -1, 0, 0.5, 0.5)
+AddVertex(-1, -1, 1, 0.0, 0.5, 0.5)
+AddVertex(1, -1, -1, 0.0, 0.5, 0.5)
+AddVertex(1, -1, 1, 0.0, 0.5, 0.5)
+
+EndDraw(true)

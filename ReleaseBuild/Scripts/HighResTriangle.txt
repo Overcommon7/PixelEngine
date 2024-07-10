@@ -1,0 +1,9 @@
+Init(5, 300, 300)
+SetClipping(false)
+float x = 0
+SetFillMode(solid)
+BeginDraw(Triangle)
+AddVertex(x,0,red)
+AddVertex(x,300,pink)
+AddVertex(150,120,brown)
+EndDraw()

@@ -1,0 +1,30 @@
+Init(25, 30, 30)
+
+float x = 5
+
+DrawPixel(x, 4)
+DrawPixel(x + 5, 6)
+DrawPixel(x + 3, 6)
+DrawPixel(x, 1)
+x += x 
+DrawPixel(x, 1)
+x += x 
+
+DrawPixel(x, 1)
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
