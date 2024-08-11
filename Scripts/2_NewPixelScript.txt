@@ -9,4 +9,12 @@ DrawPixel(x, 1)
 x += x 
 ChangeColor(blue)
 DrawPixel(x, 1)
+x += x 
+ChangeColor(beige)
+
+
+
+
+
+
 

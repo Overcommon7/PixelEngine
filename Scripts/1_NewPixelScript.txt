@@ -12,7 +12,8 @@ x += x
 
 DrawPixel(x, 1)
 
- 
+
+
 
 
 

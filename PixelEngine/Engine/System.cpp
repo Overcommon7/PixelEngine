@@ -7,7 +7,7 @@
 
 void System::Initialize()
 {
-    InitWindow(screenWidth, screenHeight, "PixelEngie");
+    InitWindow(screenWidth, screenHeight, "PixelEngine");
     SetExitKey(KEY_NULL);
     targetFPS = GetMonitorRefreshRate(GetCurrentMonitor());
     SetTargetFPS(targetFPS);

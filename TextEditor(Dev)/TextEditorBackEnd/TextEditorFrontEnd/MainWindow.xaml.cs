@@ -137,6 +137,12 @@ namespace TextEditorFrontEnd
         private void FillSuggestionBox()
         {
             var line = TextField.GetLineText(TextField.GetLineIndexFromCharacterIndex(TextField.SelectionStart));
+            if (string.IsNullOrEmpty(line))
+                return;
+
+            if (string.IsNullOrWhiteSpace(line))
+                return;
+
             foreach (var suggestion in ScriptParser.GetSuggestions(line, ref variables))
                 SuggestionBox.Items.Add(suggestion);
         }

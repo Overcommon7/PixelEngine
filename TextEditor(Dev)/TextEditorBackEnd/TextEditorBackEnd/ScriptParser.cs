@@ -514,9 +514,28 @@ namespace TextEditorBackEnd
             {
                 bool variablesAdded = false;
                 bool boolAdded = false;
-                var name = line.Substring(0, line.IndexOf('(')).ToLower();
+                bool colorsAdded = false;
+
+                int indexOf = line.IndexOf('(');
+                int comma = line.LastIndexOf(',');
+                var name = line.Substring(0, indexOf).ToLower();
+                string typed = string.Empty;
+
+                if (comma == -1 && line.Length > indexOf + 1)
+                {
+                    typed = line.Substring(indexOf + 1);
+                }
+                else if (comma != -1 && line.Length > comma + 1)
+                {
+                    typed = line.Substring(comma + 1);
+                }
+
+                typed = typed.ToLower();
+
                 enums.ResetBools();
-                if (!lowerCommands.ContainsKey(name)) return suggestions;
+                if (!lowerCommands.ContainsKey(name)) 
+                    return suggestions;
+
                 int j = 0;
                 for (int i = 0; i < line.Length; i++)
                     if (line[i] == ',') j++;
@@ -537,9 +556,28 @@ namespace TextEditorBackEnd
                         if (boolAdded) continue;
                         suggestions.Add("true");
                         suggestions.Add("false");
+                        boolAdded = true;
+                    }
+                    else if (listItem == "color")
+                    {
+                        if (colorsAdded) 
+                            continue;
+
+                        foreach (var color in colors)
+                        {
+                            var lower = color.ToLower();
+                            if (string.IsNullOrEmpty(typed) || lower.StartsWith(typed))
+                                suggestions.Add(lower);
+                        }
+                            
+
+                        colorsAdded = true;
                     }
                     else
                     {
+                        if (!enums.bools.ContainsKey(name))
+                            continue;
+
                         if (enums.bools[paramList[j]]) continue;
                         foreach (var type in enums.enums[paramList[j]])
                             suggestions.Add(type); 
