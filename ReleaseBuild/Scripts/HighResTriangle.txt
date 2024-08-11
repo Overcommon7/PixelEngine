@@ -1,9 +1,9 @@
 Init(5, 300, 300)
 SetClipping(false)
 float x = 0
-SetFillMode(solid)
+SetFillMode(wireframe)
 BeginDraw(Triangle)
 AddVertex(x,0,red)
-AddVertex(x,300,pink)
-AddVertex(150,120,brown)
+AddVertex(x,150,pink)
+AddVertex(75,60,brown)
 EndDraw()
